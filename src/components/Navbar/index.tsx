@@ -1,10 +1,26 @@
-import { FaMoon } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import useDarkMode from '@/hooks/useDarkMode';
+import styles from '@s/navbar.module.css';
+
+const navbar: string = `${styles.navbar}
+bg-gray-100
+dark:bg-gray-700
+`;
+const navbarIcon: string = `${styles.navbar_icon}`;
 
 const Navbar = () => {
   return (
-    <div>
+    <div className={navbar}>
+      <SearchBar />
       <ThemeIcon />
+    </div>
+  );
+};
+
+const SearchBar = () => {
+  return (
+    <div>
+      <input type='text' placeholder='Quick search...' />
     </div>
   );
 };
@@ -15,7 +31,11 @@ const ThemeIcon = () => {
 
   return (
     <span onClick={handleMode}>
-      <FaMoon />
+      {theme ? (
+        <FaSun className={navbarIcon} />
+      ) : (
+        <FaMoon className={navbarIcon} />
+      )}
     </span>
   );
 };
