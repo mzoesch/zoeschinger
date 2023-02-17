@@ -1,38 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Tailwind UI examples
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+https://tailwindui.com/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## UI components
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+https://headlessui.com/
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## SVG icons
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+https://heroicons.com/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## React icons
 
-## Learn More
+```
+https://react-icons.github.io/react-icons/
+```
 
-To learn more about Next.js, take a look at the following resources:
+https://mui.com/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Colors
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Primary (#f0f0f0)
 
-## Deploy on Vercel
+Shades:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+#f0f0f0
+#d8d8d8
+#c0c0c0
+#a8a8a8
+#909090
+#787878
+#606060
+#484848
+#303030
+#171717
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## dark:Primary (#4e0090)
+
+Shades:
+
+```
+#4e0090
+#460081
+#3e0073
+#360064
+#2e0056
+#270048
+#1f0039
+#17002b
+#0f001c
+#07000e
+```
+
+https://shuffle.dev/
