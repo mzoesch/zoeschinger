@@ -7,10 +7,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon, Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Dashboard', href: 'daschboard', current: true },
-  { name: 'Team', href: 'team', current: false },
-  { name: 'Projects', href: 'projects', current: false },
-  { name: 'Calendar', href: 'calendar', current: false },
+  { name: 'Dashboard', href: '/', current: true },
+  { name: 'Projects', href: '/projects', current: false },
 ];
 
 function classNames(...classes: any) {
@@ -50,7 +48,7 @@ const Navbar = () => {
                     <NavbarImage hideArguments='block lg:hidden' />
                     <NavbarImage hideArguments='hidden lg:block' />
                   </div>
-                  {/* Navbar not mobile */}
+                  {/* Navbar desktop */}
                   <div className='hidden sm:ml-6 sm:block'>
                     <div className='flex space-x-4'>
                       {navigation.map((item) => (
@@ -63,7 +61,7 @@ const Navbar = () => {
                               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                             'px-3 py-2 rounded-md text-sm font-medium'
                           )}
-                          aria-current={item.current ? 'page' : undefined}
+                          aria-current={item.current ? 'page' : true}
                         >
                           {item.name}
                         </a>
