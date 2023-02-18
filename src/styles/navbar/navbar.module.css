@@ -11,6 +11,28 @@
     shadow-lg;
   }
 
+  /* #region Navbar highlight */
+  /* Colors in CSSFIX */
+
+  .navbar_links_current,
+  .navbar_links_other,
+  .navbar_links_current_mobile,
+  .navbar_links_other_mobile {
+    @apply px-3 py-2 rounded-md;
+  }
+
+  .navbar_links_current,
+  .navbar_links_other {
+    @apply text-sm;
+  }
+
+  .navbar_links_current_mobile,
+  .navbar_links_other_mobile {
+    @apply block text-base;
+  }
+
+  /* #endregion Navbar highlight */
+
   /* #region ThemeIcon */
 
   .navbar_icon_sun,

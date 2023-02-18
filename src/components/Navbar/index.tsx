@@ -2,9 +2,21 @@ import SearchBar from './SearchBar';
 import ThemeIcon from './ThemeIcon';
 import NavbarImage from './NavbarImage';
 
+import { CgProfile } from 'react-icons/cg';
+import {
+  navbarLinksCurrent,
+  navbarLinksOther,
+  navbarLinksCurrentMobile,
+  navbarLinksOtherMobile,
+} from './CSSFix';
+
+import styles from '@s/navbar/navbar.module.css';
+
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon, Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
+
+import { useEffect } from 'react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
@@ -16,6 +28,22 @@ function classNames(...classes: any) {
 }
 
 const Navbar = () => {
+  function test() {
+    navigation.forEach((item) => {
+      if (item.href === window.location.pathname) {
+        item.current = true;
+      } else {
+        item.current = false;
+      }
+    });
+
+    console.log(window.location.pathname);
+  }
+
+  useEffect(() => {
+    typeof document != undefined ? test() : console.log('undefined');
+  });
+
   return (
     <div>
       <Disclosure as='nav' className='bg-primaryLight dark:bg-primary'>
@@ -55,13 +83,10 @@ const Navbar = () => {
                         <a
                           key={item.name}
                           href={item.href}
-                          className={classNames(
-                            item.current
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'px-3 py-2 rounded-md text-sm font-medium'
-                          )}
-                          aria-current={item.current ? 'page' : true}
+                          className={
+                            item.current ? navbarLinksCurrent : navbarLinksOther
+                          }
+                          aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
                         </a>
@@ -79,11 +104,7 @@ const Navbar = () => {
                     <div>
                       <Menu.Button className='flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                         <span className='sr-only'>Open user menu</span>
-                        <img
-                          className='h-8 w-8 rounded-full'
-                          src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                          alt=''
-                        />
+                        <CgProfile size='35px' className='text-white' />
                       </Menu.Button>
                     </div>
                     <Transition
@@ -152,9 +173,8 @@ const Navbar = () => {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'block px-3 py-2 rounded-md text-base font-medium'
+                        ? navbarLinksCurrentMobile
+                        : navbarLinksOtherMobile
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >

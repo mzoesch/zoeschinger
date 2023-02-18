@@ -7,7 +7,6 @@ const useLocalStorage = (key, initialValue) => {
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       // console.log(error);
-      console.log('Window is not defined 1');
       return initialValue;
     }
   });
