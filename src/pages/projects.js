@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import Navbar from '@c/Navbar';
+import Layout from '@c/layouts/stdLayout';
+import Projects from '@c/Projects';
 
 const Project = () => {
   return (
     <>
       <Head>
-        <title>projects</title>
+        <title>zoeschinger projects</title>
         <meta
           name='description'
           content='List of projects from Magnus Zoeschinger'
@@ -13,11 +14,14 @@ const Project = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main>
-        <Navbar />
-      </main>
+
+      <Projects />
     </>
   );
+};
+
+Project.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Project;

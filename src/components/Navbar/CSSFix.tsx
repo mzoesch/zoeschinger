@@ -13,12 +13,12 @@ export const navbarIcon: string = `
 ${styles.navbar_icon}
 `;
 
-export const navbarLinksCurrent: string = `
+export const navbarLinksCurrentDesktop: string = `
 ${styles.navbar_links_current}
 bg-gray-900 text-white
 `;
 
-export const navbarLinksOther: string = `
+export const navbarLinksOtherDesktop: string = `
 ${styles.navbar_links_current}
 text-gray-300 hover:bg-gray-700 hover:text-white
 `;
