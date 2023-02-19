@@ -1,14 +1,11 @@
 import SearchBar from './SearchBar';
-import ThemeIcon from './ThemeIcon';
+import ThemeIcon from './navbarIcons/ThemeIcon';
 import NavbarImage from './NavbarImage';
 
+import { NavbarIconsDesktop } from './navbarIcons/DisplayLinkHelper';
+
 import { CgProfile } from 'react-icons/cg';
-import {
-  navbarLinksCurrent,
-  navbarLinksOther,
-  navbarLinksCurrentMobile,
-  navbarLinksOtherMobile,
-} from './CSSFix';
+import { navbarLinksCurrentMobile, navbarLinksOtherMobile } from './CSSFix';
 
 import styles from '@s/navbar/navbar.module.css';
 
@@ -76,23 +73,7 @@ const Navbar = () => {
                     <NavbarImage hideArguments='block lg:hidden' />
                     <NavbarImage hideArguments='hidden lg:block' />
                   </div>
-                  {/* Navbar desktop */}
-                  <div className='hidden sm:ml-6 sm:block'>
-                    <div className='flex space-x-4'>
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={
-                            item.current ? navbarLinksCurrent : navbarLinksOther
-                          }
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
+                  <NavbarIconsDesktop />
                 </div>
 
                 {/* Navbar right */}
