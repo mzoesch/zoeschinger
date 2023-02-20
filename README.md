@@ -61,3 +61,38 @@ Shades:
 ```
 
 https://shuffle.dev/
+
+screens
+
+```
+Screens to choose:
+sm
+md
+lg
+xl
+2xl
+
+From mobile to desktop:
+null -> sm
+other:
+sm -> lg
+lg->2xl
+
+using
+
+module.exports = {
+  theme: {
+    screens: {
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'lg': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      '2xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    }
+  }
+}
+
+```

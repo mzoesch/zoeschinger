@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import navbarImage from '@pub/rQ.png';
+import navbarImage from '@pub/ProfilePicture.png';
 import React from 'react';
 
 interface props {

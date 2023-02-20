@@ -12,7 +12,7 @@ import { XMarkIcon, Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   return (
-    <div>
+    <div className='relative z-10'>
       <Disclosure as='nav' className='bg-primaryLight dark:bg-primary'>
         {({ open }) => (
           <>
