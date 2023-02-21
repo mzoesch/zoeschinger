@@ -96,3 +96,7 @@ module.exports = {
 }
 
 ```
+
+Issues:
+
+different theme buttons wom't sync
