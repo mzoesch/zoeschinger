@@ -12,14 +12,17 @@ const ProfileOverview = () => {
           sm:block
           lg:block
           2xl:block
-          
+        
           mx-4
         '
         >
           <ProfilePictureImage
             additionalArguments='
             rounded-full
-            w-20
+            
+            max-w-[6rem]
+
+            sm:max-w-full
             sm:w-72
             lg:w-80'
           />
