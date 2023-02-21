@@ -5,18 +5,15 @@
   .blur_gradient {
     @apply rotate-45
         
-        fixed
+        absolute
         z-10
 
-        mt-0 ml-0 -mr-7 inset-x-24
-        sm:mt-0 sm:ml-0 sm:mr-0 sm:inset-x-[16rem]
-        lg:mt-0 lg:ml-0 lg:mr-0 lg:inset-x-[50rem]
-        2xl:mt-0 2xl:ml-0 2xl:mr-0 2xl:inset-x-[80rem]
-
+        -right-96
+       
         h-32 w-[60rem]
         rounded-full
         blur-3xl opacity-40
-        bg-gradient-to-r from-sky-400 to-cyan-500;
+        bg-gradient-to-r from-sky-300 to-cyan-600;
   }
 
   .profile_gradient {

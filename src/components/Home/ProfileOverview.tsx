@@ -33,9 +33,7 @@ const ProfileOverview = () => {
           </div>
           <div className='flex justify-start gap-2 items-start mt-2'>
             <GoMail className={styles.profile_overview_email_icon} />
-            <p className={styles.profile_overview_email}>
-              magnus.zoeschinger@zoeschinger.de
-            </p>
+            <p className={styles.profile_overview_email}>just some email</p>
           </div>
         </div>
       </div>

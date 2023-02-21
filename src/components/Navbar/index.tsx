@@ -12,8 +12,11 @@ import { XMarkIcon, Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   return (
-    <div className='relative z-10'>
-      <Disclosure as='nav' className='bg-primaryLight dark:bg-primary'>
+    <div className='absolute z-10 opacity-70 min-w-full'>
+      <Disclosure
+        as='nav'
+        className='bg-primaryLight dark:bg-primary bg-opacity-25 dark:bg-opacity-25'
+      >
         {({ open }) => (
           <>
             <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -39,7 +42,10 @@ const Navbar = () => {
                 </div>
 
                 {/* Navbar desktop */}
-                <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
+                <div
+                  className='
+                flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'
+                >
                   <div className='flex flex-shrink-0 items-center'>
                     <NavbarImage hideArguments='block lg:hidden' />
                     <NavbarImage hideArguments='hidden lg:block' />
