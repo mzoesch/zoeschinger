@@ -1,6 +1,5 @@
 import ProfileOverview from './ProfileOverview';
 import gradientStyles from '@s/home/gradients.module.css';
-import styles from '@s/home/home.module.css';
 
 const Home = () => {
   return (
@@ -25,39 +24,47 @@ const Home = () => {
         <div>
           <div
             aria-hidden='true'
-            className='rotate-45
-        
-        absolute
-        z-0
+            className='
+            absolute
+            z-0
+            
+            -right-96
+            
+            h-32 w-[60rem]
 
-        -right-96
-       
-        h-32 w-[60rem]
-        rounded-full
-        blur-3xl opacity-40
-        bg-gradient-to-r from-sky-300 to-cyan-600'
+            rotate-45
+            rounded-full
+            blur-3xl opacity-40
+            bg-gradient-to-r from-sky-300 to-cyan-600'
           />
           <div
             aria-hidden='true'
-            className='rotate-12
+            className='
+            absolute
+            z-10
+            
+            hidden
+            sm:block lg:block 2xl:block
 
-          absolute
-          z-10
+            sm:mt-36 sm:-ml-3 sm:h-16 sm:w-[30rem]
+            lg:mt-60 lg:-ml-5 lg:h-16 lg:w-[40rem]
+            2xl:mt-56 2xl:-ml-5 2xl:h-16 2xl:w-[50rem]
 
-          hidden
-          sm:block
-
-          sm:mt-32 sm:-ml-[28rem] sm:mr-0 sm:inset-x-96
-          lg:mt-52 lg:-ml-[40rem] lg:mr-0 lg:inset-x-[38rem]
-          2xl:mt-52 2xl:-ml-[70rem] 2xl:mr-0 2xl:inset-x-[60rem]
-
-          h-16
-          rounded-r-full
-          bg-gradient-to-tr from-pink-600 to-purple-800'
+            rotate-12
+            rounded-r-full
+            bg-gradient-to-tr from-pink-600 to-purple-800'
           />
         </div>
 
-        <div className={styles.page}>
+        <div
+          className='
+          relative
+          z-20
+          grid
+          grid-cols-1
+          sm:grid-cols-3
+        '
+        >
           {/* Profile overview */}
           <div
             className='
@@ -86,7 +93,18 @@ const Home = () => {
           sm:col-span-2
           '
           >
-            <div className={styles.welcome_text}>
+            <div
+              className='
+            mt-10 mx-5
+            sm:mx-0 sm:mr-5 sm:mt-10
+            lg:mx-0 lg:mr-5 lg:mt-20
+    
+            max-w-3xl
+            outline outline-gray-600 outline-1 outline-offset-0
+            backdrop-blur-xl
+            bg-gray-800 bg-opacity-25
+            '
+            >
               <div className='mx-5'>
                 <div className='text-justify text-gray-50 font-light'>
                   <br />

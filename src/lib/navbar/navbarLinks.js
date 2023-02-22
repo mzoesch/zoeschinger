@@ -27,6 +27,8 @@ class Link {
 }
 
 export const navigation = [
-  new Link('Dashboard', '/'),
+  new Link('Home', '/'),
+  new Link('Dashboard', '/dashboard'),
   new Link('Projects', '/projects'),
+  new Link('About', '/about'),
 ];
