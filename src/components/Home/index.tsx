@@ -22,128 +22,114 @@ const Home = () => {
   const [two, setTwo] = useState(false);
   const [three, setThree] = useState(false);
 
-  const DashboardNode = RefDashboard.current;
-  const ProjectNode = RefProjects.current;
-  const AboutNode = RefAbout.current;
-
-  const DashboardIconNode = RefDashboardIcon.current;
-  const ProjectIconNode = RefProjectsIcon.current;
-  const AboutIconNode = RefAboutIcon.current;
-
   function handleOne(hover: boolean) {
-    console.log(hover);
+    if (one == hover) return;
     setOne(hover);
 
     if (hover == true) {
-      DashboardNode !== null && DashboardNode.classList.remove(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.remove(normalOpacity);
-      AboutNode !== null && AboutNode.classList.remove(normalOpacity);
+      RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current.classList.remove(normalOpacity);
 
-      DashboardNode !== null && DashboardNode.classList.add(hoverOpacity);
-      ProjectNode !== null && ProjectNode.classList.add(hoverOpacityOther);
-      AboutNode !== null && AboutNode.classList.add(hoverOpacityOther);
+      RefDashboard.current.classList.add(hoverOpacity);
+      RefProjects.current.classList.add(hoverOpacityOther);
+      RefAbout.current.classList.add(hoverOpacityOther);
 
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgFocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgFocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgFocus);
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgUnfocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgUnfocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgUnfocus);
+      RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      DashboardIconNode !== null && DashboardIconNode.classList.add(svgFocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.add(svgUnfocus);
-      AboutIconNode !== null && AboutIconNode.classList.add(svgUnfocus);
+      RefDashboardIcon.current.classList.add(svgFocus);
+      RefProjectsIcon.current.classList.add(svgUnfocus);
+      RefAboutIcon.current.classList.add(svgUnfocus);
     } else {
-      DashboardNode !== null && DashboardNode.classList.remove(hoverOpacity);
-      ProjectNode !== null && ProjectNode.classList.remove(hoverOpacityOther);
-      AboutNode !== null && AboutNode.classList.remove(hoverOpacityOther);
+      RefDashboard.current.classList.remove(hoverOpacity);
+      RefProjects.current.classList.remove(hoverOpacityOther);
+      RefAbout.current.classList.remove(hoverOpacityOther);
 
-      DashboardNode !== null && DashboardNode.classList.add(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.add(normalOpacity);
-      AboutNode !== null && AboutNode.classList.add(normalOpacity);
+      RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current.classList.add(normalOpacity);
     }
   }
   function handleTwo(hover: boolean) {
+    if (two == hover) return;
     setTwo(hover);
 
     if (hover == true) {
-      DashboardNode !== null && DashboardNode.classList.remove(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.remove(normalOpacity);
-      AboutNode !== null && AboutNode.classList.remove(normalOpacity);
+      RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current.classList.remove(normalOpacity);
 
-      DashboardNode !== null && DashboardNode.classList.add(hoverOpacityOther);
-      ProjectNode !== null && ProjectNode.classList.add(hoverOpacity);
-      AboutNode !== null && AboutNode.classList.add(hoverOpacityOther);
+      RefDashboard.current.classList.add(hoverOpacityOther);
+      RefProjects.current.classList.add(hoverOpacity);
+      RefAbout.current.classList.add(hoverOpacityOther);
 
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgFocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgFocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgFocus);
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgUnfocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgUnfocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgUnfocus);
+      RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      DashboardIconNode !== null && DashboardIconNode.classList.add(svgUnfocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.add(svgFocus);
-      AboutIconNode !== null && AboutIconNode.classList.add(svgUnfocus);
+      RefDashboardIcon.current.classList.add(svgUnfocus);
+      RefProjectsIcon.current.classList.add(svgFocus);
+      RefAboutIcon.current.classList.add(svgUnfocus);
     } else {
-      DashboardNode !== null &&
-        DashboardNode.classList.remove(hoverOpacityOther);
-      ProjectNode !== null && ProjectNode.classList.remove(hoverOpacity);
-      AboutNode !== null && AboutNode.classList.remove(hoverOpacityOther);
+      RefDashboard.current.classList.remove(hoverOpacityOther);
+      RefProjects.current.classList.remove(hoverOpacity);
+      RefAbout.current.classList.remove(hoverOpacityOther);
 
-      DashboardNode !== null && DashboardNode.classList.add(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.add(normalOpacity);
-      AboutNode !== null && AboutNode.classList.add(normalOpacity);
+      RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current.classList.add(normalOpacity);
     }
   }
   function handleThree(hover: boolean) {
+    if (three == hover) return;
     setThree(hover);
 
     if (hover == true) {
-      DashboardNode !== null && DashboardNode.classList.remove(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.remove(normalOpacity);
-      AboutNode !== null && AboutNode.classList.remove(normalOpacity);
+      RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current.classList.remove(normalOpacity);
 
-      DashboardNode !== null && DashboardNode.classList.add(hoverOpacityOther);
-      ProjectNode !== null && ProjectNode.classList.add(hoverOpacityOther);
-      AboutNode !== null && AboutNode.classList.add(hoverOpacity);
+      RefDashboard.current.classList.add(hoverOpacityOther);
+      RefProjects.current.classList.add(hoverOpacityOther);
+      RefAbout.current.classList.add(hoverOpacity);
 
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgFocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgFocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgFocus);
-      DashboardIconNode !== null &&
-        DashboardIconNode.classList.remove(svgUnfocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.remove(svgUnfocus);
-      AboutIconNode !== null && AboutIconNode.classList.remove(svgUnfocus);
+      RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      DashboardIconNode !== null && DashboardIconNode.classList.add(svgUnfocus);
-      ProjectIconNode !== null && ProjectIconNode.classList.add(svgUnfocus);
-      AboutIconNode !== null && AboutIconNode.classList.add(svgFocus);
+      RefDashboardIcon.current.classList.add(svgUnfocus);
+      RefProjectsIcon.current.classList.add(svgUnfocus);
+      RefAboutIcon.current.classList.add(svgFocus);
     } else {
-      DashboardNode !== null &&
-        DashboardNode.classList.remove(hoverOpacityOther);
-      ProjectNode !== null && ProjectNode.classList.remove(hoverOpacityOther);
-      AboutNode !== null && AboutNode.classList.remove(hoverOpacity);
+      RefDashboard.current.classList.remove(hoverOpacityOther);
+      RefProjects.current.classList.remove(hoverOpacityOther);
+      RefAbout.current.classList.remove(hoverOpacity);
 
-      DashboardNode !== null && DashboardNode.classList.add(normalOpacity);
-      ProjectNode !== null && ProjectNode.classList.add(normalOpacity);
-      AboutNode !== null && AboutNode.classList.add(normalOpacity);
+      RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current.classList.add(normalOpacity);
     }
   }
 
   useEffect(() => {
-    RefDashboard.current.classList.add(normalOpacity);
-    RefProjects.current.classList.add(normalOpacity);
-    RefAbout.current.classList.add(normalOpacity);
-
     RefDashboardIcon.current.classList.add(svgUnfocus);
     RefProjectsIcon.current.classList.add(svgFocus);
     RefAboutIcon.current.classList.add(svgUnfocus);
+
+    RefDashboard.current.classList.add(normalOpacity);
+    RefProjects.current.classList.add(normalOpacity);
+    RefAbout.current.classList.add(normalOpacity);
 
     console.log('init');
   }, []);
@@ -155,15 +141,21 @@ const Home = () => {
         <div className='absolute flex items-center h-screen z-0'>
           <div className='grid grid-cols-1 grid-rows-3 fixed'>
             <div
-              className='transition-all duration-1000'
+              className='transition-all duration-[1500ms]'
               ref={RefDashboardIcon}
             >
               <DashboardIcon className='h-96' />
             </div>
-            <div className='transition-all duration-1000' ref={RefProjectsIcon}>
+            <div
+              className='transition-all duration-[1500ms]'
+              ref={RefProjectsIcon}
+            >
               <LabIcon className='h-96' />
             </div>
-            <div className='transition-all duration-1000' ref={RefAboutIcon}>
+            <div
+              className='transition-all duration-[1500ms]'
+              ref={RefAboutIcon}
+            >
               <AtEmailIcon className='h-96' />
             </div>
           </div>
