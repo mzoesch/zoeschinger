@@ -1,27 +1,27 @@
 import Head from 'next/head';
 import Layout from '@c/layouts/stdLayout';
-import Projects from '@c/Projects';
+import About from '@c/About';
 
-const Project = () => {
+const Page = () => {
   return (
     <>
       <Head>
-        <title>zoeschinger projects</title>
+        <title>zoeschinger - about</title>
         <meta
           name='description'
-          content='List of projects from Magnus Zoeschinger'
+          content='Information about Magnus Zoeschinger'
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Projects />
+      <About />
     </>
   );
 };
 
-Project.getLayout = function getLayout(page) {
+Page.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export default Project;
+export default Page;

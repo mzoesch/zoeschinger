@@ -7,23 +7,54 @@ import {
   NavbarIconMobile,
 } from './navbarIcons/DisplayLinkHelper';
 
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { XMarkIcon, Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
+import { Disclosure } from '@headlessui/react';
+import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   return (
-    <div className='absolute z-10 opacity-70 min-w-full'>
-      <Disclosure
-        as='nav'
-        className='bg-primaryLight dark:bg-primary bg-opacity-25 dark:bg-opacity-25'
-      >
+    <>
+      <Disclosure as='nav'>
         {({ open }) => (
-          <>
+          <div
+            className={
+              open
+                ? `
+                absolute
+                z-10
+                min-w-full
+ 
+                bg-slate-400 dark:bg-zinc-900
+                bg-opacity-100 dark:bg-opacity-100
+
+                sm:bg-slate-300 sm:dark:bg-gray-700
+                sm:bg-opacity-50 sm:dark:bg-opacity-50
+                `
+                : `
+                absolute
+                z-10
+                min-w-full
+
+                bg-primaryLight dark:bg-primary
+                bg-opacity-0 dark:bg-opacity-0
+
+                sm:bg-slate-300 sm:dark:bg-gray-700
+                sm:bg-opacity-50 sm:dark:bg-opacity-50
+              `
+            }
+          >
             <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
               <div className='relative flex h-16 items-center justify-between'>
-                {/* Navbar mobile */}
-                <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
-                  {/* Mobile menu button*/}
+                {/* Mobile menu button*/}
+                <div
+                  className='
+                absolute
+                
+                flex
+                sm:hidden
+                
+                inset-y-0 left-0 items-center
+                '
+                >
                   <Disclosure.Button
                     className='
                     inline-flex items-center justify-center rounded-md p-2 
@@ -54,8 +85,16 @@ const Navbar = () => {
                 </div>
 
                 {/* Navbar right */}
-                <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-                  {/* TODO: hide if on mobile */}
+                <div
+                  className='
+                absolute
+                inset-y-0 right-0
+                hidden
+                sm:block
+
+                items-center pr-2
+                sm:static sm:inset-auto sm:ml-6 sm:pr-0'
+                >
                   <ThemeIcon />
 
                   {/* Profile dropdown */}
@@ -126,10 +165,10 @@ const Navbar = () => {
 
             {/* Dropdown menu - mobile only */}
             <NavbarIconMobile />
-          </>
+          </div>
         )}
       </Disclosure>
-    </div>
+    </>
   );
 };
 

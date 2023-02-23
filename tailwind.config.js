@@ -13,10 +13,26 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        quicksand: ['QUICKSAND_BOLD', 'bold'],
+        quicksand: ['QUICKSAND_LIGHT', 'extralight'],
+        quicksand: ['QUICKSAND_MEDIUM', 'light'],
+        quicksand: ['QUICKSAND_REGULAR', 'regular'],
+        quicksand: ['QUICKSAND_SEMIBOLD', 'semibold'],
+      },
       colors: {
-        primary: '#4e0090',
-        primaryLight: '#f0f0f0',
+        primary: '#121827',
+        primaryLight: '#ffffff',
         secondary: '',
+      },
+      keyframes: {
+        magic_background_transform: {
+          '0%': { 'background-position': '0%' },
+          '100%': { 'background-position': '-200%' },
+        },
+      },
+      animation: {
+        magic_background: 'magic_background_transform 2s linear infinite',
       },
     },
   },

@@ -1,6 +1,5 @@
 import useDarkMode from '@h/useDarkMode';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import styles from '@s/navbar/navbar.module.css';
 import useLoaded from '@l/FixWarningPropD';
 
 const ThemeIcon = () => {
@@ -14,9 +13,19 @@ const ThemeIcon = () => {
   return (
     <span onClick={handleMode}>
       {theme ? (
-        <FaSun className={styles.navbar_icon_sun} />
+        <FaSun
+          className='text-gray-500
+        hover:text-pink-400 mr-3 ml-0
+        transition duration-300 ease-in-out
+        cursor-pointer'
+        />
       ) : (
-        <FaMoon className={styles.navbar_icon_moon} />
+        <FaMoon
+          className='mr-3 ml-0
+        transition duration-300 ease-in-out
+        cursor-pointer text-gray-500
+        hover:text-blue-900'
+        />
       )}
     </span>
   );
