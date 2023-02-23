@@ -246,24 +246,24 @@ const Home = () => {
         {/* Background icon */}
         <div
           className='absolute flex items-center h-screen z-0 transition-all duration-[2000ms]'
-          ref={RefBgGrid}
+          ref={RefBgGrid as React.RefObject<HTMLDivElement>}
         >
           <div className='grid grid-cols-1 grid-rows-3 fixed'>
             <div
               className='transition-all duration-[1500ms]'
-              ref={RefDashboardIcon}
+              ref={RefDashboardIcon as React.RefObject<HTMLDivElement>}
             >
               <DashboardIcon className='h-96' />
             </div>
             <div
               className='transition-all duration-[1500ms]'
-              ref={RefProjectsIcon}
+              ref={RefProjectsIcon as React.RefObject<HTMLDivElement>}
             >
               <LabIcon className='h-96' />
             </div>
             <div
               className='transition-all duration-[1500ms]'
-              ref={RefAboutIcon}
+              ref={RefAboutIcon as React.RefObject<HTMLDivElement>}
             >
               <AtEmailIcon className='h-96' />
             </div>
@@ -278,7 +278,7 @@ const Home = () => {
         >
           <div
             className='ml-80 mb-20 text-white text-7xl transition-all duration-700'
-            ref={RefDashboard}
+            ref={RefDashboard as React.RefObject<HTMLDivElement>}
           >
             <Link
               href='/dashboard'
@@ -291,7 +291,7 @@ const Home = () => {
           </div>
           <div
             className='block ml-80 text-white text-7xl transition-all duration-700'
-            ref={RefProjects}
+            ref={RefProjects as React.RefObject<HTMLDivElement>}
           >
             <Link
               href='/projects'
@@ -304,7 +304,7 @@ const Home = () => {
           </div>
           <div
             className='block ml-80 mt-20 text-white text-7xl transition-all duration-700'
-            ref={RefAbout}
+            ref={RefAbout as React.RefObject<HTMLDivElement>}
           >
             <Link
               href='/about'
