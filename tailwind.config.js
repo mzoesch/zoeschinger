@@ -13,6 +13,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        quicksand: ['QUICKSAND_BOLD', 'bold'],
+        quicksand: ['QUICKSAND_LIGHT', 'extralight'],
+        quicksand: ['QUICKSAND_MEDIUM', 'light'],
+        quicksand: ['QUICKSAND_REGULAR', 'regular'],
+        quicksand: ['QUICKSAND_SEMIBOLD', 'semibold'],
+      },
       colors: {
         primary: '#121827',
         primaryLight: '#ffffff',
