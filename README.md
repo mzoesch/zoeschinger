@@ -101,3 +101,4 @@ Issues:
 
 different theme buttons wom't sync
 https://fontawesome.com/
+https://www.svgrepo.com/svg/507260/dashboard
