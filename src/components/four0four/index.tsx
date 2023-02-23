@@ -42,7 +42,7 @@ const Four0Four = () => {
           </div>
           <div className='flex justify-center text-center'>
             <h2>
-              The page{' '}
+              It looks like{' '}
               <span
                 className='
               animate-magic_background
@@ -54,7 +54,7 @@ const Four0Four = () => {
               >
                 {route}
               </span>{' '}
-              has been lost in the matrix
+              went missing in the matrix
             </h2>
           </div>
 
