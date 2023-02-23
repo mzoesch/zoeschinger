@@ -10,6 +10,10 @@ const Home = () => {
   const svgFocus = 'opacity-100';
   const svgUnfocus = 'opacity-5';
 
+  const bgGridDashboard = 'top-96';
+  const bgGridProjects = 'top-0';
+  const bgGridAbout = '-top-96';
+
   const RefDashboard = useRef<HTMLElement>(null);
   const RefProjects = useRef<HTMLElement>(null);
   const RefAbout = useRef<HTMLElement>(null);
@@ -17,6 +21,8 @@ const Home = () => {
   const RefDashboardIcon = useRef<HTMLElement>(null);
   const RefProjectsIcon = useRef<HTMLElement>(null);
   const RefAboutIcon = useRef<HTMLElement>(null);
+
+  const RefBgGrid = useRef<HTMLElement>(null);
 
   const [one, setOne] = useState(false);
   const [two, setTwo] = useState(false);
@@ -45,6 +51,12 @@ const Home = () => {
       RefDashboardIcon.current.classList.add(svgFocus);
       RefProjectsIcon.current.classList.add(svgUnfocus);
       RefAboutIcon.current.classList.add(svgUnfocus);
+
+      RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current.classList.remove(bgGridAbout);
+
+      RefBgGrid.current.classList.add(bgGridDashboard);
     } else {
       RefDashboard.current.classList.remove(hoverOpacity);
       RefProjects.current.classList.remove(hoverOpacityOther);
@@ -78,6 +90,12 @@ const Home = () => {
       RefDashboardIcon.current.classList.add(svgUnfocus);
       RefProjectsIcon.current.classList.add(svgFocus);
       RefAboutIcon.current.classList.add(svgUnfocus);
+
+      RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current.classList.remove(bgGridAbout);
+
+      RefBgGrid.current.classList.add(bgGridProjects);
     } else {
       RefDashboard.current.classList.remove(hoverOpacityOther);
       RefProjects.current.classList.remove(hoverOpacity);
@@ -111,6 +129,12 @@ const Home = () => {
       RefDashboardIcon.current.classList.add(svgUnfocus);
       RefProjectsIcon.current.classList.add(svgUnfocus);
       RefAboutIcon.current.classList.add(svgFocus);
+
+      RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current.classList.remove(bgGridAbout);
+
+      RefBgGrid.current.classList.add(bgGridAbout);
     } else {
       RefDashboard.current.classList.remove(hoverOpacityOther);
       RefProjects.current.classList.remove(hoverOpacityOther);
@@ -131,6 +155,8 @@ const Home = () => {
     RefProjects.current.classList.add(normalOpacity);
     RefAbout.current.classList.add(normalOpacity);
 
+    RefBgGrid.current.classList.add(bgGridProjects);
+
     console.log('init');
   }, []);
 
@@ -138,7 +164,10 @@ const Home = () => {
     <>
       <div className='bg-gray-900 -z-20'>
         {/* Background icon */}
-        <div className='absolute flex items-center h-screen z-0'>
+        <div
+          className='absolute flex items-center h-screen z-0 transition-all duration-[2000ms]'
+          ref={RefBgGrid}
+        >
           <div className='grid grid-cols-1 grid-rows-3 fixed'>
             <div
               className='transition-all duration-[1500ms]'
@@ -202,6 +231,7 @@ const Home = () => {
               className=''
               onMouseEnter={() => handleThree(true)}
               onMouseOut={() => handleThree(false)}
+              prefetch
             >
               About
             </Link>
