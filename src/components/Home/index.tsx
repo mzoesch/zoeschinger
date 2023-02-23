@@ -33,38 +33,63 @@ const Home = () => {
     setOne(hover);
 
     if (hover == true) {
-      RefDashboard.current.classList.remove(normalOpacity);
-      RefProjects.current.classList.remove(normalOpacity);
-      RefAbout.current.classList.remove(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(normalOpacity);
 
-      RefDashboard.current.classList.add(hoverOpacity);
-      RefProjects.current.classList.add(hoverOpacityOther);
-      RefAbout.current.classList.add(hoverOpacityOther);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(hoverOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(hoverOpacityOther);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.add(hoverOpacityOther);
 
-      RefDashboardIcon.current.classList.remove(svgFocus);
-      RefProjectsIcon.current.classList.remove(svgFocus);
-      RefAboutIcon.current.classList.remove(svgFocus);
-      RefDashboardIcon.current.classList.remove(svgUnfocus);
-      RefProjectsIcon.current.classList.remove(svgUnfocus);
-      RefAboutIcon.current.classList.remove(svgUnfocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      RefDashboardIcon.current.classList.add(svgFocus);
-      RefProjectsIcon.current.classList.add(svgUnfocus);
-      RefAboutIcon.current.classList.add(svgUnfocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.add(svgFocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.add(svgUnfocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.add(svgUnfocus);
 
-      RefBgGrid.current.classList.remove(bgGridDashboard);
-      RefBgGrid.current.classList.remove(bgGridProjects);
-      RefBgGrid.current.classList.remove(bgGridAbout);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridAbout);
 
-      RefBgGrid.current.classList.add(bgGridDashboard);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.add(bgGridDashboard);
     } else {
-      RefDashboard.current.classList.remove(hoverOpacity);
-      RefProjects.current.classList.remove(hoverOpacityOther);
-      RefAbout.current.classList.remove(hoverOpacityOther);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(hoverOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(hoverOpacityOther);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(hoverOpacityOther);
 
-      RefDashboard.current.classList.add(normalOpacity);
-      RefProjects.current.classList.add(normalOpacity);
-      RefAbout.current.classList.add(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.add(normalOpacity);
     }
   }
   function handleTwo(hover: boolean) {
@@ -72,38 +97,63 @@ const Home = () => {
     setTwo(hover);
 
     if (hover == true) {
-      RefDashboard.current.classList.remove(normalOpacity);
-      RefProjects.current.classList.remove(normalOpacity);
-      RefAbout.current.classList.remove(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(normalOpacity);
 
-      RefDashboard.current.classList.add(hoverOpacityOther);
-      RefProjects.current.classList.add(hoverOpacity);
-      RefAbout.current.classList.add(hoverOpacityOther);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(hoverOpacityOther);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(hoverOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.add(hoverOpacityOther);
 
-      RefDashboardIcon.current.classList.remove(svgFocus);
-      RefProjectsIcon.current.classList.remove(svgFocus);
-      RefAboutIcon.current.classList.remove(svgFocus);
-      RefDashboardIcon.current.classList.remove(svgUnfocus);
-      RefProjectsIcon.current.classList.remove(svgUnfocus);
-      RefAboutIcon.current.classList.remove(svgUnfocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      RefDashboardIcon.current.classList.add(svgUnfocus);
-      RefProjectsIcon.current.classList.add(svgFocus);
-      RefAboutIcon.current.classList.add(svgUnfocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.add(svgUnfocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.add(svgFocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.add(svgUnfocus);
 
-      RefBgGrid.current.classList.remove(bgGridDashboard);
-      RefBgGrid.current.classList.remove(bgGridProjects);
-      RefBgGrid.current.classList.remove(bgGridAbout);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridAbout);
 
-      RefBgGrid.current.classList.add(bgGridProjects);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.add(bgGridProjects);
     } else {
-      RefDashboard.current.classList.remove(hoverOpacityOther);
-      RefProjects.current.classList.remove(hoverOpacity);
-      RefAbout.current.classList.remove(hoverOpacityOther);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(hoverOpacityOther);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(hoverOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(hoverOpacityOther);
 
-      RefDashboard.current.classList.add(normalOpacity);
-      RefProjects.current.classList.add(normalOpacity);
-      RefAbout.current.classList.add(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.add(normalOpacity);
     }
   }
   function handleThree(hover: boolean) {
@@ -111,51 +161,81 @@ const Home = () => {
     setThree(hover);
 
     if (hover == true) {
-      RefDashboard.current.classList.remove(normalOpacity);
-      RefProjects.current.classList.remove(normalOpacity);
-      RefAbout.current.classList.remove(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(normalOpacity);
 
-      RefDashboard.current.classList.add(hoverOpacityOther);
-      RefProjects.current.classList.add(hoverOpacityOther);
-      RefAbout.current.classList.add(hoverOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(hoverOpacityOther);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(hoverOpacityOther);
+      RefAbout.current !== null && RefAbout.current.classList.add(hoverOpacity);
 
-      RefDashboardIcon.current.classList.remove(svgFocus);
-      RefProjectsIcon.current.classList.remove(svgFocus);
-      RefAboutIcon.current.classList.remove(svgFocus);
-      RefDashboardIcon.current.classList.remove(svgUnfocus);
-      RefProjectsIcon.current.classList.remove(svgUnfocus);
-      RefAboutIcon.current.classList.remove(svgUnfocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgFocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgFocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgFocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.remove(svgUnfocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.remove(svgUnfocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.remove(svgUnfocus);
 
-      RefDashboardIcon.current.classList.add(svgUnfocus);
-      RefProjectsIcon.current.classList.add(svgUnfocus);
-      RefAboutIcon.current.classList.add(svgFocus);
+      RefDashboardIcon.current !== null &&
+        RefDashboardIcon.current.classList.add(svgUnfocus);
+      RefProjectsIcon.current !== null &&
+        RefProjectsIcon.current.classList.add(svgUnfocus);
+      RefAboutIcon.current !== null &&
+        RefAboutIcon.current.classList.add(svgFocus);
 
-      RefBgGrid.current.classList.remove(bgGridDashboard);
-      RefBgGrid.current.classList.remove(bgGridProjects);
-      RefBgGrid.current.classList.remove(bgGridAbout);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridDashboard);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridProjects);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.remove(bgGridAbout);
 
-      RefBgGrid.current.classList.add(bgGridAbout);
+      RefBgGrid.current !== null &&
+        RefBgGrid.current.classList.add(bgGridAbout);
     } else {
-      RefDashboard.current.classList.remove(hoverOpacityOther);
-      RefProjects.current.classList.remove(hoverOpacityOther);
-      RefAbout.current.classList.remove(hoverOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.remove(hoverOpacityOther);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.remove(hoverOpacityOther);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.remove(hoverOpacity);
 
-      RefDashboard.current.classList.add(normalOpacity);
-      RefProjects.current.classList.add(normalOpacity);
-      RefAbout.current.classList.add(normalOpacity);
+      RefDashboard.current !== null &&
+        RefDashboard.current.classList.add(normalOpacity);
+      RefProjects.current !== null &&
+        RefProjects.current.classList.add(normalOpacity);
+      RefAbout.current !== null &&
+        RefAbout.current.classList.add(normalOpacity);
     }
   }
 
   useEffect(() => {
-    RefDashboardIcon.current.classList.add(svgUnfocus);
-    RefProjectsIcon.current.classList.add(svgFocus);
-    RefAboutIcon.current.classList.add(svgUnfocus);
+    RefDashboardIcon.current !== null &&
+      RefDashboardIcon.current.classList.add(svgUnfocus);
+    RefProjectsIcon.current !== null &&
+      RefProjectsIcon.current.classList.add(svgFocus);
+    RefAboutIcon.current !== null &&
+      RefAboutIcon.current.classList.add(svgUnfocus);
 
-    RefDashboard.current.classList.add(normalOpacity);
-    RefProjects.current.classList.add(normalOpacity);
-    RefAbout.current.classList.add(normalOpacity);
+    RefDashboard.current !== null &&
+      RefDashboard.current.classList.add(normalOpacity);
+    RefProjects.current !== null &&
+      RefProjects.current.classList.add(normalOpacity);
+    RefAbout.current !== null && RefAbout.current.classList.add(normalOpacity);
 
-    RefBgGrid.current.classList.add(bgGridProjects);
+    RefBgGrid.current !== null &&
+      RefBgGrid.current.classList.add(bgGridProjects);
 
     console.log('init');
   }, []);
@@ -231,7 +311,6 @@ const Home = () => {
               className=''
               onMouseEnter={() => handleThree(true)}
               onMouseOut={() => handleThree(false)}
-              prefetch
             >
               About
             </Link>
