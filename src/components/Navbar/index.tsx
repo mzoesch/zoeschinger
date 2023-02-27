@@ -34,6 +34,7 @@ const Navbar = () => {
                 z-10
                 min-w-full
 
+
                 bg-primaryLight dark:bg-primary
                 bg-opacity-0 dark:bg-opacity-0
 
@@ -91,7 +92,8 @@ const Navbar = () => {
                 inset-y-0 right-0
                 hidden
                 sm:block
-
+                    h-8
+                    w-auto
                 items-center pr-2
                 sm:static sm:inset-auto sm:ml-6 sm:pr-0'
                 >
