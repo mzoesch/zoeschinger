@@ -1,0 +1,74 @@
+@use '@s/globals.module.scss' as g;
+@use './navbar.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .navbar {
+    display: flex;
+
+    align-items: center;
+
+    background-color: none;
+  }
+
+  .left {
+    display: block;
+
+    flex-grow: 1;
+  }
+
+  .left_mobile {
+    display: block;
+  }
+
+  .left_dekstop {
+    display: none;
+  }
+
+  .middle {
+    display: block;
+
+    flex-grow: 1;
+  }
+
+  .right {
+    display: none;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .navbar {
+    display: flex;
+    background-color: rgb(var(--primary-off), 50%);
+  }
+
+  .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    flex-grow: 1;
+  }
+
+  .left_mobile {
+    display: none;
+  }
+
+  .left_dekstop {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 2rem;
+    margin-left: 2rem;
+  }
+
+  .middle {
+    display: none;
+  }
+
+  .right {
+    display: block;
+
+    flex-grow: 1;
+  }
+}

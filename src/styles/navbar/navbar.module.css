@@ -1,0 +1,14 @@
+.navbar {
+  height: 4rem;
+}
+
+.mobile_navbar_img {
+  width: auto;
+  height: 2.75rem;
+  margin-left: calc(-2.75rem / 2);
+}
+
+.desktop_navbar_img {
+  width: auto;
+  height: 2rem;
+}

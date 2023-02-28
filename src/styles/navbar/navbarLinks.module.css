@@ -1,0 +1,33 @@
+.all_links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.link_selected {
+  text-decoration: none;
+  font-size: var(--text-md-font-size);
+  line-height: var(--text-md-line-height);
+
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  color: rgba(255, 255, 255, 100%);
+
+  background-color: rgba(var(--ucble-primary-dark), 100%);
+  border-radius: var(--border-rounded-md);
+}
+
+.link_unselected {
+  text-decoration: none;
+  font-size: var(--text-md-font-size);
+  line-height: var(--text-md-line-height);
+
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  color: rgba(var(--primary-negativ), 100%);
+}
