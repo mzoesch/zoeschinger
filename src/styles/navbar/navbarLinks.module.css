@@ -29,5 +29,5 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 
-  color: rgba(var(--primary-negativ), 100%);
+  color: rgb(var(--primary-negativ) / 100%);
 }

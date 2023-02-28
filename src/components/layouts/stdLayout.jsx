@@ -1,11 +1,11 @@
 import Navbar from '@c/Navbar';
 import Footer from '@c/Footer';
-import styles from '@s/stdLayout/stdLayout.module.css';
+import styles from '@s/wrapper.module.css';
 
 function Layout({ children }) {
   return (
     <>
-      <div className={styles.overall_grid}>
+      <div className={styles.wrapper}>
         <Navbar />
         {children}
         <Footer />

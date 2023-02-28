@@ -38,7 +38,7 @@
 @media all and (min-width: g.$sm) {
   .navbar {
     display: flex;
-    background-color: rgb(var(--primary-off), 50%);
+    background-color: rgb(var(--primary-off) / 50%);
   }
 
   .left {
@@ -67,7 +67,10 @@
   }
 
   .right {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
 
     flex-grow: 1;
   }

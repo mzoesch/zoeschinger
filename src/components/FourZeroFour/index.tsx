@@ -1,7 +1,9 @@
+import styles from '@s/FourZeroFour/main.module.scss';
+
 const Page = () => {
   return (
     <>
-      <div>This is a 404 page</div>
+      <div className={styles.main}>This is a 404 page 😖</div>
     </>
   );
 };

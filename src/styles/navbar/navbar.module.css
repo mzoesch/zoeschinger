@@ -1,4 +1,6 @@
 .navbar {
+  position: absolute;
+  min-width: 100vw;
   height: 4rem;
 }
 

@@ -1,14 +1,15 @@
 body {
   margin: 0rem;
+  overflow-x: hidden;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 :root {
-  --ucble-primary-light: 255, 255, 255;
-  --ucble-primary-light-off: 203, 213, 225;
-  --ucble-primary-dark: 19, 24, 38;
-  --ucble-primary-dark-off: 55, 65, 81;
-
+  --ucble-primary-light: 255 255 255;
+  --ucble-primary-light-off: 203 213 225;
+  --ucble-primary-dark: 19 24 38;
+  --ucble-primary-dark-off: 55 65 81;
+  
   --primary: var(--ucble-primary-light);
   --primary-negativ: var(--ucble-primary-dark);
   --primary-off: var(--ucble-primary-light-off);

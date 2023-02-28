@@ -1,0 +1,15 @@
+.main {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+
+  bottom: 0rem;
+  height: 4rem;
+
+  align-items: center;
+  justify-content: center;
+
+  color: rgb(var(--primary-negativ) / 100%);
+
+  background-color: rgb(var(--primary-off) / 50%);
+}

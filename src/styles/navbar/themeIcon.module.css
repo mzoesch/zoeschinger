@@ -1,0 +1,29 @@
+.sun {
+  margin-right: 0.75rem;
+
+  transition-property: color;
+  transition-duration: 300ms;
+
+  cursor: pointer;
+
+  color: rgb(237, 237, 39);
+}
+
+.sun:hover {
+  color: rgb(244, 114, 182);
+}
+
+.moon {
+  margin-right: 0.75rem;
+
+  transition-property: color;
+  transition-duration: 300ms;
+
+  cursor: pointer;
+
+  color: rgb(107, 144, 128);
+}
+
+.moon:hover {
+  color: rgb(26, 105, 196);
+}
