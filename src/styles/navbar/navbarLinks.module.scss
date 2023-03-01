@@ -2,7 +2,63 @@
 @use './navbarLinks.module.css';
 
 @media all and (min-width: g.$mobile) {
+  .all_links_open,
+  .all_links_closed {
+    position: absolute;
+    display: block;
+
+    top: 0rem;
+    height: 4rem;
+
+    width: 100%;
+  }
+
+  .all_links_open {
+    background-color: rgb(var(--mobile-dropdown) / 100%);
+    padding-top: 1rem;
+  }
+
+  .all_links_closed {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: rgb(var(--mobile-dropdown) / 0%);
+  }
+
+  .link_unselected {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .link_selected {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    color: rgb(var(--primary-negativ) / 100%);
+    background-color: rgb(var(--mobile-navbar-link-selected) / 100%);
+  }
 }
 
 @media all and (min-width: g.$sm) {
+  .all_links {
+    position: static;
+    padding-top: 0rem;
+
+    display: flex;
+    background-color: rgb(255 255 255 / 0%);
+    gap: 1.25rem;
+  }
+
+  .link_unselected {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+
+  .link_selected {
+    margin-left: 0rem;
+    margin-right: 0rem;
+
+    color: rgba(255, 255, 255, 100%);
+    background-color: rgb(var(--ucble-primary-dark) / 100%);
+  }
 }

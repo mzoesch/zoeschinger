@@ -27,3 +27,59 @@
 .moon:hover {
   color: rgb(26, 105, 196);
 }
+
+.mobile_darkmode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-left: 1.75rem;
+  margin-right: 1.75rem;
+
+  color: rgb(var(--navbar-text) / 100%);
+}
+
+.theme_switch {
+  background-color: white;
+}
+
+.theme_switch_on,
+.theme_switch_off {
+  display: block;
+  cursor: pointer;
+
+  height: 2rem;
+  width: 3.5rem;
+
+  border-radius: var(--border-rounded-full);
+}
+
+.theme_switch_on {
+  background-color: rgb(83, 186, 245);
+}
+
+.theme_switch_off {
+  background-color: rgb(209, 213, 219);
+}
+
+.theme_toggler_thingy_on,
+.theme_toggler_thingy_off {
+  height: 2rem;
+  width: 2rem;
+
+  border-radius: var(--border-rounded-full);
+
+  background-color: #ffffff;
+
+  transition: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.theme_toggler_thingy_off {
+  margin-left: 0rem;
+}
+
+.theme_toggler_thingy_on {
+  margin-left: 1.5rem;
+}

@@ -1,5 +1,5 @@
 import styles from '@s/navbar/navbar.module.scss';
-import { LinksDesktop } from './LinkHelper';
+import { LinksDesktop, LinksMobile } from './LinkHelper';
 import ThemeIcon from './ThemeToggler';
 
 import NavbarImage from './NavbarImage';
@@ -14,7 +14,7 @@ const Navbar = () => {
             <LinksDesktop />
           </div>
           <div className={styles.left_mobile}>
-            <>X</>
+            <LinksMobile />
           </div>
         </div>
         {/* Only used on mobile */}
