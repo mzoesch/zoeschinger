@@ -1,10 +1,11 @@
 .main {
   position: absolute;
   display: flex;
+
   width: 100vw;
+  height: 4rem;
 
   bottom: 0rem;
-  height: 4rem;
 
   align-items: center;
   justify-content: center;

@@ -10,22 +10,41 @@
 
 .main {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   flex-direction: column;
 
+  text-align: center;
+  align-items: center;
+  align-items: center;
+
   min-width: 100vw;
-  min-height: 34vh;
+  min-height: 100vh;
+
   background-color: rgb(var(--primary) / 100%);
 
   color: rgb(var(--primary-negativ-off) / 100%);
-  font-size: 2.5rem;
 }
 
 .sub {
-  font-size: medium;
-  font-weight: 500;
+  flex: auto;
+
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 5vw;
+
+  margin-left: 10vw;
+  margin-right: 10vw;
+
+  /* background-color: red; */
+}
+
+.magic {
+  display: inline-block;
+  position: relative;
 }
 
 .magic_text {
@@ -49,4 +68,12 @@
   white-space: nowrap;
 
   animation: background-pan 4s linear infinite;
+}
+
+.footer_text {
+  font-size: medium;
+}
+
+.footer_link {
+  color: rgb(70 126 236 / 100%);
 }

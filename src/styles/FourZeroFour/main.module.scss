@@ -1,2 +1,32 @@
 @use '@s/globals.module.scss' as g;
 @use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .whooooops {
+    margin-top: 23vh;
+    font-size: 1.6rem;
+  }
+
+  .sub {
+    font-size: small;
+  }
+
+  .footer {
+    margin-bottom: 25vh;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .whooooops {
+    margin-top: 29vh;
+    font-size: 2.5rem;
+  }
+
+  .sub {
+    font-size: medium;
+  }
+
+  .footer {
+    margin-bottom: 13vh;
+  }
+}
