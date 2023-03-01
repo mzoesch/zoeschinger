@@ -1,13 +1,52 @@
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: -200% center;
+  }
+}
+
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
 
   min-width: 100vw;
   min-height: 34vh;
   background-color: rgb(var(--primary) / 100%);
 
-  color: rgb(var(--primary-negativ) / 100%);
+  color: rgb(var(--primary-negativ-off) / 100%);
   font-size: 2.5rem;
+}
+
+.sub {
+  font-size: medium;
+  font-weight: 500;
+}
+
+.magic_text {
+  --purple: rgb(123, 31, 162);
+  --violet: rgb(103, 58, 183);
+  --pink: rgb(244, 143, 177);
+
+  background: linear-gradient(
+    to right,
+    var(--purple),
+    var(--violet),
+    var(--pink),
+    var(--purple)
+  );
+  background-size: 200%;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  white-space: nowrap;
+
+  animation: background-pan 4s linear infinite;
 }

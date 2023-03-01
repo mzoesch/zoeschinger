@@ -20,7 +20,7 @@
 
   .all_links_closed {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     background-color: rgb(var(--mobile-dropdown) / 0%);
   }
