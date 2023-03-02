@@ -25,48 +25,60 @@ const Home = () => {
     setTranslate(`0%${plus}`);
   };
 
+  const handleOne = () => {
+    setTranslate(`0%${mid}`);
+  };
+
+  const handleTwo = () => {
+    setTranslate(`0%${minus}`);
+  };
+
   return (
-    <div className={quicksand.className}>
-      <div className={styles.overall}>
-        <div className={styles.zoeschinger}>
-          zoeschinger<span className={styles.com}>.com</span>
-        </div>
-        <div
-          className={styles.background_stuff}
-          style={{ translate }}
-          ref={RefBackgroundThingy as React.RefObject<HTMLDivElement>}
-        >
-          <div ref={RefDashboardIcon as React.RefObject<HTMLDivElement>}>
-            <DashboardIcon className={styles.icon} />
+    <>
+      <div className={quicksand.className}>
+        <div className={styles.overall}>
+          <div className={styles.zoeschinger}>
+            zoeschinger<span className={styles.com}>.com</span>
           </div>
-          <div ref={RefProjectIcon as React.RefObject<HTMLDivElement>}>
-            <LabIcon className={styles.icon} />
-          </div>
-          <div ref={RefAboutIcon as React.RefObject<HTMLDivElement>}>
-            <AtEmailIcon className={styles.icon} />
-          </div>
-        </div>
-        <div className={styles.main}>
-          <div className={styles.menu}>
-            <div className={styles.menu_item} onMouseEnter={handleZero}>
-              <Link href='/dashboard' className={styles.link}>
-                Dashboard
-              </Link>
+          <div className={styles.main}>
+            <div className={styles.menu}>
+              <div className={styles.menu_item} onMouseEnter={handleZero}>
+                <Link href='/dashboard' className={styles.link}>
+                  Dashboard
+                </Link>
+              </div>
+              <div className={styles.menu_item} onMouseEnter={handleOne}>
+                <Link href='/projects' className={styles.link}>
+                  Projects
+                </Link>
+              </div>
+              <div className={styles.menu_item} onMouseEnter={handleTwo}>
+                <Link href='/about' className={styles.link}>
+                  About
+                </Link>
+              </div>
             </div>
-            <div className={styles.menu_item}>
-              <Link href='/projects' className={styles.link}>
-                Projects
-              </Link>
-            </div>
-            <div className={styles.menu_item}>
-              <Link href='/about' className={styles.link}>
-                About
-              </Link>
+            <div className={styles.background_stuff_wrapper}>
+              <div
+                className={styles.background_stuff}
+                style={{ translate }}
+                ref={RefBackgroundThingy as React.RefObject<HTMLDivElement>}
+              >
+                <div ref={RefDashboardIcon as React.RefObject<HTMLDivElement>}>
+                  <DashboardIcon className={styles.icon} />
+                </div>
+                <div ref={RefProjectIcon as React.RefObject<HTMLDivElement>}>
+                  <LabIcon className={styles.icon} />
+                </div>
+                <div ref={RefAboutIcon as React.RefObject<HTMLDivElement>}>
+                  <AtEmailIcon className={styles.icon} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

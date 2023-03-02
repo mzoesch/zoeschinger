@@ -6,6 +6,69 @@ $hoverOne: 0;
 $hoverTwo: 0;
 
 @media all and (min-width: g.$mobile) {
+  .zoeschinger {
+    font-size: var(--text-2xl-font-size);
+    line-height: var(--text-2xl-line-height);
+    font-weight: bold;
+  }
+
+  .menu {
+    font-size: var(--text-5xl-font-size);
+    line-height: var(--text-5xl-line-height);
+    font-weight: 600;
+
+    margin-left: 2rem;
+  }
+
+  .menu:hover + .background_stuff_wrapper > .background_stuff {
+    opacity: 25%;
+    margin-left: 2rem;
+  }
+
+  .icon {
+    opacity: 40%;
+    height: 20rem;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .zoeschinger {
+    font-size: var(--text-5xl-font-size);
+    line-height: var(--text-5xl-line-height);
+    font-weight: bold;
+  }
+
+  .menu {
+    font-size: var(--text-7xl-font-size);
+    line-height: var(--text-7xl-line-height);
+    font-weight: 600;
+
+    margin-left: 7rem;
+  }
+
+  .menu:hover + .background_stuff_wrapper > .background_stuff {
+    opacity: 25%;
+    margin-left: 5rem;
+  }
+
+  .icon {
+    height: 30rem;
+  }
+}
+
+@media all and (min-width: g.$lg) {
+  .menu {
+    margin-left: 10rem;
+  }
+
+  .menu:hover + .background_stuff_wrapper > .background_stuff {
+    opacity: 25%;
+    margin-left: 10rem;
+  }
+
+  .icon {
+    height: 35rem;
+  }
 }
 
 // Only for communicating with ts
