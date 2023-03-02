@@ -1,0 +1,17 @@
+@use '@s/globals.module.scss' as g;
+@use './main.module.css';
+
+$hoverZero: 0;
+$hoverOne: 0;
+$hoverTwo: 0;
+
+@media all and (min-width: g.$mobile) {
+}
+
+// Only for communicating with ts
+
+:export {
+  hoverZero: $hoverZero;
+  hoverOne: $hoverOne;
+  hoverTwo: $hoverTwo;
+}

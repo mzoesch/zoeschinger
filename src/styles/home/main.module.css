@@ -1,0 +1,95 @@
+.overall {
+  display: flex;
+  align-items: center;
+  background-color: rgb(18 24 39 / 100%);
+}
+
+.main {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 1;
+}
+
+.zoeschinger {
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
+
+  font-size: var(--text-5xl-font-size);
+  line-height: var(--text-5xl-line-height);
+  font-weight: bold;
+
+  color: rgb(107 114 128 / 100);
+  z-index: 2;
+}
+
+.com {
+  font-size: var(--text-xl-font-size);
+  line-height: var(--text-xl-line-height);
+}
+
+.menu {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10rem;
+
+  font-size: var(--text-7xl-font-size);
+  line-height: var(--text-7xl-line-height);
+  font-weight: 600;
+
+  z-index: 3;
+}
+
+.menu_item {
+  width: 100%;
+
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+
+  transition: all 500ms ease;
+
+  opacity: 70%;
+}
+
+.menu:hover > .menu_item {
+  opacity: 11%;
+}
+
+.menu:hover > .menu_item:hover {
+  opacity: 100%;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.background_stuff {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  margin-left: 6rem;
+
+  /* translate: 0%35%; */
+  /* background-color: red; */
+
+  overflow: hidden;
+  z-index: 1;
+}
+
+.icon {
+  height: 35rem;
+}
