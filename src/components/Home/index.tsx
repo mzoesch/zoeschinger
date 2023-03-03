@@ -1,7 +1,7 @@
 import styles from '@s/home/main.module.scss';
 
 import { Quicksand } from 'next/font/google';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 
 const quicksand = Quicksand({ subsets: ['latin'] });
@@ -9,7 +9,6 @@ const quicksand = Quicksand({ subsets: ['latin'] });
 import { DashboardIcon, LabIcon, AtEmailIcon } from '@c/svg';
 
 const Home = () => {
-  const [index, setIndex] = useState(1);
   const [translate, setTranslate] = useState<string>('0%0%');
 
   const plus = '35%';
