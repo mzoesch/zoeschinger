@@ -1,4 +1,4 @@
-import styles from '@s/navbar/navbar.module.scss';
+import styles from '@s/navbar/main.module.scss';
 import { LinksDesktop, LinksMobile } from './LinkHelper';
 import ThemeIcon from './ThemeToggler';
 

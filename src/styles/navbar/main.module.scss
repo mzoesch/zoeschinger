@@ -1,5 +1,5 @@
 @use '@s/globals.module.scss' as g;
-@use './navbar.module.css';
+@use './main.module.css';
 
 @media all and (min-width: g.$mobile) {
   .navbar {
