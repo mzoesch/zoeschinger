@@ -4,6 +4,7 @@
   justify-content: center;
 
   width: 100%;
+  color: white;
 
   margin-left: 2.5rem;
   margin-right: 2.5rem;
@@ -31,10 +32,18 @@
   cursor: pointer;
 
   background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.project::before {
+.project_wrapper:hover > .project > .project_border {
+  opacity: 100%;
+}
+
+.project:hover::before {
+  opacity: 100%;
+}
+
+.project::before,
+.project_border {
   position: absolute;
 
   border-radius: inherit;
@@ -48,9 +57,41 @@
 
   z-index: 2;
 
+  opacity: 0%;
+  transition: opacity 600ms;
+}
+
+.project::before {
   background: radial-gradient(
-    800px circle at 100px 100px,
+    800px circle at var(--mouse-x) var(--mouse-y),
     rgba(255, 255, 255, 0.06),
     transparent 40%
   );
+
+  z-index: 3;
+}
+
+.project_border {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.4),
+    transparent 40%
+  );
+
+  /* background: red; */
+
+  z-index: 1;
+}
+
+.project_content {
+  position: relative;
+
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
+  margin: 1px;
+
+  background-color: rgb(11, 14, 25);
+  border-radius: inherit;
+
+  z-index: 2;
 }

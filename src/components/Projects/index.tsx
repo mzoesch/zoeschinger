@@ -1,44 +1,103 @@
 import styles from '@s/projects/main.module.scss';
 
-import { Parser } from '@l/documentHelper';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const Projects = () => {
-  function test() {
-    const hanldeOnMouseMove = (e: any) => {
-      const { currentTarget: target } = e;
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-      const rect = target.getBoundingClientRect(),
-        x = e.clientX - rect.left,
-        y = e.clientY - rect.top;
+  const RefPrjBox1 = useRef<HTMLElement>(null);
+  const RefPrjBox2 = useRef<HTMLElement>(null);
+  const RefPrjBox3 = useRef<HTMLElement>(null);
+  const RefPrjBox4 = useRef<HTMLElement>(null);
+  const RefPrjBox5 = useRef<HTMLElement>(null);
+  const RefPrjBox6 = useRef<HTMLElement>(null);
 
-      console.log(x);
-      console.log(y);
+  const RefPrjs = [
+    RefPrjBox1,
+    RefPrjBox2,
+    RefPrjBox3,
+    RefPrjBox4,
+    RefPrjBox5,
+    RefPrjBox6,
+  ];
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setMouse({
+        x: event.clientX,
+        y: event.clientY,
+      });
     };
+    window.addEventListener('mousemove', handleMouseMove);
 
-    for (const project_card of document.querySelectorAll('.project_card')) {
-      project_card.mousemove = (e: any) => {
-        hanldeOnMouseMove(e);
-      };
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const onPrjBoxHover = () => {
+    for (let i = 0; i < RefPrjs.length; i++) {
+      const rect = RefPrjs[i].current?.getBoundingClientRect();
+      const x = mouse.x - (rect?.left ?? 0);
+      const y = mouse.y - (rect?.top ?? 0);
+
+      RefPrjs[i].current?.style.setProperty('--mouse-x', `${x}px`);
+      RefPrjs[i].current?.style.setProperty('--mouse-y', `${y}px`);
     }
-  }
-
-  Parser(test);
+  };
 
   return (
     <>
       <div className={styles.main}>
         <div className={styles.project_wrapper}>
-          <div id='.project_card' className={styles.project}>
-            Project 1
+          <div
+            ref={RefPrjBox1 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
           </div>
-          <div id='.project_card' className={styles.project}>
-            Project 2
+          <div
+            ref={RefPrjBox2 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
           </div>
-          <div className={styles.project}>Project 3</div>
-          <div className={styles.project}>Project 4</div>
-          <div className={styles.project}>Project 5</div>
-          <div className={styles.project}>Project 6</div>
+          <div
+            ref={RefPrjBox3 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
+          </div>
+          <div
+            ref={RefPrjBox4 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
+          </div>
+          <div
+            ref={RefPrjBox5 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
+          </div>
+          <div
+            ref={RefPrjBox6 as React.RefObject<HTMLDivElement>}
+            className={styles.project}
+            onMouseMove={onPrjBoxHover}
+          >
+            <div className={styles.project_border}></div>
+            <div className={styles.project_content}>Prj</div>
+          </div>
         </div>
       </div>
     </>
