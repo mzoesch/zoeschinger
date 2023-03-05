@@ -6,7 +6,7 @@
 
   cursor: pointer;
 
-  color: rgb(237, 237, 39);
+  color: rgb(var(--ucble-primary-light));
 }
 
 .sun:hover {

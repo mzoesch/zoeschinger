@@ -1,0 +1,9 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "master": true,
+      "trunk": true,
+      "dev": false
+    }
+  }
+}
