@@ -17,6 +17,9 @@ body {
   --ucble-mobile-navbar-link-selected-light: 255 255 255;
   --ucble-mobile-navbar-link-selected-dark: 32 41 54;
 
+  --ucble-project-card-dark: 12 14 24;
+  --ucble-project-card-light: 230 230 230;
+
   --primary: var(--ucble-primary-light);
   --primary-negativ: var(--ucble-primary-dark);
   --primary-off: var(--ucble-primary-light-off);
@@ -26,6 +29,8 @@ body {
   --mobile-navbar-link-selected: var(--ucble-mobile-navbar-link-selected-light);
   --navbar-text: var(--ucble-navbar-text-light);
   --mobile-dropdown: var(--ucble-mobile-dropdown-light);
+
+  --project-card: var(--ucble-project-card-light);
 
   --border-rounded-sm: 0.125rem;
   --border-rounded-md: 0.375rem;
@@ -78,6 +83,8 @@ body {
   --navbar-text: var(--ucble-navbar-text-dark);
   --mobile-navbar-link-selected: var(--ucble-mobile-navbar-link-selected-dark);
   --mobile-dropdown: var(--ucble-mobile-dropdown-dark);
+
+  --project-card: var(--ucble-project-card-dark);
 }
 
 .sr-only {

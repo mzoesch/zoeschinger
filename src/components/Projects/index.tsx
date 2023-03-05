@@ -1,25 +1,13 @@
 import styles from '@s/projects/main.module.scss';
 
-import { useRef, useEffect, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
+import ProjectCard from './ProjectCard';
+import { projects } from '@l/projects';
 
 const Projects = () => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  const RefPrjBox1 = useRef<HTMLElement>(null);
-  const RefPrjBox2 = useRef<HTMLElement>(null);
-  const RefPrjBox3 = useRef<HTMLElement>(null);
-  const RefPrjBox4 = useRef<HTMLElement>(null);
-  const RefPrjBox5 = useRef<HTMLElement>(null);
-  const RefPrjBox6 = useRef<HTMLElement>(null);
-
-  const RefPrjs = [
-    RefPrjBox1,
-    RefPrjBox2,
-    RefPrjBox3,
-    RefPrjBox4,
-    RefPrjBox5,
-    RefPrjBox6,
-  ];
+  let projectRefs: any = [];
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -36,13 +24,13 @@ const Projects = () => {
   }, []);
 
   const onPrjBoxHover = () => {
-    for (let i = 0; i < RefPrjs.length; i++) {
-      const rect = RefPrjs[i].current?.getBoundingClientRect();
+    for (let i = 0; i < projectRefs.length; i++) {
+      const rect = projectRefs[i].current?.getBoundingClientRect();
       const x = mouse.x - (rect?.left ?? 0);
       const y = mouse.y - (rect?.top ?? 0);
 
-      RefPrjs[i].current?.style.setProperty('--mouse-x', `${x}px`);
-      RefPrjs[i].current?.style.setProperty('--mouse-y', `${y}px`);
+      projectRefs[i].current?.style.setProperty('--mouse-x', `${x}px`);
+      projectRefs[i].current?.style.setProperty('--mouse-y', `${y}px`);
     }
   };
 
@@ -50,54 +38,28 @@ const Projects = () => {
     <>
       <div className={styles.main}>
         <div className={styles.project_wrapper}>
-          <div
-            ref={RefPrjBox1 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
-          <div
-            ref={RefPrjBox2 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
-          <div
-            ref={RefPrjBox3 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
-          <div
-            ref={RefPrjBox4 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
-          <div
-            ref={RefPrjBox5 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
-          <div
-            ref={RefPrjBox6 as React.RefObject<HTMLDivElement>}
-            className={styles.project}
-            onMouseMove={onPrjBoxHover}
-          >
-            <div className={styles.project_border}></div>
-            <div className={styles.project_content}>Prj</div>
-          </div>
+          {projects.map((element) => {
+            const elementRef = createRef<HTMLElement>();
+            projectRefs.push(elementRef);
+
+            return (
+              <div
+                key={element.title}
+                ref={elementRef as React.RefObject<HTMLDivElement>}
+                className={styles.project}
+                onMouseMove={onPrjBoxHover}
+              >
+                <div className={styles.project_border} />
+                <div className={styles.project_content}>
+                  <ProjectCard
+                    title={element.title}
+                    subText={element.subText}
+                    href={element.href}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

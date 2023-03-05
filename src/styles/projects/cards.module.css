@@ -1,0 +1,30 @@
+.card {
+  color: rgb(var(--primary-negativ) / 100%);
+
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.title {
+  font-size: larger;
+}
+
+.subText {
+  font-size: smaller;
+}
+
+.footer {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icons {
+  height: 2rem;
+  fill: white;
+}
