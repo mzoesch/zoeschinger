@@ -1,30 +1,123 @@
 .card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+
   color: rgb(var(--primary-negativ) / 100%);
+  fill: rgb(var(--primary-negativ) / 100%);
 
   margin-left: 2rem;
   margin-right: 2rem;
 }
 
+.bottom {
+  position: relative;
+
+  bottom: 1rem;
+}
+
 .title {
-  font-size: larger;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .subText {
   font-size: smaller;
+  margin-bottom: 1rem;
 }
 
 .footer {
   display: flex;
 
   justify-content: space-between;
+
+  min-height: 2.4rem;
 }
 
 .links {
+  position: relative;
   display: flex;
-  gap: 0.5rem;
+  gap: 3rem;
+  margin-right: 1rem;
+  z-index: 10;
+
+  justify-content: center;
 }
 
 .icons {
+  position: absolute;
   height: 2rem;
-  fill: white;
+
+  transition: all;
+  transition-duration: 100ms;
+}
+
+.icons:hover {
+  scale: 115%;
+  fill: rgb(200 200 200 / 100%);
+}
+
+.top_img_wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 1rem;
+  margin-right: -1rem;
+
+  height: 4rem;
+}
+
+.top_img {
+  position: absolute;
+  z-index: 10;
+
+  height: 100%;
+  width: auto;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+
+  border-radius: var(--border-rounded-xl);
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  border-color: #525151;
+  border-width: 1px;
+  border-style: solid;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(255 255 255 / 5%);
+}
+
+.arrow {
+  position: relative;
+  margin-left: 0.5rem;
+
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.button:hover > .arrow {
+  translate: 0.25rem;
+}
+
+.read_more {
+  text-decoration: none;
+  color: rgb(var(--primary-negativ) / 100%);
 }

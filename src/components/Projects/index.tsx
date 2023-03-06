@@ -25,12 +25,19 @@ const Projects = () => {
 
   const onPrjBoxHover = () => {
     for (let i = 0; i < projectRefs.length; i++) {
-      const rect = projectRefs[i].current?.getBoundingClientRect();
-      const x = mouse.x - (rect?.left ?? 0);
-      const y = mouse.y - (rect?.top ?? 0);
+      projectRefs[i].current?.style.setProperty(
+        '--mouse-x',
+        `${
+          mouse.x - projectRefs[i].current?.getBoundingClientRect().left ?? 0
+        }px`
+      );
 
-      projectRefs[i].current?.style.setProperty('--mouse-x', `${x}px`);
-      projectRefs[i].current?.style.setProperty('--mouse-y', `${y}px`);
+      projectRefs[i].current?.style.setProperty(
+        '--mouse-y',
+        `${
+          mouse.y - projectRefs[i].current?.getBoundingClientRect().top ?? 0
+        }px`
+      );
     }
   };
 
@@ -50,11 +57,14 @@ const Projects = () => {
                 onMouseMove={onPrjBoxHover}
               >
                 <div className={styles.project_border} />
-                <div className={styles.project_content}>
+                <div className={styles.project_content} />
+                <div className={styles.actual_project_content}>
                   <ProjectCard
                     title={element.title}
                     subText={element.subText}
                     href={element.href}
+                    source={element.source}
+                    readMore={element.readMore}
                   />
                 </div>
               </div>

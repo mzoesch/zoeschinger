@@ -29,8 +29,6 @@
   position: relative;
   border-radius: var(--border-rounded-xl);
 
-  cursor: pointer;
-
   background-color: rgba(255, 255, 255, 0.02);
 }
 
@@ -92,4 +90,14 @@
   border-radius: inherit;
 
   z-index: 2;
+}
+
+.actual_project_content {
+  position: absolute;
+  top: 0rem;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 10;
 }
