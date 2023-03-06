@@ -1,0 +1,36 @@
+.stuff {
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.stuff1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  font-weight: bolder;
+
+  color: rgb(var(--primary-negativ) / 100%);
+
+  margin-bottom: 2rem;
+}
+
+.stuff2 {
+  display: flex;
+  margin-top: 2rem;
+
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  font-weight: bolder;
+
+  color: rgb(var(--primary-negativ) / 100%);
+}
