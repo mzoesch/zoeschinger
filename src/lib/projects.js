@@ -29,8 +29,16 @@ class Project {
 }
 
 export const projects = [
-  new Project('Zoeschinger', 'This website', '/'),
-  new Project('Text to git', 'stuff', '/'),
+  new Project(
+    'Zoeschinger',
+    'Website for my projects and stuff. So you can run them in the web.',
+    '/'
+  ),
+  new Project(
+    'Text to git',
+    'Allows you to place and display ASCII-Text at your GitHubs contributions overview.',
+    '/'
+  ),
   new Project('Salg', 'more stuff here', '/'),
   new Project('asdfasdf', 'more stuff here', '/'),
 ];

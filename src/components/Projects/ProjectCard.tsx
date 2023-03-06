@@ -3,6 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { GitHubLogo, LinkIcon, DashboardIcon } from '@c/svg';
+import { Raleway, Josefin_Sans } from 'next/font/google';
+
+const raleway = Raleway({ subsets: ['latin'] });
+const josefinSans = Josefin_Sans({ subsets: ['latin'] });
 
 const ProjectCard = ({
   title,
@@ -22,10 +26,14 @@ const ProjectCard = ({
           <DashboardIcon className={styles.top_img} />
         </div>
         <div className={styles.bottom}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.subText}>{subText}</div>
+          <div className={styles.title} style={josefinSans.style}>
+            {title}
+          </div>
+          <div className={styles.subText} style={raleway.style}>
+            {subText}
+          </div>
           <div className={styles.footer}>
-            <div>Read more -D</div>
+            <div className={styles.button}>Read more -D</div>
             <div className={styles.links}>
               <Link href={'/'}>
                 <GitHubLogo className={styles.icons} />
