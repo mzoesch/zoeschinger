@@ -63,6 +63,8 @@ const Projects = () => {
                     title={element.title}
                     subText={element.subText}
                     href={element.href}
+                    source={element.source}
+                    readMore={element.readMore}
                   />
                 </div>
               </div>

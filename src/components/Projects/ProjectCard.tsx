@@ -12,11 +12,15 @@ const ProjectCard = ({
   title,
   subText,
   href,
+  source,
+  readMore,
 }: // img,
 {
   title: any;
   subText: any;
   href: any;
+  source: any;
+  readMore: any;
   // img: any;
 }) => {
   return (
@@ -33,19 +37,26 @@ const ProjectCard = ({
             {subText}
           </div>
           <div className={styles.footer}>
-            <Link href={'/'} className={styles.read_more}>
-              <div className={styles.button}>
-                <div>Read more</div>
-                <HiOutlineArrowNarrowRight className={styles.arrow} />
-              </div>
+            <Link href={readMore} className={styles.read_more}>
+              {readMore == '-1' ? null : (
+                <div className={styles.button}>
+                  <div>Read more</div>
+                  <HiOutlineArrowNarrowRight className={styles.arrow} />
+                </div>
+              )}
             </Link>
             <div className={styles.links}>
-              <Link href={'/'}>
-                <GitHubLogo className={styles.icons} />
-              </Link>
-              <Link href={'/'}>
-                <LinkIcon className={styles.icons} />
-              </Link>
+              {source == '-1' ? null : (
+                <Link href={source} target='_blank'>
+                  <GitHubLogo className={styles.icons} />
+                </Link>
+              )}
+
+              {href == '-1' ? null : (
+                <Link href={href} target='_blank'>
+                  <LinkIcon className={styles.icons} />
+                </Link>
+              )}
             </div>
           </div>
         </div>
