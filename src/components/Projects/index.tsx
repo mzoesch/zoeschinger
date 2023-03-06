@@ -50,7 +50,8 @@ const Projects = () => {
                 onMouseMove={onPrjBoxHover}
               >
                 <div className={styles.project_border} />
-                <div className={styles.project_content}>
+                <div className={styles.project_content} />
+                <div className={styles.actual_project_content}>
                   <ProjectCard
                     title={element.title}
                     subText={element.subText}

@@ -1,5 +1,6 @@
 import styles from '@s/projects/cards.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { GitHubLogo, LinkIcon, DashboardIcon } from '@c/svg';
 
@@ -26,7 +27,9 @@ const ProjectCard = ({
           <div className={styles.footer}>
             <div>Read more -D</div>
             <div className={styles.links}>
-              <GitHubLogo className={styles.icons} />
+              <Link href={'/'}>
+                <GitHubLogo className={styles.icons} />
+              </Link>
               <LinkIcon className={styles.icons} />
             </div>
           </div>

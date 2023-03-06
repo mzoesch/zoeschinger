@@ -8,6 +8,7 @@
   height: 100%;
 
   color: rgb(var(--primary-negativ) / 100%);
+  fill: rgb(var(--primary-negativ) / 100%);
 
   margin-left: 2rem;
   margin-right: 2rem;
@@ -34,13 +35,14 @@
 }
 
 .links {
+  position: relative;
   display: flex;
   gap: 0.5rem;
+  z-index: 10;
 }
 
 .icons {
   height: 2rem;
-  fill: white;
 }
 
 .top_img_wrapper {
@@ -55,7 +57,9 @@
 }
 
 .top_img {
+  position: absolute;
+  z-index: 10;
+
   height: 100%;
   width: auto;
-  fill: white;
 }
