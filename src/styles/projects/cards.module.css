@@ -1,8 +1,22 @@
 .card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+
   color: rgb(var(--primary-negativ) / 100%);
 
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.bottom {
+  position: relative;
+
+  bottom: 1rem;
 }
 
 .title {
@@ -26,5 +40,22 @@
 
 .icons {
   height: 2rem;
+  fill: white;
+}
+
+.top_img_wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 1rem;
+  margin-right: 1rem;
+
+  height: 5rem;
+}
+
+.top_img {
+  height: 100%;
+  width: auto;
   fill: white;
 }
