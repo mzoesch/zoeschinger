@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { GitHubLogo, LinkIcon, DashboardIcon } from '@c/svg';
 import { Raleway, Josefin_Sans } from 'next/font/google';
-
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 const raleway = Raleway({ subsets: ['latin'] });
 const josefinSans = Josefin_Sans({ subsets: ['latin'] });
 
@@ -33,12 +33,19 @@ const ProjectCard = ({
             {subText}
           </div>
           <div className={styles.footer}>
-            <div className={styles.button}>Read more -D</div>
+            <Link href={'/'} className={styles.read_more}>
+              <div className={styles.button}>
+                <div>Read more</div>
+                <HiOutlineArrowNarrowRight className={styles.arrow} />
+              </div>
+            </Link>
             <div className={styles.links}>
               <Link href={'/'}>
                 <GitHubLogo className={styles.icons} />
               </Link>
-              <LinkIcon className={styles.icons} />
+              <Link href={'/'}>
+                <LinkIcon className={styles.icons} />
+              </Link>
             </div>
           </div>
         </div>
