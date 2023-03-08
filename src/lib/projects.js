@@ -64,8 +64,16 @@ export const projects = [
     'Just some Python game. 2D shooter stuff thingy, idk.',
     '-1',
     'https://github.com/mzoesch/Planet_Attacked',
-    '-1'
+    '-1',
+    'ShuttleIcon'
   ),
-  new Project('Salg', 'more stuff here', '-1', '-1', '-1'),
+  new Project(
+    'Salg',
+    'more stuff here',
+    '-1',
+    '-1',
+    '/projects/salgo',
+    'SortIcon'
+  ),
   new Project('asdfasdf', 'more stuff here', '-1', '-1', '-1'),
 ];

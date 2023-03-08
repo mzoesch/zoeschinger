@@ -4,3 +4,5 @@ export { default as AtEmailIcon } from '@p/svg/AtEmailIcon.svg';
 export { default as GitHubLogo } from '@p/svg/GitHubLogo.svg';
 export { default as LinkIcon } from '@p/svg/LinkIcon.svg';
 export { default as TextIcon } from '@p/svg/TextIcon.svg';
+export { default as SortIcon } from '@p/svg/SortIcon.svg';
+export { default as ShuttleIcon } from '@p/svg/ShuttleIcon.svg';

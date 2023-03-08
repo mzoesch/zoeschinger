@@ -65,6 +65,7 @@ const Projects = () => {
                     href={element.href}
                     source={element.source}
                     readMore={element.readMore}
+                    icon={element.icon}
                   />
                 </div>
               </div>

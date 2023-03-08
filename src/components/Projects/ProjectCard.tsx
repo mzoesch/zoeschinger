@@ -2,7 +2,14 @@ import styles from '@s/projects/cards.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { GitHubLogo, LinkIcon, DashboardIcon } from '@c/svg';
+import {
+  GitHubLogo,
+  LinkIcon,
+  DashboardIcon,
+  TextIcon,
+  SortIcon,
+  ShuttleIcon,
+} from '@c/svg';
 import { Raleway, Josefin_Sans } from 'next/font/google';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 const raleway = Raleway({ subsets: ['latin'] });
@@ -14,20 +21,25 @@ const ProjectCard = ({
   href,
   source,
   readMore,
-}: // img,
-{
-  title: any;
-  subText: any;
-  href: any;
-  source: any;
-  readMore: any;
-  // img: any;
+  icon,
+}: {
+  title: string;
+  subText: string;
+  href: string;
+  source: string;
+  readMore: string;
+  icon: string;
 }) => {
   return (
     <>
       <div className={styles.card}>
         <div className={styles.top_img_wrapper}>
-          <DashboardIcon className={styles.top_img} />
+          {icon === 'DashboardIcon' && (
+            <DashboardIcon className={styles.top_img} />
+          )}
+          {icon === 'TextIcon' && <TextIcon className={styles.top_img} />}
+          {icon === 'SortIcon' && <SortIcon className={styles.top_img} />}
+          {icon === 'ShuttleIcon' && <ShuttleIcon className={styles.top_img} />}
         </div>
         <div className={styles.bottom}>
           <div className={styles.title} style={josefinSans.style}>
