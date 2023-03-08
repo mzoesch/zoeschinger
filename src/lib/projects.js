@@ -56,7 +56,7 @@ export const projects = [
     'Allows you to place and display ASCII-Text at your GitHubs contributions overview.',
     '-1',
     'https://github.com/mzoesch/TxtToGit',
-    '-1',
+    '/projects/txttogit',
     'TextIcon'
   ),
   new Project(
@@ -64,16 +64,15 @@ export const projects = [
     'Just some Python game. 2D shooter stuff thingy, idk.',
     '-1',
     'https://github.com/mzoesch/Planet_Attacked',
-    '-1',
+    '/projects/spaceinv',
     'ShuttleIcon'
   ),
   new Project(
-    'Salg',
+    'SAlg',
     'more stuff here',
     '-1',
     '-1',
     '/projects/salgo',
     'SortIcon'
   ),
-  new Project('asdfasdf', 'more stuff here', '-1', '-1', '-1'),
 ];

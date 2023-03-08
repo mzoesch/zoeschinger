@@ -1,10 +1,10 @@
-import styles from '@s/projects/salgo/main.module.scss';
+import styles from '@s/projects/txttogit/main.module.scss';
 
 const SAlgo = () => {
   return (
     <>
       <div className={styles.main}>
-        <h1>Sorting Algorithms</h1>
+        <h1>Text to Git</h1>
       </div>
     </>
   );
