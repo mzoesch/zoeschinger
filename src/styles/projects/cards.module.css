@@ -59,7 +59,7 @@
 
 .icons:hover {
   scale: 115%;
-  fill: rgb(200 200 200 / 100%);
+  fill: rgb(var(--project-card-icon-hover) / 100%);
 }
 
 .top_img_wrapper {
@@ -102,7 +102,7 @@
 }
 
 .button:hover {
-  background-color: rgb(255 255 255 / 5%);
+  background-color: rgb(var(--project-card-button-hover) / 25%);
 }
 
 .arrow {
