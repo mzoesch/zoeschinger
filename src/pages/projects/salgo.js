@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import Layout from '@c/layouts/stdLayout';
+import Layout from '@c/layouts/projectsLayout';
+import SAlgo from '@c/Projects/SAlgo';
 
 const Page = () => {
   return (
@@ -12,7 +13,7 @@ const Page = () => {
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <h1>Rnd sub shit</h1>
+        <SAlgo />
       </>
     </>
   );

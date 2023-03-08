@@ -1,0 +1,30 @@
+.sidebar {
+  position: relative;
+  top: 0rem;
+  left: 0rem;
+
+  min-height: 100%;
+  min-width: 5rem;
+  width: var(--inner-width);
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgb(var(--primary-off) / 50%);
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sidebar_inner {
+  position: fixed;
+
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
