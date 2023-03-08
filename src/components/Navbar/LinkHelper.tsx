@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { HiOutlineBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 import NavbarImage from './NavbarImage';
 import DarkModeTogglerThingy from './DarkModeTogglerThingy';
-import { GetCurrentRoute } from '@l/Routes';
 
 function DisplayCurrentToLink() {
   let p: string = '';
