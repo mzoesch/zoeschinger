@@ -41,7 +41,11 @@ const Sidebar = () => {
           {projects.map((element) => {
             return (
               <div key={element.title}>
-                <SidebarIcon title={element.title} icon={element.icon} />
+                <SidebarIcon
+                  title={element.title}
+                  icon={element.icon}
+                  href={element.readMore}
+                />
               </div>
             );
           })}

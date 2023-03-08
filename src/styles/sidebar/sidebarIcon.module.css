@@ -9,8 +9,8 @@
   width: 4rem;
   height: 4rem;
 
-  background-color: rgb(47 49 54 / 100%);
-  fill: rgb(255 255 255 / 40%);
+  background-color: rgb(var(--sidebar-icon-bg) / 100%);
+  fill: rgb(var(--sidebar-icon-fill) / 40%);
 
   border-radius: 40px;
 
