@@ -6,10 +6,16 @@ import { useState } from 'react';
 import { HiOutlineBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 import NavbarImage from './NavbarImage';
 import DarkModeTogglerThingy from './DarkModeTogglerThingy';
+import { GetCurrentRoute } from '@l/Routes';
 
 function DisplayCurrentToLink() {
+  let p: string = '';
+  if ((window.location.pathname.match(/\//g) || []).length > 1)
+    p = window.location.pathname.replace(/\/[^/]*$/, '');
+  else p = window.location.pathname;
+
   navigation.forEach((element) => {
-    if (element.href === window.location.pathname) element.current = true;
+    if (element.href === p) element.current = true;
     else element.current = false;
   });
 }
