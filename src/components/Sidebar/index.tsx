@@ -1,6 +1,8 @@
 import styles from '@s/sidebar/main.module.scss';
 
+import SidebarIcon from './SidebarIcon';
 import { useRef, useEffect } from 'react';
+import { projects } from '@l/projects';
 
 const Sidebar = () => {
   const outerSB = useRef<HTMLElement>(null);
@@ -36,10 +38,13 @@ const Sidebar = () => {
           className={styles.sidebar_inner}
           ref={innerSB as React.RefObject<HTMLDivElement>}
         >
-          <div>icon</div>
-          <div>icon</div>
-          <div>icon</div>
-          <div>icon</div>
+          {projects.map((element) => {
+            return (
+              <div key={element.title}>
+                <SidebarIcon title={element.title} icon={element.icon} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

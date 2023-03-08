@@ -1,3 +1,5 @@
+import { DashboardIcon } from '@c/svg';
+
 class Project {
   #title;
   #subText;
@@ -46,14 +48,16 @@ export const projects = [
     'Website for my projects and stuff. So you can run them in the web.',
     'https://www.zoeschinger.com/',
     'https://github.com/mzoesch/zoeschinger',
-    '/projects/zoeschinger'
+    '/projects/zoeschinger',
+    'DashboardIcon'
   ),
   new Project(
     'Text to git',
     'Allows you to place and display ASCII-Text at your GitHubs contributions overview.',
     '-1',
     'https://github.com/mzoesch/TxtToGit',
-    '-1'
+    '-1',
+    'TextIcon'
   ),
   new Project(
     'Space Inv.',
