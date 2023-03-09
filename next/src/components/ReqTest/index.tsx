@@ -1,5 +1,9 @@
 const getServerJSON = async () => {
-  const res = await fetch('http://localhost:8000/api/v1/users');
+  const ip = process.env.PRIVATE_API_ADDRESS;
+  const api = ip + 'api/v1/users';
+  console.log(api);
+
+  const res = await fetch(api);
   const json = await res.json();
 
   return json[0].first_name;
