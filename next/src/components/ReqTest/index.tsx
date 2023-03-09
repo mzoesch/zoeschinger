@@ -1,12 +1,12 @@
 const getServerJSON = async () => {
   const ip = process.env.PRIVATE_API_ADDRESS;
-  const api = ip + 'api/v1/users';
+  const api = 'http://' + ip + 'api/v1/users';
   console.log(api);
 
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const res = await fetch(api);
   const json = await res.json();
 
-  return json[0].body;
+  return json[0];
 };
 
 const ReqTest = () => {
