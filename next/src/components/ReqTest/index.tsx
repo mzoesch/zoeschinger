@@ -3,10 +3,10 @@ const getServerJSON = async () => {
   const api = ip + 'api/v1/users';
   console.log(api);
 
-  const res = await fetch(api);
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const json = await res.json();
 
-  return json[0].first_name;
+  return json[0].body;
 };
 
 const ReqTest = () => {
