@@ -9,5 +9,7 @@ updates:
     directory: "next/" # Location of package manifests
     schedule:
       interval: "weekly"
+    target-branch: "dev"
+    open-pull-requests-limit: 10
     commit-message:
       prefix: ⬆
