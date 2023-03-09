@@ -12,4 +12,4 @@ updates:
     target-branch: "dev"
     open-pull-requests-limit: 10
     commit-message:
-      prefix: ⬆
+      prefix: "⬆"
