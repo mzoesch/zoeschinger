@@ -6,7 +6,7 @@ const getServerJSON = async () => {
   const res = await fetch(api);
   const json = await res.json();
 
-  return json[0];
+  return json;
 };
 
 const ReqTest = () => {
