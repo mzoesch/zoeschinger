@@ -1,9 +1,39 @@
 .main {
   margin-top: 5rem;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   width: 100%;
+}
 
-  color: rgb(var(--primary-negativ));
+.title {
+  color: rgb(var(--primary-negativ) / 100%);
   text-decoration: underline;
-  text-decoration-color: rgb(var(--primary-negativ));
+  text-decoration-color: rgb(var(--primary-negativ) / 100%);
+}
+
+.text {
+  color: rgb(var(--primary-negativ) / 100%);
+}
+
+.alg_master {
+  margin-top: 5rem;
+}
+
+.nav {
+  color: rgb(var(--primary-negativ) / 100%);
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1rem;
+
+  background-color: rgb(var(--primary-off) / 50%);
+}
+
+.nav_section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 1rem;
 }

@@ -1,0 +1,42 @@
+.btn,
+.primary,
+.secondary,
+.danger_outline {
+  padding: 0.5rem;
+  border-radius: var(--border-rounded-md);
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary {
+  background-color: rgb(63 121 181 / 100%);
+}
+
+.primary:hover {
+  background: rgb(49 95 142/ 100%);
+}
+
+.secondary {
+  background-color: rgb(128 128 128/ 50%);
+}
+
+.secondary:hover {
+  background-color: rgb(128 128 128/ 75%);
+}
+
+.danger_outline {
+  background-color: transparent;
+  border: 2px solid rgb(233 86 58 / 100%);
+
+  transition: all;
+  transition-duration: 400ms;
+}
+
+.danger_outline:hover {
+  background-color: rgb(233 86 58 / 100%);
+  color: white;
+}
