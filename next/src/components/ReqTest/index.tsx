@@ -1,6 +1,6 @@
 const getServerJSON = async () => {
   const ip = process.env.PRIVATE_API_ADDRESS;
-  const api = 'http://' + ip + 'api/v1/users';
+  const api = ip + 'api/v1/users';
   console.log(api);
 
   const res = await fetch(api);
