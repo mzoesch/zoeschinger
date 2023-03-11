@@ -1,5 +1,3 @@
-import { DashboardIcon } from '@c/svg';
-
 class Project {
   #title;
   #subText;
