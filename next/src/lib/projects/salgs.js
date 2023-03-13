@@ -1,9 +1,10 @@
-export class SAlg {
+export class SAlgInformation {
   #title;
   #explanation;
   #bestComplexity;
   #avgComplexity;
   #worstComplexity;
+  #memory;
   #stable;
   #learnMore;
 
@@ -13,6 +14,7 @@ export class SAlg {
     bestComplexity,
     avgComplexity,
     worstComplexity,
+    memory,
     stable,
     learnMore
   ) {
@@ -23,6 +25,7 @@ export class SAlg {
     this.#avgComplexity = avgComplexity;
     this.#worstComplexity = worstComplexity;
 
+    this.#memory = memory;
     this.#stable = stable;
     this.#learnMore = learnMore;
   }
@@ -47,6 +50,10 @@ export class SAlg {
     return this.#worstComplexity;
   }
 
+  get memory() {
+    return this.#memory;
+  }
+
   get stable() {
     return this.#stable;
   }
@@ -57,9 +64,9 @@ export class SAlg {
 }
 
 export const salgs = [
-  new SAlg('-1', '-1', '-1', '-1', '-1', '-1'),
+  new SAlgInformation('-1', '-1', '-1', '-1', '-1', '-1'),
 
-  new SAlg(
+  new SAlgInformation(
     'Quicksort',
     'Quicksort is a divide and conquer algorithm. It works by selecting a ' +
       'pivot element from the array and partitioning the other elements into two sub-arrays, ' +
@@ -70,10 +77,11 @@ export const salgs = [
     'O(n log n)',
     'O(n log n)',
     'O(n^2)',
+    'log n',
     false,
     'https://en.wikipedia.org/wiki/Quicksort'
   ),
-  new SAlg(
+  new SAlgInformation(
     'Merge sort',
     'Merge sort is a divide and conquer algorithm. It works by ' +
       'recursively breaking down the array elements into nested sub-arrays, then recombining ' +
@@ -85,10 +93,11 @@ export const salgs = [
     'O(n log n)',
     'O(n log n)',
     'O(n log n)',
+    'n',
     true,
     'https://en.wikipedia.org/wiki/Mergesort'
   ),
-  new SAlg(
+  new SAlgInformation(
     'Selection sort',
     'Selection sort is a simple sorting algorithm. This ' +
       'sorting algorithm is an in-place comparison-based algorithm in which the list is ' +
@@ -103,10 +112,11 @@ export const salgs = [
     'O(n^2)',
     'O(n^2)',
     'O(n^2)',
+    '1',
     false,
     'https://en.wikipedia.org/wiki/Selection_sort'
   ),
-  new SAlg(
+  new SAlgInformation(
     'Bubble sort',
     'Bubble sort is a simple sorting algorithm. This ' +
       'sorting algorithm is comparison-based algorithm in which each pair of adjacent elements ' +
@@ -117,6 +127,7 @@ export const salgs = [
     'O(n)',
     'O(n^2)',
     'O(n^2)',
+    '1',
     true,
     'https://en.wikipedia.org/wiki/Bubble_sort'
   ),

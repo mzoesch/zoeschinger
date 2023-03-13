@@ -1,3 +1,12 @@
+/*
+* Exports
+* primary
+* secondary
+* danger_outline
+* dropdown
+* polished_button
+*/
+
 .btn,
 .primary,
 .secondary,
@@ -48,7 +57,7 @@
   color: white;
 }
 
-.drop_btn {
+.dropdown_btn {
   cursor: pointer;
   border-radius: var(--border-rounded-md);
   padding: 0.5rem;
@@ -61,7 +70,7 @@
   background-color: rgb(76 175 80 / 100%);
 }
 
-.dropdown:hover .drop_btn {
+.dropdown:hover .dropdown_btn {
   background-color: #3e8e41;
 }
 
@@ -109,4 +118,49 @@
 
 .dropdown:hover .arrow {
   rotate: 90deg;
+}
+
+.polished_button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+
+  border-radius: var(--border-rounded-xl);
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  width: fit-content;
+
+  border-color: #525151;
+  border-width: 1px;
+  border-style: solid;
+
+  text-decoration: none;
+
+  cursor: pointer;
+  color: rgb(var(--primary-negativ) / 100%);
+}
+
+.polished_button:hover {
+  background-color: rgb(var(--project-card-button-hover) / 25%);
+}
+
+.polished_button_arrow {
+  position: relative;
+  margin-left: 0.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.polished_button:hover > .polished_button_arrow {
+  translate: 0.25rem;
 }
