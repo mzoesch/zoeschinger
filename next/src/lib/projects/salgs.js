@@ -7,6 +7,7 @@ export class SAlgInformation {
   #memory;
   #stable;
   #learnMore;
+  #apiAcronym;
 
   constructor(
     title,
@@ -16,7 +17,8 @@ export class SAlgInformation {
     worstComplexity,
     memory,
     stable,
-    learnMore
+    learnMore,
+    apiAcronym
   ) {
     this.#title = title;
     this.#explanation = explanation;
@@ -28,6 +30,8 @@ export class SAlgInformation {
     this.#memory = memory;
     this.#stable = stable;
     this.#learnMore = learnMore;
+
+    this.#apiAcronym = apiAcronym;
   }
 
   get title() {
@@ -61,6 +65,10 @@ export class SAlgInformation {
   get learnMore() {
     return this.#learnMore;
   }
+
+  get apiAcronym() {
+    return this.#apiAcronym;
+  }
 }
 
 export const salgs = [
@@ -79,7 +87,8 @@ export const salgs = [
     'O(n^2)',
     'log n',
     false,
-    'https://en.wikipedia.org/wiki/Quicksort'
+    'https://en.wikipedia.org/wiki/Quicksort',
+    'quicksort'
   ),
   new SAlgInformation(
     'Merge sort',
@@ -95,7 +104,8 @@ export const salgs = [
     'O(n log n)',
     'n',
     true,
-    'https://en.wikipedia.org/wiki/Mergesort'
+    'https://en.wikipedia.org/wiki/Mergesort',
+    'mergesort'
   ),
   new SAlgInformation(
     'Selection sort',
@@ -114,7 +124,8 @@ export const salgs = [
     'O(n^2)',
     '1',
     false,
-    'https://en.wikipedia.org/wiki/Selection_sort'
+    'https://en.wikipedia.org/wiki/Selection_sort',
+    'selectionsort'
   ),
   new SAlgInformation(
     'Bubble sort',
@@ -129,6 +140,7 @@ export const salgs = [
     'O(n^2)',
     '1',
     true,
-    'https://en.wikipedia.org/wiki/Bubble_sort'
+    'https://en.wikipedia.org/wiki/Bubble_sort',
+    'bubblesort'
   ),
 ];

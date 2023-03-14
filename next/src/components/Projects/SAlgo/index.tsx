@@ -14,6 +14,15 @@ import { SortingAlgorithm, DEFAULT_ARRAY_SIZE } from '@l/projects/salg';
 const SAlgo = () => {
   const [sa, RESET_SA] = useState(new SortingAlgorithm());
 
+  const handleExecute = async () => {
+    sa.execute().then(() => {
+      sa.temp();
+      handleUpdateDOM();
+    });
+
+    return;
+  };
+
   // region change array size
 
   const rangeSlider = useRef<HTMLInputElement>(null);
@@ -51,6 +60,7 @@ const SAlgo = () => {
   );
   const handleSelectNewAlgorithm = (element: SAlgInformation) => {
     setCurrentSelectedAlgorithm(element);
+    sa.sortingType = element.apiAcronym;
     return;
   };
 
@@ -141,7 +151,9 @@ const SAlgo = () => {
               >
                 Shuffle
               </div>
-              <div className={btn_styles.primary}>Execute</div>
+              <div className={btn_styles.primary} onClick={handleExecute}>
+                Execute
+              </div>
               <div
                 className={btn_styles.secondary}
                 onClick={handleCollapseSubnav}
