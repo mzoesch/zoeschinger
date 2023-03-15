@@ -16,16 +16,16 @@ async def get_salgo():
 
 
 @router.post("/")
-async def post_salgo(salgo: salgo_model.SAlgo):
+async def post_salgo(req: salgo_model.Model):
 
     algorithms = {
-        'quicksort': quicksort.QuickSort(arrayToSort=salgo.arrayToSort),
-        'mergesort': mergesort.MergeSort(arrayToSort=salgo.arrayToSort),
+        'quicksort': quicksort.QuickSort(arrayToSort=req.arrayToSort),
+        'mergesort': mergesort.MergeSort(arrayToSort=req.arrayToSort),
     }
 
-    backend_algorithm: base.SAlgo = algorithms[salgo.type]
+    backend_algorithm: base.Base = algorithms[req.type]
     backend_algorithm.sort()
 
-    salgo.sortedSteps = backend_algorithm.sortedSteps
+    req.sortedSteps = backend_algorithm.sortedSteps
 
-    return salgo
+    return req

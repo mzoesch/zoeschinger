@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class SAlgo(ABC):
+class Base(ABC):
 
     arrayToSort: list[int]
     sortedSteps: list[list[int]]

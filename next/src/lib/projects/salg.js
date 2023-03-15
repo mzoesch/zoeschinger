@@ -43,26 +43,17 @@ export class SortingAlgorithm {
     this.#sortingType = type;
   }
 
-  temp() {
-    console.log(this.#sortedSteps[0]);
+  // Only temp?
+  get sortedSteps() {
+    return this.#sortedSteps;
   }
 
   async execute() {
-    const apiEndpoint = process.env.PRIVATE_API_ENDPOINT + 'projects/salgo';
-
     const model = new Model(this.#sortingType, this.#array);
+    const res = await model.sendReq();
 
-    const response = await fetch(apiEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(model.toJSON()),
-    });
-    const json = await response.json();
+    this.#sortedSteps = res.sortedSteps;
 
-    this.#sortedSteps = json.sortedSteps;
-
-    return json;
+    return res;
   }
 }

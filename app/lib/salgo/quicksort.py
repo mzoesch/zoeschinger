@@ -1,7 +1,7 @@
 from . import base as b
 
 
-class QuickSort(b.SAlgo):
+class QuickSort(b.Base):
 
     def sort(self):
         self.sortedSteps = self.arrayToSort.copy()

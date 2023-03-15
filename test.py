@@ -1,27 +1,12 @@
-from . import base as b
-from . import steps
+def mergeSort(arr: list[int]) -> None:
 
-
-class MergeSort(b.Base):
-
-    def sort(self):
-        self.sortedSteps = self.arrayToSort.copy()
-        self.internal_sort(self.sortedSteps)
-
-        return
-
-    @staticmethod
-    def internal_sort(arr: list[int]) -> list[int]:
-
-        if len(arr) <= 1:
-            return arr
-
-        mid = len(arr) // 2
+    if len(arr) > 1:
+        mid = len(arr)//2
         L = arr[:mid]
         R = arr[mid:]
 
-        MergeSort.internal_sort(L)
-        MergeSort.internal_sort(R)
+        mergeSort(L)
+        mergeSort(R)
 
         i = j = k = 0
 
@@ -44,4 +29,12 @@ class MergeSort(b.Base):
             j += 1
             k += 1
 
-        return arr
+    return arr
+
+
+if __name__ == '__main__':
+    print(
+        mergeSort(
+            [6, 5, 4, 2, 1, 7]
+        )
+    )

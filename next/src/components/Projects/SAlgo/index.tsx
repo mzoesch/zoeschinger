@@ -16,7 +16,8 @@ const SAlgo = () => {
 
   const handleExecute = async () => {
     sa.execute().then(() => {
-      sa.temp();
+      console.log(sa.sortedSteps);
+
       handleUpdateDOM();
     });
 

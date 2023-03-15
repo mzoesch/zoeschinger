@@ -12,7 +12,7 @@ class SAlgoType(str, Enum):
     bubblesort = "bubblesort"
 
 
-class SAlgo(BaseModel):
+class Model(BaseModel):
     type: SAlgoType
     arrayToSort: list[int]
     sortedSteps: list[list[int]] = []
