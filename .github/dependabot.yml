@@ -5,11 +5,22 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "next/" # Location of package manifests
+  - package-ecosystem: 'npm' # See documentation for possible values
+    directory: 'next/' # Location of package manifests
     schedule:
-      interval: "weekly"
-    target-branch: "dev"
+      # Check for updates to GitHub Actions every weekday
+      interval: 'daily'
+    target-branch: 'dev'
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "⬆"
+      prefix: '⬆ ⏭️'
+
+  - package-ecosystem: 'pip' # See documentation for possible values
+    directory: 'app/' # Location of package manifests
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: 'daily'
+    target-branch: 'dev'
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: '⬆ 🐍'
