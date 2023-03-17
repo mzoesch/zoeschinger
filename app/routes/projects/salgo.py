@@ -26,7 +26,7 @@ async def post_salgo(req: salgo_model.Model):
     backend_algorithm: base.Base = algorithms[req.type]
     backend_algorithm.sort()
 
-    print(f'{backend_algorithm.sortedSteps=}')
+    # print(f'{backend_algorithm.sortedSteps=}')
     return {
         "sortedSteps": backend_algorithm.sortedSteps
     }

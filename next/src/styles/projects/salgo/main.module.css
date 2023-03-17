@@ -168,3 +168,26 @@
 
   grid-template-columns: 1fr 1fr;
 }
+
+.alg_view_subnav_row_hint_hover_obj {
+  display: flex;
+}
+
+.alg_view_subnav_row_hint {
+  position: absolute;
+  display: none;
+  margin-top: 2rem;
+
+  max-width: 25rem;
+
+  background-color: red;
+  padding: 0.5rem;
+
+  text-align: justify;
+
+  box-shadow: 0 0 2rem 0.5rem rgb(var(--primary-negativ) / 7%);
+}
+
+.alg_view_subnav_row_hint_hover_obj:hover > .alg_view_subnav_row_hint {
+  display: block;
+}

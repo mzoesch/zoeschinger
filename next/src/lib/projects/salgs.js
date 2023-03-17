@@ -95,9 +95,7 @@ export const salgs = [
     'Merge sort is a divide and conquer algorithm. It works by ' +
       'recursively breaking down the array elements into nested sub-arrays, then recombining ' +
       'those nested sub-arrays in sorted order. It is an efficient, general-purpose, ' +
-      'comparison-based sorting algorithm. Most implementations produce a stable sort, ' +
-      'which means that the implementation preserves the input order of equal elements in the ' +
-      'sorted output.',
+      'comparison-based sorting algorithm.',
 
     'O(n log n)',
     'O(n log n)',
