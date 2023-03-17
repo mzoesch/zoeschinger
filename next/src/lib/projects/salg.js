@@ -151,7 +151,16 @@ class SortingAlgorithm {
     return ReturnOfReplicateStep(false, 'none');
   }
 
+  resetNumbers() {
+    this.#arrayWrites = 0;
+    this.#auxiliaryArrayWrites = 0;
+    this.#comparisons = 0;
+    this.#skippedFrames = 0;
+  }
+
   async execute() {
+    this.resetNumbers();
+
     const model = new Model(this.#sortingType, this.#array);
     const res = await model.sendReq();
 
