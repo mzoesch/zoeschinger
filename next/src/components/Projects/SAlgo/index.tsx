@@ -9,14 +9,44 @@ import Link from 'next/link';
 import { useRef, createRef, useState, useEffect } from 'react';
 
 import { SAlgInformation, salgs } from '@l/projects/salgs';
-import { SortingAlgorithm, DEFAULT_ARRAY_SIZE } from '@l/projects/salg';
+import {
+  SortingAlgorithm,
+  DEFAULT_ARRAY_SIZE,
+  ArrayIndex,
+} from '@l/projects/salg';
 
 const SAlgo = () => {
   const [sa, RESET_SA] = useState(new SortingAlgorithm());
 
   const handleExecute = async () => {
-    sa.execute().then(() => {
-      console.log(sa.sortedSteps);
+    sa.execute().then(async () => {
+      const iterator = sa.replicate();
+
+      while (true) {
+        const next = iterator.next();
+
+        if (next.done) break;
+
+        console.log(sa.array);
+        // console.log(next.value);
+
+        handleUpdateDOM();
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+
+      // const interval = setInterval(() => {
+      //   const next = iterator.next();
+
+      //   if (next.done) {
+      //     clearInterval(interval);
+      //     return;
+      //   }
+
+      //   console.log(sa.array);
+      //   console.log(next.value);
+      //   handleUpdateDOM();
+      // }, 1000);
 
       handleUpdateDOM();
     });
@@ -252,13 +282,15 @@ const SAlgo = () => {
                 <div
                   className={styles.alg_view_visualization_view_view_wrapper}
                 >
-                  {sa.array?.map((element: number) => {
+                  {sa.array?.map((element: ArrayIndex) => {
                     return (
                       <div
-                        key={`${element}`}
+                        key={`${element.uniqueID}`}
                         style={{
                           width: `${sa.boundariesX / sa.size}px`,
-                          height: `${sa.boundariesY * (element / sa.size)}px`,
+                          height: `${
+                            sa.boundariesY * (element.value / sa.size)
+                          }px`,
                           backgroundColor: 'rgb(var(--primary-negativ))',
                         }}
                       />

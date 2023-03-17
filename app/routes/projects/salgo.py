@@ -12,7 +12,7 @@ router = APIRouter(
 
 @router.get("/")
 async def get_salgo():
-    return {"Salgo": "Salgo"}
+    return {"SAglo": "Make a POST request to get started."}
 
 
 @router.post("/")
@@ -26,6 +26,7 @@ async def post_salgo(req: salgo_model.Model):
     backend_algorithm: base.Base = algorithms[req.type]
     backend_algorithm.sort()
 
-    req.sortedSteps = backend_algorithm.sortedSteps
-
-    return req
+    print(f'{backend_algorithm.sortedSteps=}')
+    return {
+        "sortedSteps": backend_algorithm.sortedSteps
+    }

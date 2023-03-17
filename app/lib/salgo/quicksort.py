@@ -9,3 +9,6 @@ class QuickSort(b.Base):
         self.sortedSteps = [self.sortedSteps]
 
         return
+
+    def internal_sort(self, arr: list[int]) -> list[int]:
+        pass
