@@ -109,6 +109,11 @@
   color: rgb(var(--primary-negativ) / 100%);
 }
 
+.alg_view_visualization_view_nav_section > div {
+  border: 1px solid rgb(var(--primary-negativ) / 50%);
+  padding: 0.25rem;
+}
+
 .alg_view_visualization_view_master {
   grid-column: 1 / span 2;
 }

@@ -371,7 +371,7 @@ const SAlgo = () => {
                     <div>{`${sa.arrayWrites ?? 0}`} writes to main array</div>
                     <div>
                       {`${sa.auxiliaryArrayWrites ?? 0}`} writes to auxiliary
-                      array
+                      array(s)
                     </div>
                     <div>0 array swaps</div>
                     <div>{`${sa.comparison ?? 0}`} comparisons</div>
