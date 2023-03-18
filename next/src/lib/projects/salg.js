@@ -212,7 +212,7 @@ class SortingAlgorithm {
     return;
   }
 
-  playSound(percentage) {
+  async playSound(percentage) {
     const context = new AudioContext();
     const oscillator = context.createOscillator();
     const gain = context.createGain();
@@ -228,7 +228,13 @@ class SortingAlgorithm {
     gain.connect(context.destination);
     oscillator.start(0);
 
-    gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.1, context.currentTime + 0.04);
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    context.close();
+
+    return;
   }
 }
 
