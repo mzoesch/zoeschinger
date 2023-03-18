@@ -23,6 +23,7 @@ const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
 // Following the norm of ~view.dio
 const WRITE_TO_MAIN_ARRAY = 'write_main_arr';
 const WRITE_TO_AUXILIARY_ARRAY = 'write_aux_arr';
+const ARRAY_SWAP = 'swap';
 const COMPARISON = 'comparison';
 
 const SAlgo = () => {
@@ -257,8 +258,56 @@ const SAlgo = () => {
                       continue;
                     }
 
+                    if (stepInfo.typeOfChange == ARRAY_SWAP) {
+                      setArrayInView([]);
+                      for (let j = 0; j < sa.array.length; j++) {
+                        if (sa.sortingSteps[i].indices.includes(j))
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j], true),
+                          ]);
+                        else
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j]),
+                          ]);
+                      }
+
+                      if (sa.soundEnabled == true)
+                        sa.playSound(
+                          (sa.sortingSteps[i].values[0] / sa.size) * 100
+                        );
+
+                      await new Promise((resolve) =>
+                        setTimeout(resolve, sa.delay)
+                      );
+
+                      continue;
+                    }
+
                     if (stepInfo.typeOfChange == COMPARISON) {
-                      // TODO: Change color
+                      if (sa.animateComparison == false) continue;
+
+                      setArrayInView([]);
+                      for (let j = 0; j < sa.array.length; j++) {
+                        if (sa.sortingSteps[i].indices.includes(j))
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j], false, true),
+                          ]);
+                        else
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j]),
+                          ]);
+                      }
+
+                      // TODO: Should comparisons be with sound?
+
+                      await new Promise((resolve) =>
+                        setTimeout(resolve, sa.delay)
+                      );
+
                       continue;
                     }
 
@@ -268,17 +317,12 @@ const SAlgo = () => {
                     continue;
                   }
 
-                  if (
-                    sa.animateSorting == false ||
-                    sa.animateReplication == false
-                  ) {
-                    setArrayInView([]);
-                    for (let i = 0; i < sa.array.length; i++)
-                      setArrayInView((prev) => [
-                        ...prev,
-                        new ArrayIndex(sa.array[i]),
-                      ]);
-                  }
+                  setArrayInView([]);
+                  for (let i = 0; i < sa.array.length; i++)
+                    setArrayInView((prev) => [
+                      ...prev,
+                      new ArrayIndex(sa.array[i]),
+                    ]);
                 }}
               >
                 Sort
@@ -360,6 +404,18 @@ const SAlgo = () => {
               </div>
               <div className={styles.alg_view_subnav_row}>
                 <input
+                  type='checkbox'
+                  checked={sa.animateComparison}
+                  value='Should the comparison animation be played?'
+                  onChange={() => {
+                    sa.animateComparison = !sa.animateComparison;
+                    handleUpdateDOM();
+                  }}
+                />
+                <div style={{ marginLeft: '0.5rem' }}>Animate comparisons</div>
+              </div>
+              <div className={styles.alg_view_subnav_row}>
+                <input
                   type='range'
                   min='1'
                   max='2000'
@@ -391,8 +447,6 @@ const SAlgo = () => {
                   Array to Viewport
                 </div>
               </div>
-            </div>
-            <div className={styles.alg_view_subnav_section2}>
               <div className={styles.alg_view_subnav_row}>
                 <div
                   className={btn_styles.danger_outline}
@@ -405,6 +459,7 @@ const SAlgo = () => {
                 </div>
               </div>
             </div>
+            <div className={styles.alg_view_subnav_section2}></div>
           </div>
           <div className={styles.alg_view_visualization_master}>
             <div
@@ -448,7 +503,15 @@ const SAlgo = () => {
                       <div
                         key={element.id}
                         style={
-                          element.changed
+                          element.comparison
+                            ? {
+                                width: `${sa.boundariesX / sa.size}px`,
+                                height: `${
+                                  sa.boundariesY * (element.value / sa.size)
+                                }px`,
+                                backgroundColor: 'rgb(255 255 0 / 100)',
+                              }
+                            : element.changed
                             ? {
                                 width: `${sa.boundariesX / sa.size}px`,
                                 height: `${
@@ -483,7 +546,21 @@ const SAlgo = () => {
                     <div
                       className={styles.alg_view_visualization_explanation_text}
                     >
-                      {currentSelectedAlgorithm.explanation}
+                      {currentSelectedAlgorithm.explanation.map(
+                        (element: string) => {
+                          return (
+                            <div
+                              key={element}
+                              style={{
+                                marginTop: '0.5rem',
+                                marginBottom: '0.5rem',
+                              }}
+                            >
+                              {element}
+                            </div>
+                          );
+                        }
+                      )}
                     </div>
                     <div>
                       <h2 className={styles.subtitle}>Time Complexity</h2>

@@ -1,9 +1,9 @@
-from . import base as b
+from . import base
 from . import steps
 from models import norm
 
 
-class MergeSort(b.Base):
+class MergeSort(base.Base):
 
     def sort(self):
         self.sortedSteps = []
@@ -21,7 +21,7 @@ class MergeSort(b.Base):
         L = arr[:mid]
         R = arr[mid:]
         self.sortedSteps.append(steps.Steps(
-                norm.WRITE_TO_AUXILIARY_ARRAY, [], [len(arr)]))
+            norm.WRITE_TO_AUXILIARY_ARRAY, [], [len(arr)]))
 
         MergeSort.internal_sort(self, L, global_cursor)
         MergeSort.internal_sort(self, R, global_cursor + mid)
@@ -31,7 +31,8 @@ class MergeSort(b.Base):
         while i < len(L) and j < len(R):
 
             self.sortedSteps.append(steps.Steps(
-                norm.COMPARISON, [], []))
+                norm.COMPARISON, [
+                    global_cursor + i, global_cursor + j + mid], []))
             if L[i] < R[j]:
 
                 arr[k] = L[i]

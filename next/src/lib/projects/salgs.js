@@ -76,67 +76,71 @@ export const salgs = [
 
   new SAlgInformation(
     'Quicksort',
-    'Quicksort is a divide and conquer algorithm. It works by selecting a ' +
-      'pivot element from the array and partitioning the other elements into two sub-arrays, ' +
-      'according to whether they are less than or greater than the pivot. The sub-arrays are ' +
-      'then sorted recursively. This can be done in-place, requiring small additional amounts ' +
-      'of memory to perform the sorting.',
+    [
+      'Quicksort is a recursive divide and conquer comparison-based sorting algorithm.',
+      'It works by selecting a pivot element from the array and partitioning the other elements into two sub-arrays, \
+according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.',
+      'Quicksort is noted for its efficiency in practice. It is one of the most commonly used sorting algorithms \
+and is often used as a key component in other algorithms, like in the GNU C++ std library sort algorithm.',
+    ],
 
     'O(n log n)',
     'O(n log n)',
     'O(n^2)',
-    'log n',
+    'O(log n)',
     false,
     'https://en.wikipedia.org/wiki/Quicksort',
     'quicksort'
   ),
   new SAlgInformation(
     'Merge sort',
-    'Merge sort is a divide and conquer algorithm. It works by ' +
-      'recursively breaking down the array elements into nested sub-arrays, then recombining ' +
-      'those nested sub-arrays in sorted order. It is an efficient, general-purpose, ' +
-      'comparison-based sorting algorithm.',
+    [
+      'Merge sort is a recursive divide and conquer comparison-based sorting algorithm.',
+      'It works by recursively breaking down the array elements into nested sub-arrays, \
+then recombining those nested sub-arrays in sorted order.',
+      'Merge sort is noted for its efficient use of memory and stability. \
+It performs well on large data sets, and is often used as a subroutine in other sorting algorithms.',
+    ],
 
     'O(n log n)',
     'O(n log n)',
     'O(n log n)',
-    'n',
+    'O(n)',
     true,
     'https://en.wikipedia.org/wiki/Mergesort',
     'mergesort'
   ),
   new SAlgInformation(
     'Selection sort',
-    'Selection sort is a simple sorting algorithm. This ' +
-      'sorting algorithm is an in-place comparison-based algorithm in which the list is ' +
-      'divided into two parts, the sorted part at the left end and the unsorted part at the ' +
-      'right end. Initially, the sorted part is empty and the unsorted part is the entire ' +
-      'list. The smallest element is selected from the unsorted array and swapped with the ' +
-      'leftmost element, and that element becomes a part of the sorted array. This process ' +
-      'continues moving unsorted array boundary by one element to the right. This algorithm ' +
-      'is not suitable for large data sets as its average and worst case complexities are ' +
-      'of Ο(n^2), where n is the number of items.',
+    [
+      'Selection Sort is an iterative, in-place comparison-based sorting algorithm.',
+      'It divides the data structure into two parts: the sorted part at the left end and the unsorted part at the right end. \
+It repeatedly finds the minimum element from the unsorted part and puts it at the end of the sorted part.',
+      'Selection sort is noted for its simplicity, and it has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.',
+    ],
 
     'O(n^2)',
     'O(n^2)',
     'O(n^2)',
-    '1',
+    'O(1)',
     false,
     'https://en.wikipedia.org/wiki/Selection_sort',
     'selectionsort'
   ),
   new SAlgInformation(
     'Bubble sort',
-    'Bubble sort is a simple sorting algorithm. This ' +
-      'sorting algorithm is comparison-based algorithm in which each pair of adjacent elements ' +
-      'is compared and the elements are swapped if they are not in order. This algorithm is not ' +
-      'suitable for large data sets as its average and worst case complexities are of Ο(n^2), ' +
-      'where n is the number of items.',
+    [
+      'Bubble sort is a iterative, in-place comparison-based sorting algorithm',
+      'It repeatedly steps through the data set, compares adjacent elements and swaps them \
+if they are in the wrong order.',
+      "Bubble sort is noted for its simplicity, but performs poorly in real world use. \
+It's primary used as an educational tool for teaching the concept of a sorting algorithm.",
+    ],
 
     'O(n)',
     'O(n^2)',
     'O(n^2)',
-    '1',
+    'O(1)',
     true,
     'https://en.wikipedia.org/wiki/Bubble_sort',
     'bubblesort'

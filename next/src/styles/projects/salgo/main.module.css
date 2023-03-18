@@ -70,7 +70,7 @@
   row-gap: 0.5rem;
 
   grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .alg_view_subnav_row {

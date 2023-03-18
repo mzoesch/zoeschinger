@@ -10,6 +10,7 @@ const DEFAULT_DELAY = 100;
 // Following the norm of ~view.dio
 const WRITE_TO_MAIN_ARRAY = 'write_main_arr';
 const WRITE_TO_AUXILIARY_ARRAY = 'write_aux_arr';
+const ARRAY_SWAP = 'swap';
 const COMPARISON = 'comparison';
 
 let uniqueId = 0;
@@ -18,11 +19,13 @@ class ArrayIndex {
   id;
   value;
   changed;
+  comparison;
 
-  constructor(value, changed = false) {
+  constructor(value, changed = false, comparison = false) {
     this.id = uniqueId++;
     this.value = value;
     this.changed = changed;
+    this.comparison = comparison;
   }
 }
 
@@ -64,6 +67,7 @@ class SortingAlgorithm {
   animateShuffle = true;
   animateSorting = true;
   animateReplication = false;
+  animateComparison = false;
 
   #arrayWrites = 0;
   #auxiliaryArrayWrites = 0;
@@ -162,6 +166,17 @@ class SortingAlgorithm {
       return new ReturnOfReplicateStep(true, WRITE_TO_MAIN_ARRAY);
     }
 
+    if (stepType == ARRAY_SWAP) {
+      this.#arraySwaps += 1;
+
+      this.#array[this.#sortedSteps[step].indices[0]] =
+        this.#sortedSteps[step].values[0];
+      this.#array[this.#sortedSteps[step].indices[1]] =
+        this.#sortedSteps[step].values[1];
+
+      return new ReturnOfReplicateStep(true, ARRAY_SWAP);
+    }
+
     if (stepType == COMPARISON) {
       this.#comparisons += 1;
       return new ReturnOfReplicateStep(false, COMPARISON);
@@ -172,12 +187,13 @@ class SortingAlgorithm {
       return new ReturnOfReplicateStep(false, WRITE_TO_AUXILIARY_ARRAY);
     }
 
-    return ReturnOfReplicateStep(false, 'none');
+    return new ReturnOfReplicateStep(false, 'none');
   }
 
   replicateShuffleStep(step) {
-    // only one type of step: swap
+    // Only one type of step: ARRAY_SWAP
     this.#arraySwaps += 1;
+
     this.#array[this.#shuffleSteps[step].indices[0]] =
       this.#shuffleSteps[step].values[0];
     this.#array[this.#shuffleSteps[step].indices[1]] =
@@ -226,6 +242,7 @@ class SortingAlgorithm {
     oscillator.type = 'triangle';
 
     gain.connect(context.destination);
+    gain.gain.value = 0.000001; // volume
     oscillator.start(0);
 
     gain.gain.exponentialRampToValueAtTime(0.1, context.currentTime + 0.04);

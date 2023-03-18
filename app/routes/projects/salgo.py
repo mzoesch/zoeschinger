@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 import json
 from models.projects import salgo as salgo_model
-from lib.salgo import base, quicksort, mergesort
+from lib.salgo import base, quicksort, mergesort, selectionsort, bubblesort
 
 router = APIRouter(
     prefix="/projects/salgo",
@@ -21,6 +21,8 @@ async def post_salgo(req: salgo_model.Model):
     algorithms = {
         'quicksort': quicksort.QuickSort(arrayToSort=req.arrayToSort),
         'mergesort': mergesort.MergeSort(arrayToSort=req.arrayToSort),
+        'selectionsort': selectionsort.SelectionSort(arrayToSort=req.arrayToSort),
+        'bubblesort': bubblesort.BubbleSort(arrayToSort=req.arrayToSort)
     }
 
     backend_algorithm: base.Base = algorithms[req.type]

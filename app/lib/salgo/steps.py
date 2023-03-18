@@ -2,9 +2,6 @@ import json
 
 
 class Steps:
-    """
-    write_main_arr
-    """
 
     step_type: str
     indices: list[int]
