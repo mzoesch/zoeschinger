@@ -8,6 +8,7 @@ export class SAlgo {
   constructor(type, arrayToSort) {
     this.#type = type;
     this.#arrayToSort = arrayToSort;
+    return;
   }
 
   toJSON() {

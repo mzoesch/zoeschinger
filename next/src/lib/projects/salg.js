@@ -1,4 +1,7 @@
-import { shuffle as fisherYatesShuffle } from '@l/fisher_yates';
+import {
+  shuffle as fisherYatesShuffle,
+  ShuffleSteps as fisherYatesShuffleSteps,
+} from '@l/fisher_yates';
 import { SAlgo as Model } from '@m/SAlgo';
 
 const DEFAULT_ARRAY_SIZE = 64;
@@ -9,13 +12,17 @@ const WRITE_TO_MAIN_ARRAY = 'write_main_arr';
 const WRITE_TO_AUXILIARY_ARRAY = 'write_aux_arr';
 const COMPARISON = 'comparison';
 
+let uniqueId = 0;
+
 class ArrayIndex {
   id;
   value;
+  changed;
 
-  constructor(value) {
-    this.id = Math.random().toString(36).substring(7);
+  constructor(value, changed = false) {
+    this.id = uniqueId++;
     this.value = value;
+    this.changed = changed;
   }
 }
 
@@ -29,23 +36,38 @@ class ReturnOfReplicateStep {
   }
 }
 
+class ReturnOfReplicateShuffleStep {
+  indices;
+
+  constructor(indices) {
+    this.indices = indices;
+  }
+}
+
 class SortingAlgorithm {
   #size;
   #array;
   #sortingType;
+
   #sortedSteps;
+  #shuffleSteps;
 
   #delay;
 
   boundariesX;
   boundariesY;
 
+  #MAX_FREQUENCY = 1000;
+  #MIN_FREQUENCY = 100;
+
+  soundEnabled = true;
   animateShuffle = true;
   animateSorting = true;
   animateReplication = false;
 
   #arrayWrites = 0;
   #auxiliaryArrayWrites = 0;
+  #arraySwaps = 0;
   #comparisons = 0;
 
   #skippedFrames = 0;
@@ -61,6 +83,10 @@ class SortingAlgorithm {
 
   get auxiliaryArrayWrites() {
     return this.#auxiliaryArrayWrites;
+  }
+
+  get arraySwaps() {
+    return this.#arraySwaps;
   }
 
   get comparison() {
@@ -111,14 +137,12 @@ class SortingAlgorithm {
     return this.#sortedSteps;
   }
 
-  generateArrayFromSize() {
-    this.#array = Array.from({ length: this.#size }, (_, i) => i + 1);
-
-    return;
+  get shuffleSteps() {
+    return this.#shuffleSteps;
   }
 
-  shuffle() {
-    fisherYatesShuffle(this.#array);
+  generateArrayFromSize() {
+    this.#array = Array.from({ length: this.#size }, (_, i) => i + 1);
     return;
   }
 
@@ -151,11 +175,30 @@ class SortingAlgorithm {
     return ReturnOfReplicateStep(false, 'none');
   }
 
+  replicateShuffleStep(step) {
+    // only one type of step: swap
+    this.#arraySwaps += 1;
+    this.#array[this.#shuffleSteps[step].indices[0]] =
+      this.#shuffleSteps[step].values[0];
+    this.#array[this.#shuffleSteps[step].indices[1]] =
+      this.#shuffleSteps[step].values[1];
+
+    return new ReturnOfReplicateShuffleStep(this.#shuffleSteps[step].indices);
+  }
+
   resetNumbers() {
     this.#arrayWrites = 0;
     this.#auxiliaryArrayWrites = 0;
+    this.#arraySwaps = 0;
     this.#comparisons = 0;
     this.#skippedFrames = 0;
+  }
+
+  shuffle() {
+    this.resetNumbers();
+
+    this.#shuffleSteps = fisherYatesShuffle(this.#array.slice());
+    return;
   }
 
   async execute() {
@@ -168,9 +211,29 @@ class SortingAlgorithm {
 
     return;
   }
+
+  playSound(percentage) {
+    const context = new AudioContext();
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    const frequency =
+      (percentage / 100) * (this.#MAX_FREQUENCY - this.#MIN_FREQUENCY) +
+      this.#MIN_FREQUENCY;
+
+    oscillator.connect(gain);
+    oscillator.frequency.value = frequency;
+    oscillator.type = 'triangle';
+
+    gain.connect(context.destination);
+    oscillator.start(0);
+
+    gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.04);
+  }
 }
 
 export { SortingAlgorithm };
 export { ArrayIndex };
 export { ReturnOfReplicateStep };
+export { ReturnOfReplicateShuffleStep };
 export { DEFAULT_ARRAY_SIZE };

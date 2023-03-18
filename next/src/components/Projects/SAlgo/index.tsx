@@ -12,6 +12,7 @@ import {
   SortingAlgorithm,
   ArrayIndex,
   ReturnOfReplicateStep,
+  ReturnOfReplicateShuffleStep,
   DEFAULT_ARRAY_SIZE,
 } from '@l/projects/salg';
 import { SAlgInformation, salgs } from '@l/projects/salgs';
@@ -107,6 +108,30 @@ const SAlgo = () => {
         <div className={styles.alg_view_master}>
           <div className={styles.alg_view_nav}>
             <div className={styles.alg_view_nav_section}>
+              <div className={btn_styles.dropdown}>
+                <div className={btn_styles.dropdown_btn}>
+                  {currentSelectedAlgorithm.title == '-1'
+                    ? 'Select Algorithm'
+                    : currentSelectedAlgorithm.title}
+                  <MdKeyboardArrowRight className={btn_styles.arrow} />
+                </div>
+                <div className={btn_styles.dropdown_content}>
+                  {salgs.map((element: SAlgInformation) => {
+                    if (element.title == '-1') return;
+
+                    return (
+                      <div
+                        key={element.title}
+                        onClick={() => {
+                          handleSelectNewAlgorithm(element);
+                        }}
+                      >
+                        {element.title}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
               <input
                 type='range'
                 min='1'
@@ -140,34 +165,43 @@ const SAlgo = () => {
               </div>
             </div>
             <div className={styles.alg_view_nav_section}>
-              <div className={btn_styles.dropdown}>
-                <div className={btn_styles.dropdown_btn}>
-                  {currentSelectedAlgorithm.title == '-1'
-                    ? 'Select Algorithm'
-                    : currentSelectedAlgorithm.title}
-                  <MdKeyboardArrowRight className={btn_styles.arrow} />
-                </div>
-                <div className={btn_styles.dropdown_content}>
-                  {salgs.map((element: SAlgInformation) => {
-                    if (element.title == '-1') return;
-
-                    return (
-                      <div
-                        key={element.title}
-                        onClick={() => {
-                          handleSelectNewAlgorithm(element);
-                        }}
-                      >
-                        {element.title}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
               <div
                 className={btn_styles.primary}
-                onClick={() => {
+                onClick={async () => {
                   sa.shuffle();
+
+                  for (let i = 0; i < sa.shuffleSteps.length; i++) {
+                    const stepInfo: ReturnOfReplicateShuffleStep =
+                      sa.replicateShuffleStep(i);
+
+                    if (sa.animateShuffle == false) continue;
+
+                    setArrayInView([]);
+                    for (let j = 0; j < sa.array.length; j++) {
+                      if (stepInfo.indices.includes(j))
+                        setArrayInView((prev) => [
+                          ...prev,
+                          new ArrayIndex(sa.array[j], true),
+                        ]);
+                      else
+                        setArrayInView((prev) => [
+                          ...prev,
+                          new ArrayIndex(sa.array[j]),
+                        ]);
+                    }
+
+                    if (sa.soundEnabled == true)
+                      sa.playSound(
+                        (sa.shuffleSteps[i].values[0] / sa.size) * 100
+                      );
+
+                    await new Promise((resolve) =>
+                      setTimeout(resolve, sa.delay)
+                    );
+
+                    continue;
+                  }
+
                   setArrayInView([]);
                   for (let i = 0; i < sa.array.length; i++)
                     setArrayInView((prev) => [
@@ -198,11 +232,23 @@ const SAlgo = () => {
                       }
 
                       setArrayInView([]);
-                      for (let i = 0; i < sa.array.length; i++)
-                        setArrayInView((prev) => [
-                          ...prev,
-                          new ArrayIndex(sa.array[i]),
-                        ]);
+                      for (let j = 0; j < sa.array.length; j++) {
+                        if (sa.sortingSteps[i].indices[0] == j)
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j], true),
+                          ]);
+                        else
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j], false),
+                          ]);
+                      }
+
+                      if (sa.soundEnabled == true)
+                        sa.playSound(
+                          (sa.sortingSteps[i].values[0] / sa.size) * 100
+                        );
 
                       await new Promise((resolve) =>
                         setTimeout(resolve, sa.delay)
@@ -251,10 +297,16 @@ const SAlgo = () => {
           >
             <div className={styles.alg_view_subnav_section1}>
               <div className={styles.alg_view_subnav_row}>
-                <input type='checkbox' />
-                <div style={{ marginLeft: '0.5rem' }}>
-                  Enable sounds (WiP 🚀)
-                </div>
+                <input
+                  type='checkbox'
+                  checked={sa.soundEnabled}
+                  value='Should the sorting sound be played when animating?'
+                  onChange={() => {
+                    sa.soundEnabled = !sa.soundEnabled;
+                    handleUpdateDOM();
+                  }}
+                />
+                <div style={{ marginLeft: '0.5rem' }}>Enable sounds</div>
               </div>
               <div className={styles.alg_view_subnav_row}>
                 <input
@@ -339,6 +391,8 @@ const SAlgo = () => {
                   Array to Viewport
                 </div>
               </div>
+            </div>
+            <div className={styles.alg_view_subnav_section2}>
               <div className={styles.alg_view_subnav_row}>
                 <div
                   className={btn_styles.danger_outline}
@@ -351,7 +405,6 @@ const SAlgo = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.alg_view_subnav_section2}></div>
           </div>
           <div className={styles.alg_view_visualization_master}>
             <div
@@ -373,7 +426,7 @@ const SAlgo = () => {
                       {`${sa.auxiliaryArrayWrites ?? 0}`} writes to auxiliary
                       array(s)
                     </div>
-                    <div>0 array swaps</div>
+                    <div>{`${sa.arraySwaps ?? 0}`} array swaps</div>
                     <div>{`${sa.comparison ?? 0}`} comparisons</div>
                   </div>
                   <div
@@ -394,13 +447,23 @@ const SAlgo = () => {
                     return (
                       <div
                         key={element.id}
-                        style={{
-                          width: `${sa.boundariesX / sa.size}px`,
-                          height: `${
-                            sa.boundariesY * (element.value / sa.size)
-                          }px`,
-                          backgroundColor: 'rgb(var(--primary-negativ))',
-                        }}
+                        style={
+                          element.changed
+                            ? {
+                                width: `${sa.boundariesX / sa.size}px`,
+                                height: `${
+                                  sa.boundariesY * (element.value / sa.size)
+                                }px`,
+                                backgroundColor: 'rgb(255 0 0 / 100)',
+                              }
+                            : {
+                                width: `${sa.boundariesX / sa.size}px`,
+                                height: `${
+                                  sa.boundariesY * (element.value / sa.size)
+                                }px`,
+                                backgroundColor: 'rgb(var(--primary-negativ))',
+                              }
+                        }
                       />
                     );
                   })}
