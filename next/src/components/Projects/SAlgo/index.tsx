@@ -102,11 +102,46 @@ const SAlgo = () => {
       <div className={styles.main}>
         <h1 className={styles.title}>Sorting Algorithms</h1>
         <div className={styles.text}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione
-          aperiam quisquam aspernatur earum, velit nam dicta excepturi accusamus
-          rem veritatis.
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            This page is a collection of sorting algorithms. It allows the user
+            to visualize some algorithms in action, and also provides a short
+            explanation of how the algorithm works and its complexity.
+          </div>
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            See{' '}
+            <Link
+              href={'#'}
+              style={{
+                color: 'rgb(70 126 236 / 100%)',
+                textDecoration: 'none',
+              }}
+            >
+              here
+            </Link>{' '}
+            for more information on how this page was created.
+          </div>
         </div>
-        <div className={styles.alg_view_master}>
+        <div className={styles.subtitle} style={{ fontSize: '1.5rem' }}>
+          Get started
+        </div>
+        <div className={styles.text}>
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            Select an algorithm you want to visualize
+          </div>
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            Select the size of the array you want to sort and generate it
+          </div>
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            Shuffle the array and then start the algorithm
+          </div>
+          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            Blow you can choose more advanced options
+          </div>
+        </div>
+        <h1 className={styles.title} style={{ marginTop: '5rem' }}>
+          Visualization
+        </h1>
+        <div className={styles.alg_view_master} style={{ marginTop: '2.5rem' }}>
           <div className={styles.alg_view_nav}>
             <div className={styles.alg_view_nav_section}>
               <div className={btn_styles.dropdown}>
@@ -610,6 +645,7 @@ const SAlgo = () => {
             </div>
           </div>
         </div>
+        <h1 className={styles.title}>Tech Stack</h1>
       </div>
     </>
   );
