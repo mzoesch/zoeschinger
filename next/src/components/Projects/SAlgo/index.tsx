@@ -161,20 +161,6 @@ const SAlgo = () => {
         <h1 className={styles.title} style={{ marginTop: '5rem' }}>
           Visualization
         </h1>
-        <div
-          className={btn_styles.primary}
-          onClick={async () => {
-            const apiEndpoint =
-              process.env.PRIVATE_API_ENDPOINT + 'projects/salgo';
-
-            console.log('apiEndpoint: dev ', apiEndpoint);
-
-            const res = await fetch(apiEndpoint);
-            console.log('res: ', res);
-          }}
-        >
-          SendReq
-        </div>
         <div className={styles.alg_view_master} style={{ marginTop: '2.5rem' }}>
           <div className={styles.alg_view_nav}>
             <div className={styles.alg_view_nav_section}>
