@@ -52,3 +52,8 @@ docs/_build/
 .VSCodeCounter/*
 .DS_Store
 .idea/
+venv/
+
+# logs
+error_log
+access_log
