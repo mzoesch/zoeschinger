@@ -6,3 +6,4 @@ export { default as LinkIcon } from '@p/svg/LinkIcon.svg';
 export { default as TextIcon } from '@p/svg/TextIcon.svg';
 export { default as SortIcon } from '@p/svg/SortIcon.svg';
 export { default as ShuttleIcon } from '@p/svg/ShuttleIcon.svg';
+export { default as Projects_SAlgo_SSD } from '@p/svg/projects_salgo_ssd.svg';
