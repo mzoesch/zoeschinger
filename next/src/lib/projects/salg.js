@@ -76,6 +76,9 @@ class SortingAlgorithm {
 
   #skippedFrames = 0;
 
+  currentlyShuffling = false;
+  currentlySorting = false;
+
   constructor(size = DEFAULT_ARRAY_SIZE, delay = DEFAULT_DELAY) {
     this.#size = size;
     this.#delay = delay;

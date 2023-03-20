@@ -6,6 +6,7 @@ import { TbLayoutNavbar } from 'react-icons/tb';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { RxQuestionMarkCircled } from 'react-icons/rx';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
@@ -221,167 +222,219 @@ const SAlgo = () => {
               </div>
             </div>
             <div className={styles.alg_view_nav_section}>
-              <div
-                className={btn_styles.primary}
-                onClick={async () => {
-                  sa.shuffle();
+              {sa.currentlyShuffling ? (
+                <div
+                  className={btn_styles.primary}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <AiOutlineLoading3Quarters
+                    style={{ marginRight: '0.5rem' }}
+                    className={btn_styles.loading}
+                  />
+                  Shuffling
+                </div>
+              ) : sa.currentlySorting ? (
+                <div className={btn_styles.secondary}>Shuffle</div>
+              ) : (
+                <div
+                  className={btn_styles.primary}
+                  onClick={async () => {
+                    sa.currentlyShuffling = true;
+                    handleUpdateDOM();
 
-                  for (let i = 0; i < sa.shuffleSteps.length; i++) {
-                    const stepInfo: ReturnOfReplicateShuffleStep =
-                      sa.replicateShuffleStep(i);
+                    sa.shuffle();
 
-                    if (sa.animateShuffle == false) continue;
+                    for (let i = 0; i < sa.shuffleSteps.length; i++) {
+                      const stepInfo: ReturnOfReplicateShuffleStep =
+                        sa.replicateShuffleStep(i);
 
-                    setArrayInView([]);
-                    for (let j = 0; j < sa.array.length; j++) {
-                      if (stepInfo.indices.includes(j))
-                        setArrayInView((prev) => [
-                          ...prev,
-                          new ArrayIndex(sa.array[j], true),
-                        ]);
-                      else
-                        setArrayInView((prev) => [
-                          ...prev,
-                          new ArrayIndex(sa.array[j]),
-                        ]);
-                    }
+                      if (sa.animateShuffle == false) continue;
 
-                    if (sa.soundEnabled == true)
-                      sa.playSound(
-                        (sa.shuffleSteps[i].values[0] / sa.size) * 100
+                      setArrayInView([]);
+                      for (let j = 0; j < sa.array.length; j++) {
+                        if (stepInfo.indices.includes(j))
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j], true),
+                          ]);
+                        else
+                          setArrayInView((prev) => [
+                            ...prev,
+                            new ArrayIndex(sa.array[j]),
+                          ]);
+                      }
+
+                      if (sa.soundEnabled == true)
+                        sa.playSound(
+                          (sa.shuffleSteps[i].values[0] / sa.size) * 100
+                        );
+
+                      await new Promise((resolve) =>
+                        setTimeout(resolve, sa.delay)
                       );
 
-                    await new Promise((resolve) =>
-                      setTimeout(resolve, sa.delay)
-                    );
+                      continue;
+                    }
 
-                    continue;
-                  }
+                    setArrayInView([]);
+                    for (let i = 0; i < sa.array.length; i++)
+                      setArrayInView((prev) => [
+                        ...prev,
+                        new ArrayIndex(sa.array[i]),
+                      ]);
 
-                  setArrayInView([]);
-                  for (let i = 0; i < sa.array.length; i++)
-                    setArrayInView((prev) => [
-                      ...prev,
-                      new ArrayIndex(sa.array[i]),
-                    ]);
-                }}
-              >
-                Shuffle
-              </div>
-              <div
-                className={btn_styles.primary}
-                onClick={async () => {
-                  await sa.execute();
+                    sa.currentlyShuffling = false;
+                    handleUpdateDOM();
+                  }}
+                >
+                  Shuffle
+                </div>
+              )}
 
-                  for (let i = 0; i < sa.sortingSteps.length; i++) {
-                    const stepInfo: ReturnOfReplicateStep = sa.replicateStep(i);
+              {sa.currentlySorting ? (
+                <div
+                  className={btn_styles.primary}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <AiOutlineLoading3Quarters
+                    style={{ marginRight: '0.5rem' }}
+                    className={btn_styles.loading}
+                  />
+                  Shuffling
+                </div>
+              ) : sa.currentlyShuffling ? (
+                <div className={btn_styles.secondary}>Sort</div>
+              ) : (
+                <div
+                  className={btn_styles.primary}
+                  onClick={async () => {
+                    sa.currentlySorting = true;
+                    handleUpdateDOM();
 
-                    if (sa.animateSorting == false) continue;
+                    await sa.execute();
 
-                    if (stepInfo.typeOfChange == WRITE_TO_MAIN_ARRAY) {
-                      if (
-                        stepInfo.arrayChanged == false &&
-                        sa.animateReplication == false
-                      ) {
-                        sa.skippedFrames += 1;
+                    for (let i = 0; i < sa.sortingSteps.length; i++) {
+                      const stepInfo: ReturnOfReplicateStep =
+                        sa.replicateStep(i);
+
+                      if (sa.animateSorting == false) continue;
+
+                      if (stepInfo.typeOfChange == WRITE_TO_MAIN_ARRAY) {
+                        if (
+                          stepInfo.arrayChanged == false &&
+                          sa.animateReplication == false
+                        ) {
+                          sa.skippedFrames += 1;
+                          continue;
+                        }
+
+                        setArrayInView([]);
+                        for (let j = 0; j < sa.array.length; j++) {
+                          if (sa.sortingSteps[i].indices[0] == j)
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j], true),
+                            ]);
+                          else
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j], false),
+                            ]);
+                        }
+
+                        if (sa.soundEnabled == true)
+                          sa.playSound(
+                            (sa.sortingSteps[i].values[0] / sa.size) * 100
+                          );
+
+                        await new Promise((resolve) =>
+                          setTimeout(resolve, sa.delay)
+                        );
+
                         continue;
                       }
 
-                      setArrayInView([]);
-                      for (let j = 0; j < sa.array.length; j++) {
-                        if (sa.sortingSteps[i].indices[0] == j)
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j], true),
-                          ]);
-                        else
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j], false),
-                          ]);
-                      }
+                      if (stepInfo.typeOfChange == ARRAY_SWAP) {
+                        setArrayInView([]);
+                        for (let j = 0; j < sa.array.length; j++) {
+                          if (sa.sortingSteps[i].indices.includes(j))
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j], true),
+                            ]);
+                          else
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j]),
+                            ]);
+                        }
 
-                      if (sa.soundEnabled == true)
-                        sa.playSound(
-                          (sa.sortingSteps[i].values[0] / sa.size) * 100
+                        if (sa.soundEnabled == true)
+                          sa.playSound(
+                            (sa.sortingSteps[i].values[0] / sa.size) * 100
+                          );
+
+                        await new Promise((resolve) =>
+                          setTimeout(resolve, sa.delay)
                         );
 
-                      await new Promise((resolve) =>
-                        setTimeout(resolve, sa.delay)
-                      );
-
-                      continue;
-                    }
-
-                    if (stepInfo.typeOfChange == ARRAY_SWAP) {
-                      setArrayInView([]);
-                      for (let j = 0; j < sa.array.length; j++) {
-                        if (sa.sortingSteps[i].indices.includes(j))
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j], true),
-                          ]);
-                        else
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j]),
-                          ]);
+                        continue;
                       }
 
-                      if (sa.soundEnabled == true)
-                        sa.playSound(
-                          (sa.sortingSteps[i].values[0] / sa.size) * 100
+                      if (stepInfo.typeOfChange == COMPARISON) {
+                        if (sa.animateComparison == false) continue;
+
+                        setArrayInView([]);
+                        for (let j = 0; j < sa.array.length; j++) {
+                          if (sa.sortingSteps[i].indices.includes(j))
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j], false, true),
+                            ]);
+                          else
+                            setArrayInView((prev) => [
+                              ...prev,
+                              new ArrayIndex(sa.array[j]),
+                            ]);
+                        }
+
+                        // TODO: Should comparisons be with sound?
+
+                        await new Promise((resolve) =>
+                          setTimeout(resolve, sa.delay)
                         );
 
-                      await new Promise((resolve) =>
-                        setTimeout(resolve, sa.delay)
-                      );
-
-                      continue;
-                    }
-
-                    if (stepInfo.typeOfChange == COMPARISON) {
-                      if (sa.animateComparison == false) continue;
-
-                      setArrayInView([]);
-                      for (let j = 0; j < sa.array.length; j++) {
-                        if (sa.sortingSteps[i].indices.includes(j))
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j], false, true),
-                          ]);
-                        else
-                          setArrayInView((prev) => [
-                            ...prev,
-                            new ArrayIndex(sa.array[j]),
-                          ]);
+                        continue;
                       }
 
-                      // TODO: Should comparisons be with sound?
-
-                      await new Promise((resolve) =>
-                        setTimeout(resolve, sa.delay)
-                      );
+                      if (stepInfo.typeOfChange == WRITE_TO_AUXILIARY_ARRAY)
+                        continue;
 
                       continue;
                     }
 
-                    if (stepInfo.typeOfChange == WRITE_TO_AUXILIARY_ARRAY)
-                      continue;
+                    setArrayInView([]);
+                    for (let i = 0; i < sa.array.length; i++)
+                      setArrayInView((prev) => [
+                        ...prev,
+                        new ArrayIndex(sa.array[i]),
+                      ]);
 
-                    continue;
-                  }
-
-                  setArrayInView([]);
-                  for (let i = 0; i < sa.array.length; i++)
-                    setArrayInView((prev) => [
-                      ...prev,
-                      new ArrayIndex(sa.array[i]),
-                    ]);
-                }}
-              >
-                Sort
-              </div>
+                    sa.currentlySorting = false;
+                    handleUpdateDOM();
+                  }}
+                >
+                  Sort
+                </div>
+              )}
               <div
                 className={btn_styles.secondary}
                 onClick={handleCollapseSubnav}

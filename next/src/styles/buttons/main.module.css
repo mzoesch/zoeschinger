@@ -7,6 +7,15 @@
 * polished_button
 */
 
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .btn,
 .primary,
 .secondary,
@@ -163,4 +172,13 @@
 
 .polished_button:hover > .polished_button_arrow {
   translate: 0.25rem;
+}
+
+.loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: loading 1s linear infinite;
 }
