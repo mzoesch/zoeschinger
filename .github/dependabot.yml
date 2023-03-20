@@ -8,8 +8,7 @@ updates:
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: 'next/' # Location of package manifests
     schedule:
-      # Check for updates to GitHub Actions every weekday
-      interval: 'daily'
+      interval: 'weekly'
     target-branch: 'dev'
     open-pull-requests-limit: 10
     commit-message:
