@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    PRIVATE_API_ADDRESS: process.env.PRIVATE_API_ADDRESS,
+    PRIVATE_API_ENDPOINT: process.env.PRIVATE_API_ENDPOINT,
   },
   webpack(config) {
     config.module.rules.push({

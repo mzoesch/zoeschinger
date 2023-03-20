@@ -1,5 +1,3 @@
-import { DashboardIcon } from '@c/svg';
-
 class Project {
   #title;
   #subText;
@@ -44,6 +42,14 @@ class Project {
 
 export const projects = [
   new Project(
+    'SAlgo',
+    'A visualization tool for sorting algorithms. See how they work and perform in the web.',
+    '-1',
+    '-1',
+    '/projects/salgo',
+    'SortIcon'
+  ),
+  new Project(
     'Zoeschinger',
     'Website for my projects and stuff. So you can run them in the web.',
     'https://www.zoeschinger.com/',
@@ -66,13 +72,5 @@ export const projects = [
     'https://github.com/mzoesch/Planet_Attacked',
     '/projects/spaceinv',
     'ShuttleIcon'
-  ),
-  new Project(
-    'SAlg',
-    'more stuff here',
-    '-1',
-    '-1',
-    '/projects/salgo',
-    'SortIcon'
   ),
 ];
