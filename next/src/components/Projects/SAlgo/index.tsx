@@ -166,15 +166,10 @@ const SAlgo = () => {
           onClick={async () => {
             const apiEndpoint =
               process.env.PRIVATE_API_ENDPOINT + 'projects/salgo';
+
             console.log('apiEndpoint: dev ', apiEndpoint);
 
-            const res = await fetch(apiEndpoint, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
-
+            const res = await fetch(apiEndpoint);
             console.log('res: ', res);
           }}
         >
