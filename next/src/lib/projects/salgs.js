@@ -130,7 +130,7 @@ It repeatedly finds the minimum element from the unsorted part and puts it at th
   new SAlgInformation(
     'Bubble sort',
     [
-      'Bubble sort is a iterative, in-place comparison-based sorting algorithm',
+      'Bubble sort is an iterative, in-place comparison-based sorting algorithm',
       'It repeatedly steps through the data set, compares adjacent elements and swaps them \
 if they are in the wrong order.',
       "Bubble sort is noted for its simplicity, but performs poorly in real world use. \

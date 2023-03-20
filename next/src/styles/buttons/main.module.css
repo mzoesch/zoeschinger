@@ -70,8 +70,8 @@
   background-color: rgb(76 175 80 / 100%);
 }
 
-.dropdown:hover .dropdown_btn {
-  background-color: #3e8e41;
+.dropdown:hover > .dropdown_btn {
+  background-color: #39823b;
 }
 
 .dropdown_content {

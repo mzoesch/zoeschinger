@@ -1,5 +1,5 @@
 # Features
 
 pausing algorithm
-select different sorts
+select different shuffles
 select different visualizations

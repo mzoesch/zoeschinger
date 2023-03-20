@@ -1,5 +1,6 @@
 import styles from '@s/projects/salgo/main.module.scss';
 import btn_styles from '@s/buttons/main.module.scss';
+import { Projects_SAlgo_SSD } from '@c/svg';
 
 import { TbLayoutNavbar } from 'react-icons/tb';
 import { MdKeyboardArrowRight } from 'react-icons/md';
@@ -28,8 +29,10 @@ const COMPARISON = 'comparison';
 
 const SAlgo = () => {
   const [arrayInView, setArrayInView] = useState<ArrayIndex[]>([]);
-  const [sa, RESET_SA_COULD_BREAK_EVERYTHING_NEVER_EVER_USE_THIS_SHIT] =
-    useState<SortingAlgorithm>(new SortingAlgorithm());
+  const [
+    sa,
+    RESET_SA_COULD_BREAK_EVERYTHING_NEVER_EVER_USE_THIS_SHIT_EXCEPT_YOU_KNOW_WHAT_YOU_ARE_DOING_BUT_EVEN_THEN_BE_PREPARED_FOR_HELLFIRE,
+  ] = useState<SortingAlgorithm>(new SortingAlgorithm());
 
   // region inputs
 
@@ -101,41 +104,58 @@ const SAlgo = () => {
     <>
       <div className={styles.main}>
         <h1 className={styles.title}>Sorting Algorithms</h1>
-        <div className={styles.text}>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+        <div className={styles.outside_text}>
+          <div className={styles.paragraph}>
             This page is a collection of sorting algorithms. It allows the user
             to visualize some algorithms in action, and also provides a short
             explanation of how the algorithm works and its complexity.
           </div>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-            See{' '}
+          <div className={styles.paragraph}>
+            See the{' '}
             <Link
-              href={'#'}
+              href={'#TechnicalDetails'}
               style={{
                 color: 'rgb(70 126 236 / 100%)',
                 textDecoration: 'none',
               }}
             >
-              here
+              technical details
             </Link>{' '}
             for more information on how this page was created.
+          </div>
+          <div className={styles.paragraph}>
+            When shuffling or sorting the array you will notice two different
+            colors:
+          </div>
+          <div className={styles.indented_text}>
+            <span style={{ textDecoration: 'underline' }}>Red</span> is used to
+            indicate that the current element is being changed in some way.
+            Note, it is possible that two elements are red (being changed) at
+            the same time. This only happens when these elements are being
+            swapped.
+          </div>
+          <div className={styles.indented_text}>
+            <span style={{ textDecoration: 'underline' }}>Yellow</span> is used
+            to indicate that the current element is being compared to another
+            element. (Note, in order to see this color you will need to enable
+            the Animate comparisons option.)
           </div>
         </div>
         <div className={styles.subtitle} style={{ fontSize: '1.5rem' }}>
           Get started
         </div>
         <div className={styles.text}>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <div className={styles.paragraph}>
             Select an algorithm you want to visualize
           </div>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <div className={styles.paragraph}>
             Select the size of the array you want to sort and generate it
           </div>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <div className={styles.paragraph}>
             Shuffle the array and then start the algorithm
           </div>
-          <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-            Blow you can choose more advanced options
+          <div className={styles.paragraph}>
+            Below you can choose more advanced options
           </div>
         </div>
         <h1 className={styles.title} style={{ marginTop: '5rem' }}>
@@ -645,7 +665,82 @@ const SAlgo = () => {
             </div>
           </div>
         </div>
-        <h1 className={styles.title}>Tech Stack</h1>
+        <div>
+          <h1
+            className={styles.title}
+            style={{ marginTop: '5rem' }}
+            id='TechnicalDetails'
+          >
+            Technical Details
+          </h1>
+          <div className={styles.outside_text}>
+            <div className={styles.paragraph}>
+              The visualization is built using different sized divs. The height
+              of each div is determined by the value of the element in the
+              array. When you shuffle the array, the JavaScript on your browser
+              will calculate the shuffle, and saves each step in an array. The
+              visualization will then try to replicate each step of the shuffle.
+            </div>
+            <div className={styles.paragraph}>
+              The sorting on the other hand works different. Your browser will
+              send a request to a server with the algorithm you selected and the
+              array that you want to sort. The server will then try to sort it
+              and saves each step in an other array. When its done sorting, the
+              sever will respond to your browser with each step. Your browser
+              will then try to replicate each step of the sorting and colorize
+              it respectively.
+            </div>
+            <div className={styles.paragraph}>
+              You might be wondering why I didn&apos;t just use the JavaScript
+              on your browser to sort the array. Well I think you overlooked the
+              insane amount of advantages that the server has over your browser:
+            </div>
+            <div className={styles.indented_text}>
+              First the server has a lot more computing power than your machine.
+              It is running in a virtual box with a bizarre amount of one CPU
+              core. And the next gen RAM supports your requests with its
+              whopping 500MB of RAM. So the server must be definitely faster
+              than your browser.
+            </div>
+            <div className={styles.indented_text}>
+              Second this approach costs a lot more internet bandwidth. Just
+              think about it. When the server responds to your browser with each
+              step of the sorting, it will send a lot more data than if your
+              browser would just sort the array. Imagine the sheer amount of
+              JSON that is being used to describe the thousands of steps for the
+              sorting. So offloading the calculations to the server is
+              definitely way more efficient.
+            </div>
+            <div className={styles.indented_text}>
+              Third idk. I ran out of ideas. Submit a PR if you know some.
+            </div>
+            <div className={styles.paragraph}>
+              But yes, at least this project was a really great learning
+              experience for me and I didn&apos;t enjoyed every minute of it. It
+              was pure pain and suffering.
+              <br />I hope you had a great time.
+            </div>
+            <div className={styles.signed}>
+              <div>Text primarily written by ChatGPT</div>
+            </div>
+          </div>
+          <div
+            className={styles.subtitle}
+            style={{
+              fontSize: '1.5rem',
+              marginTop: '5rem',
+              marginBottom: '2rem',
+            }}
+          >
+            System Sequence Diagram
+          </div>{' '}
+          <Projects_SAlgo_SSD
+            style={{
+              padding: '1rem',
+              backgroundColor: 'rgb(255 255 255 / 100)',
+            }}
+          />
+        </div>
       </div>
     </>
   );

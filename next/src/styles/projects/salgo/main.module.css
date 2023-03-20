@@ -28,6 +28,28 @@
   color: rgb(var(--primary-negativ) / 100%);
 }
 
+.paragraph {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.signed {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.outside_text {
+  color: rgb(var(--primary-negativ) / 100%);
+  max-width: 50rem;
+  text-align: justify;
+}
+
+.indented_text {
+  margin-left: 1rem;
+}
+
 .alg_view_master {
   margin-top: 5rem;
 }
