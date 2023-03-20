@@ -1,16 +1,17 @@
 import json
+from typing import List
 
 
 class Steps:
 
     step_type: str
-    indices: list[int]
-    values: list[int]
+    indices: List[int]
+    values: List[int]
 
     def __init__(self,
                  step_type: str,
-                 indices: list[int],
-                 values: list[int]
+                 indices: List[int],
+                 values: List[int]
                  ):
         self.step_type = step_type
         self.indices = indices

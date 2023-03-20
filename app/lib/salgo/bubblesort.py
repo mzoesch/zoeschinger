@@ -1,7 +1,7 @@
 from . import base
 from . import steps
 from models import norm
-
+from typing import List
 
 class BubbleSort(base.Base):
 
@@ -11,7 +11,7 @@ class BubbleSort(base.Base):
 
         return
 
-    def internal_sort(self, arr: list[int]) -> list[int]:
+    def internal_sort(self, arr: List[int]) -> List[int]:
 
         n = len(arr)
         for i in range(n - 1):

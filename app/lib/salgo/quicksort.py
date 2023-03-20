@@ -1,7 +1,7 @@
 from . import base
 from . import steps
 from models import norm
-
+from typing import List
 
 class QuickSort(base.Base):
 
@@ -13,7 +13,7 @@ class QuickSort(base.Base):
         return
 
     # Auxiliary function
-    def partition(self, arr: list[int], low, high):
+    def partition(self, arr: List[int], low, high):
         pivot = arr[high]
         i = low - 1
 
@@ -37,7 +37,7 @@ class QuickSort(base.Base):
 
         return i
 
-    def internal_sort(self, arr: list[int], low, high) -> list[int]:
+    def internal_sort(self, arr: List[int], low, high) -> List[int]:
         if low >= high or low < 0 or high < 0:
             return
 

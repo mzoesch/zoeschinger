@@ -1,6 +1,7 @@
 from . import base
 from . import steps
 from models import norm
+from typing import List
 
 
 class MergeSort(base.Base):
@@ -11,7 +12,7 @@ class MergeSort(base.Base):
 
         return
 
-    def internal_sort(self, arr: list[int], global_cursor: int) -> list[int]:
+    def internal_sort(self, arr: List[int], global_cursor: int) -> List[int]:
 
         if len(arr) <= 1:
             return arr

@@ -4,7 +4,7 @@
 from pydantic import BaseModel
 from enum import Enum
 from lib.salgo import steps
-
+from typing import List
 
 class SAlgoType(str, Enum):
     quicksort = "quicksort"
@@ -19,7 +19,7 @@ class Model(BaseModel):
         arbitrary_types_allowed = True
 
     type: SAlgoType
-    arrayToSort: list[int]
+    arrayToSort: List[int]
 
     # sortedSteps: list[steps.Steps] = []
-    sortedSteps: list[dict] = []
+    sortedSteps: List[dict] = []
