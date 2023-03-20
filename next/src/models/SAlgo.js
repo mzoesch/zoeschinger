@@ -20,6 +20,7 @@ export class SAlgo {
 
   async sendReq() {
     const apiEndpoint = process.env.PRIVATE_API_ENDPOINT + 'projects/salgo';
+    console.log('apiEndpoint: prod ', apiEndpoint);
 
     const res = await fetch(apiEndpoint, {
       method: 'POST',
