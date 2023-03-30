@@ -1,9 +1,8 @@
-.main {
-  margin-top: 5rem;
-  margin-left: 1rem;
-  width: 100%;
+.code_example {
+  padding: 1rem;
+  color: white;
 
-  color: rgb(var(--primary-negativ));
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--primary-negativ));
+  border-radius: 0.5rem;
+
+  background-color: rgb(68, 65, 65);
 }

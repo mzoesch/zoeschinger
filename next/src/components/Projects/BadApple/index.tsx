@@ -1,16 +1,16 @@
-import styles from '@s/projects/zoeschinger/main.module.scss';
+import styles from '@s/projects/badapple/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import basic_layout_styles from '@s/projects/basic_layout.module.scss';
 
 import Link from 'next/link';
 
-const Zoeschinger = () => {
+const BadApple = () => {
   return (
     <>
       <div className={basic_layout_styles.wrapper}>
         <div className={basic_layout_styles.main}>
           <div className={basic_layout_styles.top_wrapper}>
-            <h1 className={text_styles.title}>This website</h1>
+            <h1 className={text_styles.title}>Bad Apple</h1>
             <div className={basic_layout_styles.top_information}>
               View source code{' '}
               <Link
@@ -63,4 +63,4 @@ const Zoeschinger = () => {
   );
 };
 
-export default Zoeschinger;
+export default BadApple;

@@ -62,7 +62,7 @@
 .project::before {
   background: radial-gradient(
     800px circle at var(--mouse-x) var(--mouse-y),
-    rgb(var(--project-card-r-bg) / 20%),
+    rgb(var(--project-card-r-bg) / var(--project-card-hover-strength)),
     transparent 40%
   );
 
@@ -71,8 +71,9 @@
 
 .project_border {
   background: radial-gradient(
-    600px circle at var(--mouse-x) var(--mouse-y),
-    rgb(var(--project-card-r-bg) / 60%),
+    var(--project-card-outline-hover-radius) circle at var(--mouse-x)
+      var(--mouse-y),
+    rgb(var(--project-card-r-bg) / var(--project-card-outline-hover-strength)),
     transparent 40%
   );
 

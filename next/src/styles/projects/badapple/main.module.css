@@ -1,0 +1,22 @@
+.wrapper {
+  margin-top: 5rem;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.main {
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  width: inherit;
+  max-width: 75rem;
+
+  /* background-color: red; */
+  color: rgb(var(--primary-negativ));
+}

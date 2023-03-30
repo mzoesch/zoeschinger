@@ -9,6 +9,7 @@ import {
   TextIcon,
   SortIcon,
   ShuttleIcon,
+  BadAppleIcon,
 } from '@c/svg';
 import { Raleway, Josefin_Sans } from 'next/font/google';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
@@ -40,6 +41,9 @@ const ProjectCard = ({
           {icon === 'TextIcon' && <TextIcon className={styles.top_img} />}
           {icon === 'SortIcon' && <SortIcon className={styles.top_img} />}
           {icon === 'ShuttleIcon' && <ShuttleIcon className={styles.top_img} />}
+          {icon === 'BadAppleIcon' && (
+            <BadAppleIcon className={styles.top_img} />
+          )}
         </div>
         <div className={styles.bottom}>
           <div className={styles.title} style={josefinSans.style}>

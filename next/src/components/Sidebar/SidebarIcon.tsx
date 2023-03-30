@@ -1,5 +1,13 @@
-import { DashboardIcon, TextIcon, SortIcon, ShuttleIcon } from '@c/svg';
 import styles from '@s/sidebar/sidebarIcon.module.scss';
+
+import {
+  DashboardIcon,
+  TextIcon,
+  SortIcon,
+  ShuttleIcon,
+  BadAppleIcon,
+} from '@c/svg';
+
 import Link from 'next/link';
 
 const SidebarIcon = ({
@@ -33,6 +41,11 @@ const SidebarIcon = ({
           {icon === 'SortIcon' && (
             <div className={styles.icon}>
               <SortIcon className={styles.icon_inner} />
+            </div>
+          )}
+          {icon === 'BadAppleIcon' && (
+            <div className={styles.icon}>
+              <BadAppleIcon className={styles.icon_inner} />
             </div>
           )}
         </Link>

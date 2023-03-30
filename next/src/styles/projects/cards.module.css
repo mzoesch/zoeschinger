@@ -102,7 +102,9 @@
 }
 
 .button:hover {
-  background-color: rgb(var(--project-card-button-hover) / 25%);
+  background-color: rgb(
+    var(--project-card-button-hover) / var(--project-card-button-hover-strength)
+  );
 }
 
 .arrow {

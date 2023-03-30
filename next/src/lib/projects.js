@@ -58,6 +58,15 @@ export const projects = [
     'DashboardIcon'
   ),
   new Project(
+    'Bad Apple',
+    'A bad apple video player. Just for fun.',
+    '-1',
+    'https://github.com/mzoesch/BadApple',
+    '/projects/badapple',
+    'BadAppleIcon'
+  ),
+
+  new Project(
     'Text to git',
     'Allows you to place and display ASCII-Text at your GitHubs contributions overview.',
     '-1',
