@@ -15,14 +15,3 @@
 
   color: rgb(var(--primary-negativ));
 }
-
-.top_wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 100%;
-}
-
-.top_information {
-}

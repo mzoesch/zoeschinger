@@ -11,6 +11,7 @@ import {
   ShuttleIcon,
   BadAppleIcon,
 } from '@c/svg';
+
 import { Raleway, Josefin_Sans } from 'next/font/google';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 const raleway = Raleway({ subsets: ['latin'] });

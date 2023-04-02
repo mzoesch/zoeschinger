@@ -1,6 +1,10 @@
 import styles from '@s/navbar/main.module.scss';
+import btn_styles from '@s/buttons/main.module.scss';
+
 import { LinksDesktop, LinksMobile } from './LinkHelper';
 import ThemeIcon from './ThemeToggler';
+
+import { BsLayoutSidebarInset, BsLayoutSidebar } from 'react-icons/bs';
 
 import NavbarImage from './NavbarImage';
 
@@ -9,7 +13,7 @@ const Navbar = () => {
     <>
       <div className={styles.navbar}>
         <div className={styles.left}>
-          <div className={styles.left_dekstop}>
+          <div className={styles.left_desktop}>
             <NavbarImage props={styles.desktop_navbar_img} />
             <LinksDesktop />
           </div>

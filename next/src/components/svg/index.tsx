@@ -8,3 +8,4 @@ export { default as SortIcon } from '@p/svg/SortIcon.svg';
 export { default as ShuttleIcon } from '@p/svg/ShuttleIcon.svg';
 export { default as Projects_SAlgo_SSD } from '@p/svg/projects_salgo_ssd.svg';
 export { default as BadAppleIcon } from '@p/svg/BadAppleIcon.svg';
+export { default as Projects_Zoeschinger_TechStack } from '@p/svg/projects_zoeschinger_techstack.svg';

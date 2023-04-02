@@ -1,10 +1,31 @@
 import styles from '@s/projects/badapple/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import basic_layout_styles from '@s/projects/basic_layout.module.scss';
+import video_styles from '@s/projects/video.module.scss';
+
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
 const BadApple = () => {
+  const [iFrameHidden, setIFrameHidden] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener('hideIFrames', () => {
+      setIFrameHidden(() => !iFrameHidden);
+    });
+
+    return () => {
+      window.removeEventListener('hideIFrames', () => {
+        setIFrameHidden(() => !iFrameHidden);
+      });
+    };
+  }, [iFrameHidden]);
+
+  useEffect(() => {
+    setIFrameHidden(false);
+  }, []);
+
   return (
     <>
       <div className={basic_layout_styles.wrapper}>
@@ -48,14 +69,20 @@ const BadApple = () => {
                 v3
               </Link>
             </h2>
-            <iframe
-              width='560'
-              height='315'
-              src='https://www.youtube.com/embed/oX1Oq-ycfUk'
-              title='YouTube video player'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              allowFullScreen
-            />
+            {iFrameHidden ? (
+              <div>Video can&apos;t be displayed</div>
+            ) : (
+              <div className={video_styles.video_wrapper}>
+                <iframe
+                  width='560'
+                  height='315'
+                  src='https://www.youtube.com/embed/oX1Oq-ycfUk'
+                  title='YouTube video player'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                  allowFullScreen
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

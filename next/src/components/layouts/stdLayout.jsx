@@ -6,8 +6,8 @@ function Layout({ children }) {
   return (
     <>
       <div className={styles.wrapper}>
-        <Navbar />
         {children}
+        <Navbar />
         <Footer />
       </div>
     </>

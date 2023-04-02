@@ -1,11 +1,24 @@
 import styles from '@s/navbar/navbarLinks.module.scss';
 
-import { navigation } from '@l/navbarLinks';
-import { Parser } from '@l/windowHelper';
-import { useState } from 'react';
-import { HiOutlineBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 import NavbarImage from './NavbarImage';
 import DarkModeTogglerThingy from './DarkModeTogglerThingy';
+
+import { projects } from '@l/projects';
+import { navigation } from '@l/navbarLinks';
+import { Parser } from '@l/windowHelper';
+
+import {
+  GitHubLogo,
+  LinkIcon,
+  DashboardIcon,
+  TextIcon,
+  SortIcon,
+  ShuttleIcon,
+  BadAppleIcon,
+} from '@c/svg';
+
+import { useState, useEffect, useRef } from 'react';
+import { HiOutlineBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 
 function DisplayCurrentToLink() {
   let p: string = '';
@@ -17,6 +30,16 @@ function DisplayCurrentToLink() {
     if (element.href === p) element.current = true;
     else element.current = false;
   });
+}
+
+function isCurrentPageEqualToProjectPage() {
+  let p: string = '';
+  if ((window.location.pathname.match(/\//g) || []).length > 1)
+    p = window.location.pathname.replace(/\/[^/]*$/, '');
+  else p = window.location.pathname;
+
+  if (p === '/projects') return true;
+  return false;
 }
 
 const LinksDesktop = () => {
@@ -49,6 +72,11 @@ const LinksDesktop = () => {
 const LinksMobile = () => {
   const [open, setOpen] = useState(false);
   const handleToggle = () => setOpen(!open);
+
+  useEffect(() => {
+    const event = new CustomEvent('hideIFrames');
+    window.dispatchEvent(event);
+  }, [open]);
 
   return (
     <>
@@ -84,7 +112,41 @@ const LinksMobile = () => {
                 </a>
               );
             })}
-            <div className={styles.seperator} />
+            <div className={styles.separator} />
+            {isCurrentPageEqualToProjectPage() ? (
+              <>
+                <div className={styles.prj_header}>My projects:</div>
+                <div className={styles.projects_overview}>
+                  {projects.map((element) => {
+                    return (
+                      <a
+                        key={element.title}
+                        href={element.readMore}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {element.icon === 'DashboardIcon' && (
+                          <DashboardIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'TextIcon' && (
+                          <TextIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'SortIcon' && (
+                          <SortIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'ShuttleIcon' && (
+                          <ShuttleIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'BadAppleIcon' && (
+                          <BadAppleIcon className={styles.prj_icon} />
+                        )}
+                        {element.title}
+                      </a>
+                    );
+                  })}
+                </div>
+                <div className={styles.separator} />
+              </>
+            ) : null}
             <DarkModeTogglerThingy />
           </div>
         ) : null}

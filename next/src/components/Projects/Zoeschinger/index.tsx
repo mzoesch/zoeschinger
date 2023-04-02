@@ -2,6 +2,8 @@ import styles from '@s/projects/zoeschinger/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import basic_layout_styles from '@s/projects/basic_layout.module.scss';
 
+import { Projects_Zoeschinger_TechStack } from '@c/svg';
+
 import Link from 'next/link';
 
 const Zoeschinger = () => {
@@ -14,7 +16,7 @@ const Zoeschinger = () => {
             <div className={basic_layout_styles.top_information}>
               View source code{' '}
               <Link
-                href='https://www.github.com/mzoesch/BadApple'
+                href='https://github.com/mzoesch/zoeschinger'
                 target='_blank'
                 className={text_styles.link}
               >
@@ -25,37 +27,27 @@ const Zoeschinger = () => {
           </div>
           <div className={text_styles.text}>
             <div className={text_styles.paragraph}>
-              A Bad Apple video player written in Python. Just for fun. See the
-              original{' '}
-              <Link
-                href='https://www.youtube.com/watch?v=FtutLA63Cp8'
-                target='_blank'
-                className={text_styles.link}
-              >
-                here
-              </Link>
-              . The video is played in the terminal using ANSI escape codes.
+              Just a website to showcase my projects and other things I&apos;ve
+              done.
             </div>
           </div>
           <div>
-            <h2 className={text_styles.subtitle}>
-              Preview of{' '}
-              <Link
-                href='https://github.com/mzoesch/BadApple/blob/master/ba_v3.py'
-                className={text_styles.link}
-                target='_blank'
-              >
-                v3
-              </Link>
-            </h2>
-            <iframe
-              width='560'
-              height='315'
-              src='https://www.youtube.com/embed/oX1Oq-ycfUk'
-              title='YouTube video player'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              allowFullScreen
-            />
+            <h2 className={text_styles.subtitle}>Tech Stack</h2>
+            <div
+              style={{
+                backgroundColor: 'white',
+                width: 'calc(100% - 2rem)',
+                height: '100%',
+                padding: '1rem',
+              }}
+            >
+              <Projects_Zoeschinger_TechStack
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

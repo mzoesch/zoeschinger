@@ -139,13 +139,13 @@ const TxtToGit = () => {
               >
                 Command used
               </h3>
-              <code className={styles.code_example}>
+              <div className={styles.code_example}>
                 <span style={{ color: 'lightgreen' }}>python</span>{' '}
                 <span style={{ textDecoration: 'underline' }}>app.py</span> -y
                 2019 -msgStr{' '}
                 <span style={{ color: 'yellow' }}>&quot;@MZOESCH&quot;</span> -a
                 1
-              </code>
+              </div>
               <br />
               <br />
               <br />

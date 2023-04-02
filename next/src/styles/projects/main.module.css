@@ -10,16 +10,6 @@
   margin-right: 2.5rem;
 }
 
-.project_wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  max-width: 65rem;
-
-  gap: 0.5rem;
-}
-
 .project_wrapper > .project {
   width: 20rem;
   height: 15rem;

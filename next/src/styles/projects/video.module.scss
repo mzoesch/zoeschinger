@@ -1,14 +1,8 @@
 @use '@s/globals.module.scss' as g;
-@use './main.module.css';
+@use './video.module.css';
 
 @media all and (min-width: g.$mobile) {
-  .sidebar {
-    display: none;
-  }
 }
 
 @media all and (min-width: g.$sm) {
-  .sidebar {
-    display: flex;
-  }
 }

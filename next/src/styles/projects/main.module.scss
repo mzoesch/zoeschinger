@@ -1,2 +1,33 @@
 @use '@s/globals.module.scss' as g;
 @use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .project_wrapper {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 0.5rem;
+
+    z-index: 0;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .project_wrapper {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    max-width: 65rem;
+
+    gap: 0.5rem;
+  }
+}
