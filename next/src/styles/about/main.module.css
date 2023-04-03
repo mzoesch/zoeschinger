@@ -1,36 +1,62 @@
-.stuff {
+.main {
   display: flex;
   flex-direction: column;
 
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+
   width: 100vw;
-  height: 100vh;
 
   justify-content: center;
   text-align: center;
   align-items: center;
 }
-.stuff1 {
+
+.wrapper {
+  max-width: 75rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-
-  font-size: 4rem;
-  font-weight: bolder;
-
-  color: rgb(var(--primary-negativ) / 100%);
-
-  margin-bottom: 2rem;
 }
 
-.stuff2 {
+.tools {
   display: flex;
-  margin-top: 2rem;
+  flex-direction: column;
+  align-items: center;
 
+  width: calc(100% - 4rem);
+}
+
+.tools_list {
+  /* background-color: red; */
+
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 1rem;
+  max-width: 65rem;
+}
+
+.tools_list > div {
+  width: 10rem;
+  height: 3rem;
+
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  font-size: 4rem;
-  font-weight: bolder;
+  border-radius: var(--border-rounded-lg);
+  background-color: rgb(var(--project-card) / 100%);
+}
 
+.tool_icon {
+  height: calc(100% - 1.5rem);
+  width: auto;
+
+  fill: rgb(var(--primary-negativ) / 100%);
   color: rgb(var(--primary-negativ) / 100%);
+
+  margin-right: 0.5rem;
 }

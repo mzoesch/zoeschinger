@@ -20,6 +20,8 @@ import {
 import { useState, useEffect, useRef } from 'react';
 import { HiOutlineBars3BottomLeft, HiXMark } from 'react-icons/hi2';
 
+import Link from 'next/link';
+
 function DisplayCurrentToLink() {
   let p: string = '';
   if ((window.location.pathname.match(/\//g) || []).length > 1)
@@ -93,7 +95,11 @@ const LinksMobile = () => {
               onClick={handleToggle}
             />
           )}
-          {open ? <NavbarImage props={styles.mobile_navbar_img} /> : null}
+          {open ? (
+            <Link href='/'>
+              <NavbarImage props={styles.mobile_navbar_img} />
+            </Link>
+          ) : null}
         </div>
         {open ? (
           <div className={styles.mobile_dropdown}>
