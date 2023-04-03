@@ -19,8 +19,9 @@ const Page = () => {
   );
 };
 
-Page.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
-};
+// TODO: Create different layout
+// Page.getLayout = function getLayout(page) {
+//   return <Layout>{page}</Layout>;
+// };
 
 export default Page;
