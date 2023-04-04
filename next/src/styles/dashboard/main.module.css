@@ -4,24 +4,87 @@
   }
 
   to {
-    background-position: -200% center;
+    background-position: -400% center;
   }
 }
 
+.front_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 700;
+  text-align: center;
+
+  transition: all;
+  transition-duration: 1300ms;
+}
+
+.very_intense_fancy_text {
+  color: rgb(236 64 122 / 100%);
+}
+
+.back_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: calc(100vw - 20rem);
+  max-width: 75rem;
+
+  color: white;
+  font-weight: 700;
+  text-align: center;
+
+  padding: 2rem;
+  background-color: rgb(128 128 128 / 50%);
+  border-radius: var(--border-rounded-3xl);
+
+  transition: all;
+  transition-duration: 1300ms;
+}
+
+.back_navbar {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: 100vw;
+
+  transition: all;
+  transition-duration: 1300ms;
+}
+
+.back_footer {
+  position: absolute;
+
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+
+  transition: all;
+  transition-duration: 1300ms;
+}
+
 .main {
-  animation: background-pan 10s linear infinite;
+  animation: background-pan var(--time) linear infinite;
 
   background: linear-gradient(
     to right,
+    rgb(4, 0, 234),
     rgb(98 0 234 / 100%),
+    rgb(255, 0, 225),
     rgb(236 64 122/ 100%),
-    rgb(98 0 234 / 100%)
+    rgb(255, 0, 225),
+    rgb(98 0 234 / 100%),
+    rgb(4, 0, 234)
   );
 
-  background-size: 200%;
+  background-size: 400%;
   height: 100vh;
   overflow: hidden;
-  margin: 0px;
 }
 
 .tiles {
@@ -41,7 +104,7 @@
 }
 
 .tile:hover::before {
-  background-color: rgb(19 19 19 / 100%);
+  background-color: rgb(22 22 22 / 100%);
 }
 
 .tile::before {
