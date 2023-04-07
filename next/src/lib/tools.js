@@ -23,7 +23,7 @@ class Tools {
 //
 // Git GitHub GitLab
 //
-// Python3 FastAPI
+// Python3 FastAPI NLTK
 //
 // C++ Unreal Engine
 // Unity
@@ -42,6 +42,7 @@ export const tools = [
   new Tools('Java', 'JavaIcon'),
   new Tools('JavaScript', 'JavaScriptIcon'),
   new Tools('NextJS', 'NextJSIcon'),
+  new Tools('NLTK', 'Python3Icon'),
   new Tools('Python3', 'Python3Icon'),
   new Tools('React', 'ReactIcon'),
   new Tools('Sass', 'SassIcon'),
