@@ -6,7 +6,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Error: 404</title>
+        <title>404 - Zoeschinger</title>
         <meta name='description' content='zoeschinger 404 Page' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />

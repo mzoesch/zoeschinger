@@ -1,2 +1,69 @@
 @use '@s/globals.module.scss' as g;
 @use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .copyright {
+    text-align: center;
+    bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .main {
+    height: 7rem;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0rem;
+    justify-content: center;
+    align-items: center;
+
+    top: 1rem;
+  }
+  .link_section {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .link {
+    color: rgb(70 126 236 / 100%);
+    text-decoration: none;
+  }
+}
+
+// @media all and (min-width: g.$sm) {
+// }
+
+@media all and (min-width: g.$lg) {
+  .links {
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: flex-end;
+
+    top: auto;
+  }
+
+  .main {
+    height: 4rem;
+  }
+
+  .link_section {
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .copyright {
+    bottom: auto;
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .link {
+    color: rgb(var(--primary-negativ) / 100%);
+    text-decoration: none;
+
+    line-height: var(--text-xs-line-height);
+    font-size: var(--text-xs-font-size);
+  }
+}

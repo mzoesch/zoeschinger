@@ -1,19 +1,19 @@
 import Head from 'next/head';
-import Layout from '@c/layouts/projectsLayout';
-import SAlgo from '@c/Projects/SAlgo';
+import Layout from '@c/layouts/stdLayout';
+import Disclaimer from '@c/Disclaimer';
 
 const Page = () => {
   return (
     <>
       <>
         <Head>
-          <title>SAlgo - Zoeschinger</title>
-          <meta name='description' content='Projects of Magnus Zoeschinger' />
+          <title>About - Zoeschinger</title>
+          <meta name='description' content='About page of Magnus Zoeschinger' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <SAlgo />
+        <Disclaimer />
       </>
     </>
   );

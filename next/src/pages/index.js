@@ -5,7 +5,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>zoeschinger</title>
+        <title>Zoeschinger</title>
         <meta
           name='description'
           content='Information about Magnus Zoeschinger'

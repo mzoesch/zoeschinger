@@ -5,12 +5,36 @@
   width: 100vw;
   height: 4rem;
 
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
   bottom: 0rem;
 
   align-items: center;
   justify-content: center;
 
   color: rgb(var(--primary-negativ) / 100%);
-
   background-color: rgb(var(--primary-off) / 50%);
+}
+
+.copyright {
+  position: absolute;
+}
+
+.links {
+  position: absolute;
+  width: calc(100% - 4rem);
+  max-width: 75rem;
+
+  display: flex;
+}
+
+.link_section {
+  display: flex;
+  align-items: flex-start;
+}
+
+.link_section > * {
+  margin-left: auto;
+  white-space: nowrap;
 }

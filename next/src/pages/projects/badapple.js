@@ -7,7 +7,7 @@ const Page = () => {
     <>
       <>
         <Head>
-          <title>zoeschingers projects</title>
+          <title>BadApple - Zoeschinger</title>
           <meta name='description' content='Projects of Magnus Zoeschinger' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <link rel='icon' href='/favicon.ico' />

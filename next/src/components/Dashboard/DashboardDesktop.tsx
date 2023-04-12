@@ -9,6 +9,8 @@ import Footer from '@c/Footer';
 
 import { Dancing_Script } from 'next/font/google';
 
+import Content, { IProps } from './Content';
+
 const dancingScript = Dancing_Script({ subsets: ['latin'] });
 
 class Effect {
@@ -102,6 +104,12 @@ const Dashboard = () => {
           tile.classList.add(effect.CLASS_LIST_ELEMENT_TILE);
           tile.style.opacity = effect.toggled ? '0' : '1';
 
+          // Debugging only
+          // const debugTile = document.createElement('div');
+          // debugTile.innerText = index.toString();
+          // debugTile.className = styles.debug_tile;
+          // tile.appendChild(debugTile);
+
           tile.addEventListener('click', () => handleOnClick(index));
 
           return tile;
@@ -112,7 +120,11 @@ const Dashboard = () => {
         });
       };
 
-      effect.tileSize = document.body?.clientWidth > 800 ? 50 : 25;
+      while (tiles.current?.firstChild) {
+        tiles.current.removeChild(tiles.current.firstChild);
+      }
+
+      effect.tileSize = document.body?.clientWidth > 800 ? 50 : 50;
 
       effect.columns = Math.floor(document.body?.clientWidth / effect.tileSize);
       effect.rows = Math.floor(document.body?.clientHeight / effect.tileSize);
@@ -173,10 +185,7 @@ const Dashboard = () => {
               }
         }
       >
-        <h1>Dashboard</h1>
-        <div style={{ color: 'white' }}>
-          <div className={text_styles.paragraph}>content tbd</div>
-        </div>
+        <Content desktop={true} />
       </div>
       <div
         className={styles.back_navbar}
