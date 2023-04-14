@@ -16,7 +16,7 @@ Just a simple website with NextJS where you can view some projects that I made ð
 
 - Tested with Ubuntu 20.04 (but any half way new Debian version should also work)
 - Python3.7 or newer
-- Domain name with advanced DNS, A Record to server IP-Address
+- Domain name with advanced DNS, ARecord to server IP-Address
 - Sudo access via ssh
 - (opt) git
 
