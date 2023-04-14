@@ -1,2 +1,14 @@
 @use '@s/globals.module.scss' as g;
 @use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .main {
+    margin-top: 1rem;
+  }
+}
+
+@media all and (min-width: g.$lg) {
+  .main {
+    margin-top: 3rem;
+  }
+}
