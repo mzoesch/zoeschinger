@@ -3,7 +3,6 @@
   flex-direction: column;
 
   margin-top: 5rem;
-  margin-bottom: 7rem;
 
   width: 100vw;
 
@@ -32,9 +31,7 @@
   flex-direction: column;
   align-items: center;
 
-  width: calc(100% - 4rem);
-
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
 .tools_list {
@@ -43,12 +40,10 @@
 
   justify-content: center;
 
-  gap: 1rem;
   max-width: 65rem;
 }
 
 .tools_list > div {
-  width: 10rem;
   height: 3rem;
 
   display: flex;
@@ -118,4 +113,8 @@
 .about_title {
   text-decoration: underline;
   text-decoration-color: rgb(var(--primary-negativ) / 100%);
+}
+
+.tool_title {
+  font-size: 10rem;
 }

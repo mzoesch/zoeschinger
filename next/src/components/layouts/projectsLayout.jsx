@@ -1,7 +1,8 @@
+import styles from '@s/wrapper.module.scss';
+
 import Navbar from '@c/Navbar';
 import Sidebar from '@c/Sidebar';
 import Footer from '@c/Footer';
-import styles from '@s/wrapper.module.css';
 
 function Layout({ children }) {
   return (

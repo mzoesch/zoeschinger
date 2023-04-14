@@ -2,6 +2,10 @@
 @use './main.module.css';
 
 @media all and (min-width: g.$mobile) {
+  .main {
+    margin-bottom: 10rem;
+  }
+
   .about_wrapper {
     display: flex;
     flex-direction: column;
@@ -45,15 +49,53 @@
   }
 
   .side_text_wrapper {
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
 
   .about_title {
+    margin-top: 0rem;
     text-align: center;
+  }
+
+  .tools {
+    width: 100%;
+    margin-top: 0rem;
+  }
+
+  .tools_list {
+    gap: 0.25rem;
+  }
+
+  .tools_list > div {
+    width: 8rem;
+  }
+
+  .tool_title {
+    font-size: var(--text-xs-font-size);
+    line-height: var(--text-xs-line-height);
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .tools_list > div {
+    width: 10rem;
+  }
+
+  .tools {
+    width: calc(100% - 4rem);
+    margin-top: 4rem;
+  }
+
+  .tools_list {
+    gap: 1rem;
   }
 }
 
 @media all and (min-width: g.$lg) {
+  .main {
+    margin-bottom: 5rem;
+  }
+
   .about_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -1,0 +1,16 @@
+@use '@s/globals.module.scss' as g;
+@use './wrapper.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .footer_wrapper {
+    /* Navbar height */
+    height: 8rem;
+  }
+}
+
+@media all and (min-width: g.$lg) {
+  .footer_wrapper {
+    /* Navbar height */
+    height: 5rem;
+  }
+}

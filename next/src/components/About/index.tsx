@@ -151,8 +151,7 @@ const About = () => {
                       {tool.icon === 'BlenderIcon' && (
                         <Tools_Blender className={styles.tool_icon} />
                       )}
-
-                      {tool.title}
+                      <div className={styles.tool_title}>{tool.title}</div>
                     </div>
                   );
                 })}
