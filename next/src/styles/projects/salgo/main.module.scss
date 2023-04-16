@@ -1,2 +1,86 @@
 @use '@s/globals.module.scss' as g;
 @use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .visualization_wrapper {
+    line-height: var(--text-xs-line-height);
+    font-size: var(--text-xs-font-size);
+  }
+
+  .visualization {
+    display: flex;
+    flex-direction: column-reverse;
+
+    gap: 3rem;
+    column-gap: 0rem;
+  }
+
+  .toggle_advanced_options_nav {
+    display: none;
+  }
+
+  .visualization_nav_bot {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .visualization_nav_top_primary_btn {
+    display: none;
+  }
+
+  .size_slider {
+    display: none;
+  }
+
+  .visualization_view_nav {
+    line-height: var(--text-xs-line-height);
+    font-size: var(--text-xs-font-size);
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .visualization_wrapper {
+    line-height: var(--text-md-line-height);
+    font-size: var(--text-md-font-size);
+  }
+
+  .visualization_nav_bot {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .visualization_nav_top_primary_btn {
+    display: none;
+  }
+
+  .size_slider {
+    display: block;
+  }
+
+  .visualization_view_nav {
+    line-height: var(--text-sm-line-height);
+    font-size: var(--text-sm-font-size);
+  }
+}
+
+@media all and (min-width: g.$lg) {
+  .visualization {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 0rem;
+    column-gap: 1rem;
+  }
+
+  .toggle_advanced_options_nav {
+    display: block;
+  }
+
+  .visualization_nav_bot {
+    display: none;
+  }
+
+  .visualization_nav_top_primary_btn {
+    display: block;
+  }
+}

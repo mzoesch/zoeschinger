@@ -6,6 +6,7 @@ import { SAlgo as Model } from '@m/SAlgo';
 
 const DEFAULT_ARRAY_SIZE = 64;
 const DEFAULT_DELAY = 100;
+const DELAY_FOR_THINGS_AFTER_VIEWPORT_SIZE_CHANGE = 100;
 
 // Following the norm of ~view.dio
 const WRITE_TO_MAIN_ARRAY = 'write_main_arr';
@@ -63,7 +64,7 @@ class SortingAlgorithm {
   #MAX_FREQUENCY = 1000;
   #MIN_FREQUENCY = 100;
 
-  soundEnabled = true;
+  soundEnabled = false;
   animateShuffle = true;
   animateSorting = true;
   animateReplication = false;
@@ -263,3 +264,8 @@ export { ArrayIndex };
 export { ReturnOfReplicateStep };
 export { ReturnOfReplicateShuffleStep };
 export { DEFAULT_ARRAY_SIZE };
+export { DELAY_FOR_THINGS_AFTER_VIEWPORT_SIZE_CHANGE };
+export { WRITE_TO_MAIN_ARRAY };
+export { WRITE_TO_AUXILIARY_ARRAY };
+export { ARRAY_SWAP };
+export { COMPARISON };
