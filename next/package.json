@@ -23,7 +23,7 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.5.1",
+    "@svgr/webpack": "^7.0.0",
     "sass": "^1.60.0"
   }
 }
