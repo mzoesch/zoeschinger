@@ -6,6 +6,7 @@ import basic_layout_styles from '@s/projects/basic_layout.module.scss';
 import { TbLayoutNavbar } from 'react-icons/tb';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { RxQuestionMarkCircled } from 'react-icons/rx';
 
 import { Projects_SAlgo_SSD } from '@c/svg';
 
@@ -109,6 +110,22 @@ const SAlgo = () => {
     return;
   };
 
+  const delaySlider = useRef<HTMLInputElement>(null);
+  const handleDelaySlider = () => {
+    sa.delay = Number(delaySlider.current?.value) ?? 0;
+    handleUpdateDOM();
+
+    return;
+  };
+
+  const delayTextField = useRef<HTMLInputElement>(null);
+  const handleDelayTextField = () => {
+    sa.delay = Number(delayTextField.current?.value) ?? 0;
+    handleUpdateDOM();
+
+    return;
+  };
+
   // endregion
 
   const [subnavCollapsed, setSubnavCollapsed] = useState(true);
@@ -179,9 +196,9 @@ const SAlgo = () => {
     await sa.execute();
 
     for (let i = 0; i < sa.sortingSteps.length; i++) {
-      if (sa.animateSorting === false) continue;
-
       const stepInfo: ReturnOfReplicateStep = sa.replicateStep(i);
+
+      if (sa.animateSorting === false) continue;
 
       if (stepInfo.typeOfChange === WRITE_TO_MAIN_ARRAY) {
         if (
@@ -420,10 +437,14 @@ const SAlgo = () => {
                   marginBottom: '0rem',
                 }}
               >
-                4. (opt) In the {/* Decollapse the drop down menu */}
+                4. (opt) In the{' '}
                 <span
+                  onClick={() => {
+                    handleCollapseSubnav();
+                  }}
                   style={{
                     textDecoration: 'underline',
+                    cursor: 'pointer',
                   }}
                   className={text_styles.link}
                 >
@@ -483,7 +504,7 @@ const SAlgo = () => {
                           }
                           onChange={handleArraySizeSlider}
                           value={`${sa.size}`}
-                          className={styles.size_slider}
+                          className={styles.slider}
                           disabled={
                             sa.currentlyShuffling
                               ? true
@@ -685,7 +706,154 @@ const SAlgo = () => {
                       }
                 }
               >
-                Some Navbar
+                <h2 className={styles.visualization_sub_nav_header}>General</h2>
+                <div className={styles.visualization_sub_nav_item}>
+                  <div>
+                    <input
+                      type='checkbox'
+                      checked={sa.soundEnabled}
+                      value='Should the shuffling or sorting sound be played when animating?'
+                      onChange={() => {
+                        sa.soundEnabled = !sa.soundEnabled;
+                        handleUpdateDOM();
+                        return;
+                      }}
+                    />
+                    <div
+                      style={{
+                        marginLeft: '0.5rem',
+                      }}
+                    >
+                      Enable sounds (WiP)
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      type='checkbox'
+                      checked={sa.animateShuffle}
+                      value='Should the shuffle animation be played?'
+                      onChange={() => {
+                        sa.animateShuffle = !sa.animateShuffle;
+                        handleUpdateDOM();
+                        return;
+                      }}
+                    />
+                    <div style={{ marginLeft: '0.5rem' }}>Animate shuffle</div>
+                  </div>
+                  <div>
+                    <input
+                      type='checkbox'
+                      checked={sa.animateSorting}
+                      value='Should the sorting animation be played?'
+                      onChange={() => {
+                        sa.animateSorting = !sa.animateSorting;
+                        handleUpdateDOM();
+
+                        if (sa.animateSorting == false)
+                          alert('Weird choice, but okay. 🤔');
+                      }}
+                    />
+                    <div style={{ marginLeft: '0.5rem' }}>Animate sorting</div>
+                  </div>
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type='checkbox'
+                      checked={sa.animateReplication}
+                      value='Should replicated steps be animated?'
+                      onChange={() => {
+                        sa.animateReplication = !sa.animateReplication;
+                        handleUpdateDOM();
+                      }}
+                    />
+                    <div style={{ marginLeft: '0.5rem' }}>
+                      Animate replicated steps <RxQuestionMarkCircled />
+                    </div>
+                    <div className={styles.tooltip}>
+                      <div className={text_styles.paragraph}>
+                        Some algorithms have steps which are writing a value to
+                        an index multiple times.
+                      </div>
+                      <div className={text_styles.paragraph}>
+                        This can happen if the array is using an auxiliary
+                        array, or if the algorithm is using a recursive
+                        approach.
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      type='checkbox'
+                      checked={sa.animateComparison}
+                      value='Should the comparison animation be played?'
+                      onChange={() => {
+                        sa.animateComparison = !sa.animateComparison;
+                        handleUpdateDOM();
+                      }}
+                    />
+                    <div style={{ marginLeft: '0.5rem' }}>
+                      Animate comparisons
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      type='range'
+                      min='1'
+                      max='2000'
+                      ref={delaySlider as React.RefObject<HTMLInputElement>}
+                      onChange={handleDelaySlider}
+                      className={styles.slider}
+                      value={`${sa.delay}`}
+                    />
+                    <input
+                      type='text'
+                      ref={delayTextField as React.RefObject<HTMLInputElement>}
+                      onChange={handleDelayTextField}
+                      value={`${sa.delay}`}
+                      placeholder='delay'
+                      style={{
+                        width: '2rem',
+                        textAlign: 'right',
+                        marginLeft: '0.5rem',
+                        marginRight: '0.5rem',
+                      }}
+                    />
+                    <div>Delay in ms.</div>
+                  </div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <h2 className={styles.visualization_sub_nav_header}>Other</h2>
+                <div className={styles.visualization_sub_nav_item}>
+                  <div
+                    className={btn_styles.secondary}
+                    onClick={handleAlgViewBoundaries}
+                    style={{
+                      margin: '0rem',
+                      width: 'calc(100% - 1rem)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    Array to Viewport
+                  </div>
+                  <div
+                    className={btn_styles.danger_outline}
+                    onClick={() => {
+                      window.location.reload();
+                    }}
+                    style={{
+                      margin: '0rem',
+                      width: 'calc(100% - 1rem)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    Reset
+                  </div>
+                </div>
+                <div className={styles.visualization_sub_nav_item}></div>
               </div>
               <div className={styles.visualization}>
                 <div
