@@ -6,10 +6,21 @@ import Preview from '@p/projectsTxtToGit.png';
 import Demo1 from '@p/projectsTxtToGitDemo1.png';
 import Demo2 from '@p/projectsTxtToGitDemo2.png';
 
+import useImgPref from '@h/useImgPref';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { useRef, useEffect, useState } from 'react';
+
 const TxtToGit = () => {
+  const clickableImg1 = useRef<HTMLDivElement>(null);
+  const clickableImg2 = useRef<HTMLDivElement>(null);
+  const clickableImg3 = useRef<HTMLDivElement>(null);
+  useImgPref(clickableImg1);
+  useImgPref(clickableImg2);
+  useImgPref(clickableImg3);
+
   return (
     <>
       <div className={basic_layout_styles.wrapper}>
@@ -151,8 +162,9 @@ const TxtToGit = () => {
               <br />
               <Image
                 src={Preview}
-                alt='Preview of the project'
+                alt='Preview of the projects demo command from above.'
                 style={{ width: '100%', height: '100%' }}
+                ref={clickableImg1 as React.RefObject<HTMLImageElement>}
               />
             </div>
 
@@ -162,6 +174,7 @@ const TxtToGit = () => {
                 src={Demo1}
                 alt='Preview of the project'
                 style={{ width: '100%', height: '100%' }}
+                ref={clickableImg2 as React.RefObject<HTMLImageElement>}
               />
               <div
                 style={{
@@ -178,6 +191,7 @@ const TxtToGit = () => {
                 src={Demo2}
                 alt='Preview of the project'
                 style={{ width: '100%', height: '100%', marginBottom: '5rem' }}
+                ref={clickableImg3 as React.RefObject<HTMLImageElement>}
               />
             </div>
           </div>
