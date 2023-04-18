@@ -1,3 +1,6 @@
+// Just for reference, this is the old version of the page
+// NEVER use this file, it can be deleted at any time
+
 import styles from '@s/projects/salgo/main.module.scss';
 import btn_styles from '@s/buttons/main.module.scss';
 import { Projects_SAlgo_SSD } from '@c/svg';
