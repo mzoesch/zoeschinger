@@ -345,7 +345,7 @@ const SAlgo = () => {
             </div>
             <div className={text_styles.paragraph}>
               See the{' '}
-              <Link href={'#TechnicalDetails'} className={text_styles.link}>
+              <Link href={'#technical-details'} className={text_styles.link}>
                 technical details
               </Link>{' '}
               for more information on how this page was created.
@@ -591,7 +591,7 @@ const SAlgo = () => {
                             style={{ marginRight: '0.5rem' }}
                             className={btn_styles.loading}
                           />
-                          Shuffling
+                          Sorting
                         </div>
                       ) : sa.currentlyShuffling ? (
                         <div className={btn_styles.secondary}>Sort</div>
@@ -987,6 +987,17 @@ const SAlgo = () => {
                               {currentSelectedAlgorithm.worstComplexity}
                             </div>
                           </div>
+                          <h2 className={styles.subtitle}>Other</h2>
+                          <div>
+                            <div
+                              className={styles.visualization_complexity_table}
+                            >
+                              <div>Memory</div>
+                              <div>{currentSelectedAlgorithm.memory}</div>
+                              <div>Stable</div>
+                              <div>{`${currentSelectedAlgorithm.stable}`}</div>
+                            </div>
+                          </div>
                         </div>
                       </>
                     )}
@@ -996,7 +1007,9 @@ const SAlgo = () => {
             </div>
           </div>
           <div className={text_styles.text}>
-            <h1 className={text_styles.subtitle}>Technical Details</h1>
+            <h1 id='technical-details' className={text_styles.subtitle}>
+              Technical Details
+            </h1>
             <div className={text_styles.paragraph}>
               The visualization is built with HTML divs. The height of each div
               is determined by the value of the element in the array. When you
