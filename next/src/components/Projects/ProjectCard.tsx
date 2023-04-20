@@ -10,6 +10,7 @@ import {
   SortIcon,
   ShuttleIcon,
   BadAppleIcon,
+  SnakeAIIcon,
 } from '@c/svg';
 
 import { Raleway, Josefin_Sans } from 'next/font/google';
@@ -45,6 +46,7 @@ const ProjectCard = ({
           {icon === 'BadAppleIcon' && (
             <BadAppleIcon className={styles.top_img} />
           )}
+          {icon === 'SnakeAIIcon' && <SnakeAIIcon className={styles.top_img} />}
         </div>
         <div className={styles.bottom}>
           <div className={styles.title} style={josefinSans.style}>

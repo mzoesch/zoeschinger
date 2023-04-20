@@ -49,6 +49,7 @@ export const projects = [
     '/projects/salgo',
     'SortIcon'
   ),
+  new Project('Snake AI', '', '-1', '-1', '/projects/snakeai', 'SnakeAIIcon'),
   new Project(
     'Zoeschinger',
     'Website for my projects and stuff. So you can run them in the web.',

@@ -139,6 +139,12 @@ class SnakeAIDemo_NoAI {
   private _snakeGridContainer!: HTMLDivElement;
   private _setRunSnake: (runSnake: boolean) => void;
 
+  private _setScore: (score: number) => void;
+
+  private _timeAlive: number;
+  private _timer: NodeJS.Timeout | null;
+  private _handleTimeAliveUpdate: (timeAlive: number) => void;
+
   private _wantToDirection: number;
   private _direction: number;
   private _length: number;
@@ -149,7 +155,13 @@ class SnakeAIDemo_NoAI {
 
   private _head!: Tile;
 
-  constructor(setRunSnake: (runSnake: boolean) => void) {
+  private _score: number;
+
+  constructor(
+    setRunSnake: (runSnake: boolean) => void,
+    setScore: (score: number) => void,
+    handleTimeAliveUpdate: (timeAlive: number) => void
+  ) {
     this._tileSize = SnakeAIDemo_NoAI.TILE_SIZE;
 
     this._tiles = [];
@@ -160,9 +172,17 @@ class SnakeAIDemo_NoAI {
     this._direction = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._length = SnakeAIDemo_NoAI.DEFAULT_LENGTH;
 
+    this._score = 0;
+
     this._body = [];
 
     this._setRunSnake = setRunSnake;
+    this._setScore = setScore;
+
+    this._timeAlive = 0;
+    this._timer = null;
+    this._handleTimeAliveUpdate = handleTimeAliveUpdate;
+
     if (typeof window !== undefined) return;
     this._snakeGridContainer = window.document.createElement('div');
 
@@ -209,7 +229,6 @@ class SnakeAIDemo_NoAI {
     const createTile = (index: number): HTMLDivElement => {
       const tile = window.document.createElement('div');
       tile.className = styles.snakeGridTile;
-      tile.innerHTML = `${index}`;
 
       tile.style.setProperty(Tile.TILE_COLOR_VAR, Tile.STD_COLOR);
 
@@ -258,7 +277,6 @@ class SnakeAIDemo_NoAI {
         this._head.index
       ] as HTMLDivElement) ?? new HTMLDivElement();
 
-    div.innerHTML = 'H';
     div.style.setProperty(Tile.TILE_COLOR_VAR, Tile.COLOR_HEAD);
 
     return;
@@ -278,6 +296,12 @@ class SnakeAIDemo_NoAI {
     this.colorHead();
 
     this.spawnFood();
+
+    this._timer = setInterval(() => {
+      this._timeAlive += 1;
+      this._handleTimeAliveUpdate(this._timeAlive);
+    }, 1000);
+
     return;
   }
 
@@ -289,8 +313,14 @@ class SnakeAIDemo_NoAI {
     return this._rows;
   }
 
+  public get score(): number {
+    return this._score;
+  }
+
   private gameOver(): void {
     this._setRunSnake(false);
+
+    if (this._timer) clearInterval(this._timer);
 
     return;
   }
@@ -305,7 +335,6 @@ class SnakeAIDemo_NoAI {
             this._toClear.index
           ] as HTMLDivElement) ?? new HTMLDivElement();
 
-        div.innerHTML = `${this._toClear.index}`;
         div.style.setProperty(Tile.TILE_COLOR_VAR, Tile.STD_COLOR);
 
         return;
@@ -318,7 +347,6 @@ class SnakeAIDemo_NoAI {
               tile.index
             ] as HTMLDivElement) ?? new HTMLDivElement();
 
-          div.innerHTML = 'B';
           div.style.setProperty(Tile.TILE_COLOR_VAR, Tile.COLOR_BODY);
         });
 
@@ -375,6 +403,10 @@ class SnakeAIDemo_NoAI {
 
       if (isOnFood()) {
         this._length++;
+
+        this._score++;
+        this._setScore(this._score);
+
         this.spawnFood();
       }
 
@@ -467,6 +499,11 @@ class SnakeAIDemo_NoAI {
     this._wantToDirection = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._setRunSnake(false);
 
+    this._score = 0;
+    this._setScore(0);
+    this._timeAlive = 0;
+    this._handleTimeAliveUpdate(0);
+
     return;
   }
 
@@ -490,7 +527,6 @@ class SnakeAIDemo_NoAI {
       (this._snakeGridContainer.childNodes[food.index] as HTMLDivElement) ??
       new HTMLDivElement();
 
-    div.innerHTML = 'F';
     div.style.setProperty(Tile.TILE_COLOR_VAR, Tile.COLOR_FOOD);
 
     this._food = food;
