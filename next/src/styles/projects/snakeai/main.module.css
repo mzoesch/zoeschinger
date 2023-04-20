@@ -1,17 +1,41 @@
+.demo {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-color: rgb(var(--primary-off) / 100%);
+
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  width: 100%;
+  height: 40rem;
+}
+
+.btn_area {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .snakeGridContainer {
   position: relative;
 
+  width: calc(100% - 2rem);
   height: 100%;
-  width: 100%;
+
+  background-color: rgb(0, 0, 0);
 
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
-
-  background-color: black;
+  gap: 1px;
 }
 
 .snakeGridTile {
   position: relative;
-  background-color: red;
+
+  background-color: var(--snake-grid-tile-color);
 }

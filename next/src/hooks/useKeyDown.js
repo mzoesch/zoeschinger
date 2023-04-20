@@ -7,7 +7,9 @@ const useKeyDown = (handler, deps = []) => {
     return () => {
       document.removeEventListener('keydown', handler);
     };
-  }, [deps, handler]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 };
 
-export { useKeyDown };
+export default useKeyDown;
