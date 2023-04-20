@@ -27,3 +27,4 @@ export { default as Tools_TypeScript } from '@p/svg/ToolsTypeScript.svg';
 export { default as Tools_UnrealEngine } from '@p/svg/ToolsUnrealEngine.svg';
 export { default as Tools_Unity } from '@p/svg/ToolsUnity.svg';
 export { default as Tools_Blender } from '@p/svg/ToolsBlender.svg';
+export { default as SnakeAIIcon } from '@p/svg/SnakeAIIcon.svg';

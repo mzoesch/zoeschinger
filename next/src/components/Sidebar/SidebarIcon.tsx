@@ -6,6 +6,7 @@ import {
   SortIcon,
   ShuttleIcon,
   BadAppleIcon,
+  SnakeAIIcon,
 } from '@c/svg';
 
 import Link from 'next/link';
@@ -46,6 +47,11 @@ const SidebarIcon = ({
           {icon === 'BadAppleIcon' && (
             <div className={styles.icon}>
               <BadAppleIcon className={styles.icon_inner} />
+            </div>
+          )}
+          {icon === 'SnakeAIIcon' && (
+            <div className={styles.icon}>
+              <SnakeAIIcon className={styles.icon_inner} />
             </div>
           )}
         </Link>

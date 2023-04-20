@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import Demo from '@c/Projects/SnakeAI/demo';
+import Layout from '@c/layouts/stdLayout';
+import Demo from '@c/Projects/SnakeAI/DemoPlayable';
 
 const Page = () => {
   return (
@@ -17,6 +18,10 @@ const Page = () => {
       <Demo />
     </>
   );
+};
+
+Page.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Page;
