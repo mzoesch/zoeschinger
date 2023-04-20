@@ -8,6 +8,7 @@ const useLocalStorage = (key, initialValue) => {
     } catch (error) {
       /* Will always throw on server side */
       // console.log(error);
+
       return initialValue;
     }
   });
@@ -22,8 +23,10 @@ const useLocalStorage = (key, initialValue) => {
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.log(error);
+      alert(error);
     }
   };
+
   return [storedValue, setValue];
 };
 

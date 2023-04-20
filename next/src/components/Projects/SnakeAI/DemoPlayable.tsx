@@ -4,14 +4,16 @@ import btn_styles from '@s/buttons/main.module.scss';
 
 import { useRef, useState, useEffect } from 'react';
 import { SnakeAIDemo_NoAI } from '@l/projects/snakeAIDemo_NoAI';
-import { Tile as snakeGridTile } from '@l/projects/snakeAIDemo_NoAI';
 
 import useKeyDown from '@h/useKeyDown';
+import useSnakeAIDemo_NoAIStats from '@h/useSnakeAIDemo_NoAIStats';
 
 import { Source_Code_Pro } from 'next/font/google';
 const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
 
 const Demo = () => {
+  const [highscore, setHighscore] = useSnakeAIDemo_NoAIStats(0);
+
   const [updateDOM, setUpdateDOM] = useState(0);
   const handleUpdateDOM = () => {
     if (updateDOM == 1) {
@@ -41,7 +43,12 @@ const Demo = () => {
   };
 
   const [snakeGrid, DO_NOT_USE] = useState<SnakeAIDemo_NoAI>(
-    new SnakeAIDemo_NoAI(setRunSnake, handleScoreUpdate, handleTimeAliveUpdate)
+    new SnakeAIDemo_NoAI(
+      setRunSnake,
+      handleScoreUpdate,
+      handleTimeAliveUpdate,
+      setHighscore
+    )
   );
   const createSnakeGrid = () => {
     snakeGrid.fillGrid({
@@ -199,8 +206,9 @@ const Demo = () => {
               </div>
             </div>
             <div className={styles.btn_area_item}>
-              <div>Score: {`${score}`}</div>
               <div>Time alive: {`${timeAlive}`}s</div>
+              <div>Highscore: {`${highscore}`}</div>
+              <div>Score: {`${score}`}</div>
             </div>
           </div>
           <div ref={snakeGridContainer} className={styles.snakeGridContainer} />

@@ -145,6 +145,8 @@ class SnakeAIDemo_NoAI {
   private _timer: NodeJS.Timeout | null;
   private _handleTimeAliveUpdate: (timeAlive: number) => void;
 
+  private _setHighScore: (highScore: number) => void;
+
   private _wantToDirection: number;
   private _direction: number;
   private _length: number;
@@ -160,7 +162,8 @@ class SnakeAIDemo_NoAI {
   constructor(
     setRunSnake: (runSnake: boolean) => void,
     setScore: (score: number) => void,
-    handleTimeAliveUpdate: (timeAlive: number) => void
+    handleTimeAliveUpdate: (timeAlive: number) => void,
+    setHighScore: (highScore: number) => void
   ) {
     this._tileSize = SnakeAIDemo_NoAI.TILE_SIZE;
 
@@ -178,6 +181,8 @@ class SnakeAIDemo_NoAI {
 
     this._setRunSnake = setRunSnake;
     this._setScore = setScore;
+
+    this._setHighScore = setHighScore;
 
     this._timeAlive = 0;
     this._timer = null;
@@ -321,6 +326,8 @@ class SnakeAIDemo_NoAI {
     this._setRunSnake(false);
 
     if (this._timer) clearInterval(this._timer);
+
+    this._setHighScore(this._score);
 
     return;
   }
@@ -498,6 +505,8 @@ class SnakeAIDemo_NoAI {
     this._direction = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._wantToDirection = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._setRunSnake(false);
+
+    if (this._timer) clearInterval(this._timer);
 
     this._score = 0;
     this._setScore(0);
