@@ -90,17 +90,15 @@ const Demo = () => {
           <h1 className={text_styles.title}>Snake Demo - No AI</h1>
           <div className={text_styles.text}>
             <div className={text_styles.paragraph}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-              dolor error molestias distinctio voluptate velit, quidem sit ex
-              quos atque nostrum harum in tempora itaque veritatis
-              necessitatibus quaerat totam labore?
+              No support for mobile devices.
             </div>
             <div className={text_styles.paragraph}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-              dolor error molestias distinctio voluptate velit, quidem sit ex
-              quos atque nostrum harum in tempora itaque veritatis
-              necessitatibus quaerat totam labore?
+              This is a demo of the snake game. The snake is controlled by the
+              user. The snake will die if it hits the wall or itself (Head (red
+              tile) and tail (green tile)). The snake will grow by 1 tile if it
+              eats an apple (blue tile).
             </div>
+
             <h2>Controls</h2>
             <div className={text_styles.paragraph}>
               -{' '}
@@ -185,14 +183,18 @@ const Demo = () => {
         <div className={styles.demo}>
           <div className={styles.btn_area}>
             <div className={styles.btn_area_item}>
+              {runSnake ? (
+                <div className={btn_styles.secondary}>Recalculate Cells</div>
+              ) : (
+                <div
+                  className={btn_styles.secondary}
+                  onClick={() => createSnakeGrid()}
+                >
+                  <div className={text_styles.text}>Recalculate Cells</div>
+                </div>
+              )}
               <div
-                className={btn_styles.secondary}
-                onClick={() => createSnakeGrid()}
-              >
-                Recalculate Cells
-              </div>
-              <div
-                className={btn_styles.secondary}
+                className={btn_styles.primary}
                 onClick={() => {
                   snakeGrid.reset();
                   createSnakeGrid();
@@ -205,10 +207,12 @@ const Demo = () => {
                 Spawn Snake
               </div>
             </div>
-            <div className={styles.btn_area_item}>
-              <div>Time alive: {`${timeAlive}`}s</div>
-              <div>Highscore: {`${highscore}`}</div>
-              <div>Score: {`${score}`}</div>
+            <div className={text_styles.text}>
+              <div className={styles.btn_area_item}>
+                <div>Time alive: {`${timeAlive}`}s</div>
+                <div>Highscore: {`${highscore}`}</div>
+                <div>Score: {`${score}`}</div>
+              </div>
             </div>
           </div>
           <div ref={snakeGridContainer} className={styles.snakeGridContainer} />
