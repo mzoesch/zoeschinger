@@ -14,6 +14,13 @@ class Tile {
   public static readonly COLOR_TILE_CHECKING: string = '#FFFFFF';
   public static readonly COLOR_TILE_VIABLE: string = '#FFFF00';
 
+  public static readonly COLOR_OUTER_RING: string = '#0000FF';
+  public static readonly COLOR_NOT_GOOD_TILE: string = '#000000';
+  public static readonly COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_TILE: string =
+    '#FFAAFF';
+  public static readonly COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_CHECKED_NEIGHBORS: string =
+    '#AAFFAA';
+
   private _index: number;
   private _element: HTMLDivElement;
   private _columns: number;
@@ -110,6 +117,7 @@ class SnakeAIDemo_HamiltonianCycle {
   private static _waitAfterViableCycle: number = 5;
   private static _waitAfterViableTileCheck: number = 200;
   private static _waitAfterNoViableTileFound: number = 200;
+  private static _waitAfterTwoNeighborsViablyCycle: number = 5;
 
   private static readonly TILE_SIZE: number = 50;
   private _tileSize: number;
@@ -262,9 +270,30 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  private colorTileTest(tile: Tile[]): void {
+  private colorOuterRing(outerRing: Tile[]): void {
+    outerRing.forEach((element) => {
+      element.element.style.setProperty(
+        Tile.TILE_COLOR_VAR,
+        Tile.COLOR_OUTER_RING
+      );
+    });
+
+    return;
+  }
+
+  private colorTileTwoNeighborsFromTile(tile: Tile): void {
+    tile.element.style.setProperty(
+      Tile.TILE_COLOR_VAR,
+      Tile.COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_TILE
+    );
+  }
+
+  private colorTileTwoNeighborsCheckedTiles(tile: Tile[]): void {
     tile.forEach((element) => {
-      element.element.style.setProperty(Tile.TILE_COLOR_VAR, '#000000');
+      element.element.style.setProperty(
+        Tile.TILE_COLOR_VAR,
+        Tile.COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_CHECKED_NEIGHBORS
+      );
     });
 
     return;
@@ -502,9 +531,17 @@ class SnakeAIDemo_HamiltonianCycle {
               };
 
               if ((await checkIfTileIsRelevant(tile)) === false) return true;
-              console.log('tile relevant', tile.index);
-              tile.element.style.setProperty(Tile.TILE_COLOR_VAR, '#000000');
-              await new Promise((resolve) => setTimeout(resolve, 5_000));
+
+              tile.element.style.setProperty(
+                Tile.TILE_COLOR_VAR,
+                Tile.COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_TILE
+              );
+              await new Promise((resolve) =>
+                setTimeout(
+                  resolve,
+                  SnakeAIDemo_HamiltonianCycle._waitAfterTwoNeighborsViablyCycle
+                )
+              );
 
               const theTwoNeighborsToCheck: Tile[] = getValidNeighbors(tile);
               const firstNeighborToCheck: Tile = theTwoNeighborsToCheck[0];
@@ -560,13 +597,15 @@ class SnakeAIDemo_HamiltonianCycle {
 
                   this.clearAllColors();
                   this.colorHamiltonianCycle();
-                  fromNeighbor.element.style.setProperty(
-                    Tile.TILE_COLOR_VAR,
-                    '#FFAAFF'
+                  this.colorTileTwoNeighborsFromTile(fromNeighbor);
+                  this.colorTileTwoNeighborsCheckedTiles(checkedTiles);
+                  this.colorOuterRing(outerRing);
+                  await new Promise((resolve) =>
+                    setTimeout(
+                      resolve,
+                      SnakeAIDemo_HamiltonianCycle._waitAfterTwoNeighborsViablyCycle
+                    )
                   );
-                  this.colorTileTest(checkedTiles);
-                  this.colorTileChecking(outerRing);
-                  await new Promise((resolve) => setTimeout(resolve, 2_000));
 
                   if (outerRing.length === 0) break;
                   continue;
@@ -581,20 +620,22 @@ class SnakeAIDemo_HamiltonianCycle {
                   firstNeighborToCheck
                 );
 
-              console.log(
-                'firstNeighborCanReachHeadOrTail',
-                firstNeighborToCheck.index,
-                firstNeighborCanReachHeadOrTail
-              );
-              console.log(
-                'secondNeighborCanReachHeadOrTail',
-                secondNeighborToCheck.index,
-                secondNeighborCanReachHeadOrTail
-              );
+              if (firstNeighborCanReachHeadOrTail === false) {
+                console.log('Tile invalid', tile.index);
+                console.log(
+                  'firstNeighborCanReachHeadOrTail',
+                  firstNeighborToCheck.index,
+                  firstNeighborCanReachHeadOrTail
+                );
+                console.log(
+                  'secondNeighborCanReachHeadOrTail',
+                  secondNeighborToCheck.index,
+                  secondNeighborCanReachHeadOrTail
+                );
+                await new Promise((resolve) => setTimeout(resolve, 2_000));
 
-              await new Promise((resolve) => setTimeout(resolve, 5_000));
-              if (firstNeighborCanReachHeadOrTail === false) return false;
-              await new Promise((resolve) => setTimeout(resolve, 5_000));
+                return false;
+              }
 
               secondNeighborCanReachHeadOrTail =
                 await checkIfNeighborCanReachHeadOrTail(
@@ -602,24 +643,26 @@ class SnakeAIDemo_HamiltonianCycle {
                   secondNeighborToCheck
                 );
 
-              console.log(
-                'firstNeighborCanReachHeadOrTail',
-                firstNeighborToCheck.index,
-                firstNeighborCanReachHeadOrTail
-              );
-              console.log(
-                'secondNeighborCanReachHeadOrTail',
-                secondNeighborToCheck.index,
-                secondNeighborCanReachHeadOrTail
-              );
+              if (secondNeighborCanReachHeadOrTail === false) {
+                console.log('Tile invalid', tile.index);
+                console.log(
+                  'firstNeighborCanReachHeadOrTail',
+                  firstNeighborToCheck.index,
+                  firstNeighborCanReachHeadOrTail
+                );
+                console.log(
+                  'secondNeighborCanReachHeadOrTail',
+                  secondNeighborToCheck.index,
+                  secondNeighborCanReachHeadOrTail
+                );
+                await new Promise((resolve) => setTimeout(resolve, 2_000));
 
-              await new Promise((resolve) => setTimeout(resolve, 5_000));
-              if (secondNeighborCanReachHeadOrTail === false) return false;
-              await new Promise((resolve) => setTimeout(resolve, 5_000));
+                return false;
+              }
 
               // Is tile valid; false = calculate new hamiltonian cycle
-
               console.log('tile valid', tile.index);
+              // await new Promise((resolve) => setTimeout(resolve, 3_000));
               return true;
             }
 
@@ -646,7 +689,10 @@ class SnakeAIDemo_HamiltonianCycle {
           const isValid: boolean = await validateTile(tile);
 
           if (isValid === false) {
-            tile.element.style.setProperty(Tile.TILE_COLOR_VAR, '#000000');
+            tile.element.style.setProperty(
+              Tile.TILE_COLOR_VAR,
+              Tile.COLOR_NOT_GOOD_TILE
+            );
             await new Promise((resolve) =>
               setTimeout(
                 resolve,
