@@ -3,6 +3,7 @@ import text_styles from '@s/text/main.module.scss';
 import btn_styles from '@s/buttons/main.module.scss';
 
 import { useRef, useState, useEffect } from 'react';
+
 import { SnakeAIDemo_NoAI } from '@l/projects/snakeAIDemo_NoAI';
 
 import useKeyDown from '@h/useKeyDown';
@@ -98,7 +99,6 @@ const Demo = () => {
               tile) and tail (green tile)). The snake will grow by 1 tile if it
               eats an apple (blue tile).
             </div>
-
             <h2>Controls</h2>
             <div className={text_styles.paragraph}>
               -{' '}

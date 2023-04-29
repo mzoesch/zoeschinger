@@ -5,6 +5,8 @@
   margin-bottom: 4rem;
 }
 
+/* region general */
+
 .demo {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -15,26 +17,6 @@
   padding: 1rem;
 
   height: 40rem;
-}
-
-.btn_area {
-  display: flex;
-
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 1rem;
-}
-
-.btn_area_item {
-  display: flex;
-
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  gap: 0.5rem;
 }
 
 .snakeGridContainer {
@@ -55,3 +37,33 @@
 
   background-color: var(--snake-grid-tile-color);
 }
+
+/* endregion general */
+
+/* region snakeai-playable */
+
+.btn_area {
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
+.btn_area_item {
+  display: flex;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 0.5rem;
+  /* background-color: #00ffff; */
+}
+
+/* endregion snakeai-playable */
+
+/* region snakeai-hamiltonian-cycle */
+/* endregion snakeai-hamiltonian-cycle */

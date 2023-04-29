@@ -223,6 +223,8 @@ class SnakeAIDemo_NoAI {
             this._snakeGridContainer.firstChild
           );
         }
+
+        return;
       };
 
       clearLocalTiles();

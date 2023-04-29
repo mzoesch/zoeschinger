@@ -35,48 +35,14 @@ if (isset($_POST['w']) && isset($_POST['h'])) {
     }
 
     for ($i = 0; $i < $grid->getQuantity(); $i++) {
-        echo "<div
-        onHover = 'this.style.backgroundColor = \"black\";'
-        onClick = 'this.style.backgroundColor = \"black\";'
-        ></div>";
+        echo "
+        <div
+            onClick = 'this.style.backgroundColor = \"black\";'
+        >
+        </div>";
     }
 
     ?>
-
-
-    <script type="text/javascript">
-        const HoverListener = {
-            addElem: function(elem, callback, delay) {
-                if (delay === undefined)
-                    delay = 1000;
-
-                let hoverTimer;
-
-                addEvent(elem, 'mouseover', function() {
-                    hoverTimer = setTimeout(callback, delay);
-                });
-
-                addEvent(elem, 'mouseout', function() {
-                    clearTimeout(hoverTimer);
-                });
-            },
-        };
-
-        function addHoverEvent(obj, evt, fn) {
-            if (typeof obj.addEvenListener != 'undefined')
-                obj.addEvenListener(evt, fn, false);
-            else if (typeof obj.attachEvent != 'undefined') {
-                obj.attachEvent('on' + evt, fn);
-            }
-        }
-
-        addHoverEvent(window, 'load', function() {
-            HoverListener.addElem(window.document.getElementById('wrapper'), function() {
-                alert('Hovered!');
-            });
-        })
-    </script>
-
 
 </div>
 

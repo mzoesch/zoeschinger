@@ -63,7 +63,6 @@ const SnakeAI = () => {
                   Check it out{' '}
                   <Link
                     href='/projects/demo/snakeai-playable'
-                    target='_blank'
                     className={text_styles.link}
                   >
                     here
@@ -84,8 +83,20 @@ const SnakeAI = () => {
                   className={text_styles.subtitle}
                   style={{ marginTop: '1rem' }}
                 >
-                  Version 1
+                  Hamiltonian cycle
                 </h4>
+                <div className={text_styles.text}>
+                  <div className={text_styles.paragraph}>
+                    Check it out{' '}
+                    <Link
+                      href='/projects/demo/snakeai-hamiltonian-cycle'
+                      className={text_styles.link}
+                    >
+                      here
+                    </Link>
+                    .
+                  </div>
+                </div>
               </div>
             </div>
           </div>
