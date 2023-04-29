@@ -5,8 +5,6 @@
   margin-bottom: 4rem;
 }
 
-/* region general */
-
 .demo {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -34,13 +32,8 @@
 
 .snakeGridTile {
   position: relative;
-
   background-color: var(--snake-grid-tile-color);
 }
-
-/* endregion general */
-
-/* region snakeai-playable */
 
 .btn_area {
   display: flex;
@@ -60,10 +53,4 @@
   align-items: center;
 
   gap: 0.5rem;
-  /* background-color: #00ffff; */
 }
-
-/* endregion snakeai-playable */
-
-/* region snakeai-hamiltonian-cycle */
-/* endregion snakeai-hamiltonian-cycle */

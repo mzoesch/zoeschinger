@@ -1,4 +1,4 @@
-import styles from '@s/projects/snakeai/main.module.scss';
+import styles from '@s/projects/snakeai/ham.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import btn_styles from '@s/buttons/main.module.scss';
 
@@ -14,6 +14,11 @@ const Demo = () => {
 
   const createSnakeGrid = () => {
     snakeGrid.fillGrid(snakeGridContainer.current ?? null);
+  };
+
+  const [timeSettingsHidden, setTimeSettingsHidden] = useState<boolean>(true);
+  const handleTimeSettingsToggle = () => {
+    setTimeSettingsHidden(!timeSettingsHidden);
   };
 
   useEffect(() => {
@@ -39,43 +44,140 @@ const Demo = () => {
           </div>
         </div>
         <div className={styles.demo}>
-          <div className={styles.btn_area}>
-            <div className={styles.btn_area_item}>
-              <div
-                className={btn_styles.danger_outline}
-                onClick={() => {
-                  snakeGrid.resetTilesWithRecalculation();
-                  return;
-                }}
-              >
-                <div className={text_styles.text}>Recalculate cells</div>
+          <div className={styles.nav_wrap}>
+            <div className={text_styles.text}>
+              <div className={styles.btn_area}>
+                <div className={styles.btn_area_item}>
+                  <div
+                    className={btn_styles.danger_outline}
+                    onClick={() => {
+                      snakeGrid.resetTilesWithRecalculation();
+                    }}
+                  >
+                    Recalculate cells
+                  </div>
+                  <div
+                    className={btn_styles.secondary}
+                    onClick={() => {
+                      snakeGrid.toggleIndices();
+                    }}
+                  >
+                    Toggle indices
+                  </div>
+                </div>
+                <div className={styles.btn_area_item}>
+                  <div className={btn_styles.secondary}>
+                    Toggle hamiltonian cycle
+                  </div>
+                  <div
+                    className={btn_styles.primary}
+                    onClick={() => {
+                      snakeGrid.calculateANewHamiltonianCycle();
+                    }}
+                  >
+                    Calculate an hamiltonian cycle
+                  </div>
+                  <div className={btn_styles.primary}>Spawn Snake</div>
+                </div>
               </div>
-              <div
-                className={btn_styles.danger_outline}
-                onClick={() => {
-                  snakeGrid.devToolWriteIndicesToInnerHTML();
-                  return;
-                }}
-              >
-                <div className={text_styles.text}>Show indices</div>
-              </div>
-              <div
-                className={btn_styles.secondary}
-                onClick={() => {
-                  snakeGrid.toggleHamiltonianCycle();
-                }}
-              >
-                <div className={text_styles.text}>Toggle hamiltonian grid</div>
-              </div>
-              <div className={btn_styles.primary}>Start</div>
             </div>
             <div className={text_styles.text}>
-              <div className={styles.btn_area_item}>
-                <div>Some stats</div>
-                <div>Some other stuff</div>
+              <div className={styles.area_for_showing_time_settings}>
+                <div className={styles.btn_for_showing_time_settings}>
+                  <div
+                    className={btn_styles.green}
+                    onClick={() => {
+                      handleTimeSettingsToggle();
+                      return;
+                    }}
+                  >
+                    {timeSettingsHidden ? 'Show' : 'Hide'} time settings
+                  </div>
+                </div>
+                <div
+                  className={styles.time_settings}
+                  style={{ display: timeSettingsHidden ? 'none' : 'flex' }}
+                >
+                  <div>
+                    <div>Timeout after checking one Neighbor</div>
+                    <div className={styles.time_settings_inputs}>
+                      <div>
+                        <input type='number' style={{ textAlign: 'right' }} />{' '}
+                        ms
+                      </div>
+                      <div>|</div>
+                      <div>
+                        <input type='checkbox' /> animate
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      Timeout after each spread cycle for viable ham if it can
+                      reach all unhamed tiles
+                    </div>
+                    <div className={styles.time_settings_inputs}>
+                      <div>
+                        <input type='number' style={{ textAlign: 'right' }} />{' '}
+                        ms
+                      </div>
+                      <div>|</div>
+                      <div>
+                        <input type='checkbox' /> animate
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      Timeout after checking if all unhamed tiles are not
+                      leading to an unreachable ham cycle for current progressed
+                      ham
+                    </div>
+                    <div className={styles.time_settings_inputs}>
+                      <div>
+                        <input type='number' style={{ textAlign: 'right' }} />{' '}
+                        ms
+                      </div>
+                      <div>|</div>
+                      <div>
+                        <input type='checkbox' /> animate
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>Timeout after a not good tile was found</div>
+                    <div className={styles.time_settings_inputs}>
+                      <div>
+                        <input type='number' style={{ textAlign: 'right' }} />{' '}
+                        ms
+                      </div>
+                      <div>|</div>
+                      <div>
+                        <input type='checkbox' /> animate
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      Timeout after each spread cycle for two neighbors viable
+                      check
+                    </div>
+                    <div className={styles.time_settings_inputs}>
+                      <div>
+                        <input type='number' style={{ textAlign: 'right' }} />{' '}
+                        ms
+                      </div>
+                      <div>|</div>
+                      <div>
+                        <input type='checkbox' /> animate
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <div className={styles.stats}></div>
           <div ref={snakeGridContainer} className={styles.snakeGridContainer} />
         </div>
       </div>

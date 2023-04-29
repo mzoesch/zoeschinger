@@ -1,4 +1,4 @@
-import styles from '@s/projects/snakeai/main.module.scss';
+import styles from '@s/projects/snakeai/ham.module.scss';
 
 class Tile {
   // id : <tile-index>
@@ -60,6 +60,11 @@ class Tile {
     return;
   }
 
+  public clearIndexFromInnerHtml(): void {
+    this._element.innerHTML = '';
+    return;
+  }
+
   public writeIndexToInnerHtml(): void {
     this._element.innerHTML = `${this._index}`;
     return;
@@ -113,13 +118,22 @@ class SnakeAIDemo_HamiltonianCycle {
   private static readonly ALPHA: number = 4;
   private static readonly ALPHA_GOAL: number = 2;
 
-  private static _waitAfterFindingNeighbors: number = 50;
-  private static _waitAfterViableCycle: number = 5;
-  private static _waitAfterViableTileCheck: number = 200;
-  private static _waitAfterNoViableTileFound: number = 200;
-  private static _waitAfterTwoNeighborsViablyCycle: number = 5;
+  private static readonly TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR: number = 100;
+  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_VIABLE_HAM_IF_IT_CAN_REACH_ALL_UNHAMED_TILES: number = 5;
+  private static readonly TIMEOUT_AFTER_CHECKING_IF_ALL_UNHAMED_TILES_ARE_NOT_LEADING_TO_AN_UNREACHABLE_HAM_CYCLE_FOR_CURRENT_PROGRESSED_HAM: number = 200;
+  private static readonly TIMEOUT_AFTER_A_NOT_GOOD_TILE_WAS_FOUND: number = 150;
+  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK: number = 20;
 
+  private _timeoutAfterCheckingOneNeighbor: number;
+  private _timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles: number;
+  private _timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam: number;
+  private _timeoutAfterANotGoodTileWasFound: number;
+  private _timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck: number;
+
+  private static readonly INDICES_ARE_VISIBLE: boolean = false;
   private static readonly TILE_SIZE: number = 50;
+
+  private _indicesAreVisible: boolean;
   private _tileSize: number;
 
   private _columns: number;
@@ -131,6 +145,19 @@ class SnakeAIDemo_HamiltonianCycle {
 
   public constructor(snakeGridContainer: HTMLDivElement | null) {
     this._tileSize = SnakeAIDemo_HamiltonianCycle.TILE_SIZE;
+
+    this._timeoutAfterCheckingOneNeighbor =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR;
+    this._timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_VIABLE_HAM_IF_IT_CAN_REACH_ALL_UNHAMED_TILES;
+    this._timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_CHECKING_IF_ALL_UNHAMED_TILES_ARE_NOT_LEADING_TO_AN_UNREACHABLE_HAM_CYCLE_FOR_CURRENT_PROGRESSED_HAM;
+    this._timeoutAfterANotGoodTileWasFound =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_A_NOT_GOOD_TILE_WAS_FOUND;
+    this._timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK;
+
+    this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
 
     this._columns = 0;
     this._rows = 0;
@@ -299,6 +326,60 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
+  //#region setters and getters
+
+  public get timeoutAfterCheckingOneNeighbor(): number {
+    return this._timeoutAfterCheckingOneNeighbor;
+  }
+
+  public set timeoutAfterCheckingOneNeighbor(value: number) {
+    this._timeoutAfterCheckingOneNeighbor = value;
+  }
+
+  public get timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles(): number {
+    return this
+      ._timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles;
+  }
+
+  public set timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles(
+    value: number
+  ) {
+    this._timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles =
+      value;
+  }
+
+  public get timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam(): number {
+    return this
+      ._timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam;
+  }
+
+  public set timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam(
+    value: number
+  ) {
+    this._timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam =
+      value;
+  }
+
+  public get timeoutAfterANotGoodTileWasFound(): number {
+    return this._timeoutAfterANotGoodTileWasFound;
+  }
+
+  public set timeoutAfterANotGoodTileWasFound(value: number) {
+    this._timeoutAfterANotGoodTileWasFound = value;
+  }
+
+  public get timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck(): number {
+    return this._timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck;
+  }
+
+  public set timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck(
+    value: number
+  ) {
+    this._timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck = value;
+  }
+
+  //#endregion setters and getters
+
   private async calculateAnHamiltonianCycle(): Promise<void> {
     this._hamiltonianCycle = [];
     let uncheckedTiles: number = this._tiles.length;
@@ -398,7 +479,8 @@ class SnakeAIDemo_HamiltonianCycle {
           await new Promise((resolve) =>
             setTimeout(
               resolve,
-              SnakeAIDemo_HamiltonianCycle._waitAfterViableCycle
+              this
+                ._timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles
             )
           );
 
@@ -408,8 +490,7 @@ class SnakeAIDemo_HamiltonianCycle {
           )
             return true;
 
-          if (outerRing.length === 0) return false;
-
+          if (outerRing.length === 0) break;
           continue;
         }
 
@@ -433,7 +514,8 @@ class SnakeAIDemo_HamiltonianCycle {
         await new Promise((resolve) =>
           setTimeout(
             resolve,
-            SnakeAIDemo_HamiltonianCycle._waitAfterViableTileCheck
+            this
+              ._timeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam
           )
         );
 
@@ -539,7 +621,7 @@ class SnakeAIDemo_HamiltonianCycle {
               await new Promise((resolve) =>
                 setTimeout(
                   resolve,
-                  SnakeAIDemo_HamiltonianCycle._waitAfterTwoNeighborsViablyCycle
+                  this._timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck
                 )
               );
 
@@ -603,7 +685,8 @@ class SnakeAIDemo_HamiltonianCycle {
                   await new Promise((resolve) =>
                     setTimeout(
                       resolve,
-                      SnakeAIDemo_HamiltonianCycle._waitAfterTwoNeighborsViablyCycle
+                      this
+                        ._timeoutAfterEachSpreadCycleForTwoNeighborsViablyCheck
                     )
                   );
 
@@ -619,50 +702,16 @@ class SnakeAIDemo_HamiltonianCycle {
                   tile,
                   firstNeighborToCheck
                 );
-
-              if (firstNeighborCanReachHeadOrTail === false) {
-                console.log('Tile invalid', tile.index);
-                console.log(
-                  'firstNeighborCanReachHeadOrTail',
-                  firstNeighborToCheck.index,
-                  firstNeighborCanReachHeadOrTail
-                );
-                console.log(
-                  'secondNeighborCanReachHeadOrTail',
-                  secondNeighborToCheck.index,
-                  secondNeighborCanReachHeadOrTail
-                );
-                await new Promise((resolve) => setTimeout(resolve, 2_000));
-
-                return false;
-              }
+              if (firstNeighborCanReachHeadOrTail === false) return false;
 
               secondNeighborCanReachHeadOrTail =
                 await checkIfNeighborCanReachHeadOrTail(
                   tile,
                   secondNeighborToCheck
                 );
-
-              if (secondNeighborCanReachHeadOrTail === false) {
-                console.log('Tile invalid', tile.index);
-                console.log(
-                  'firstNeighborCanReachHeadOrTail',
-                  firstNeighborToCheck.index,
-                  firstNeighborCanReachHeadOrTail
-                );
-                console.log(
-                  'secondNeighborCanReachHeadOrTail',
-                  secondNeighborToCheck.index,
-                  secondNeighborCanReachHeadOrTail
-                );
-                await new Promise((resolve) => setTimeout(resolve, 2_000));
-
-                return false;
-              }
+              if (secondNeighborCanReachHeadOrTail === false) return false;
 
               // Is tile valid; false = calculate new hamiltonian cycle
-              console.log('tile valid', tile.index);
-              // await new Promise((resolve) => setTimeout(resolve, 3_000));
               return true;
             }
 
@@ -694,10 +743,7 @@ class SnakeAIDemo_HamiltonianCycle {
               Tile.COLOR_NOT_GOOD_TILE
             );
             await new Promise((resolve) =>
-              setTimeout(
-                resolve,
-                SnakeAIDemo_HamiltonianCycle._waitAfterNoViableTileFound
-              )
+              setTimeout(resolve, this._timeoutAfterANotGoodTileWasFound)
             );
 
             return false;
@@ -732,10 +778,6 @@ class SnakeAIDemo_HamiltonianCycle {
         )
           return false;
 
-        console.log('Success!');
-        console.log(this._hamiltonianCycle.length);
-        console.log(this._rows * this._columns);
-
         return true;
       };
 
@@ -758,10 +800,7 @@ class SnakeAIDemo_HamiltonianCycle {
         this.colorNeighbors(validNeighbors);
 
         await new Promise((resolve) =>
-          setTimeout(
-            resolve,
-            SnakeAIDemo_HamiltonianCycle._waitAfterFindingNeighbors
-          )
+          setTimeout(resolve, this._timeoutAfterCheckingOneNeighbor)
         );
 
         const randomIndex: number = getRandomIndexWithRules(validNeighbors);
@@ -794,7 +833,7 @@ class SnakeAIDemo_HamiltonianCycle {
         );
       });
 
-      console.log(this._hamiltonianCycle);
+      console.log('Successfully created an ham:', this._hamiltonianCycle);
       return;
     }
 
@@ -804,15 +843,16 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public toggleHamiltonianCycle(): void {
+  public calculateANewHamiltonianCycle(): void {
     this.calculateAnHamiltonianCycle();
 
     return;
   }
 
-  public reset(): void {
+  private reset(): void {
     this._columns = 0;
     this._rows = 0;
+    this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
 
     return;
   }
@@ -824,10 +864,27 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public devToolWriteIndicesToInnerHTML(): void {
+  private writeIndicesToInnerHTML(): void {
     this._tiles.forEach((element: Tile) => {
       element.writeIndexToInnerHtml();
     });
+  }
+
+  private clearIndicesFromInnerHTML(): void {
+    this._tiles.forEach((element: Tile) => {
+      element.clearIndexFromInnerHtml();
+    });
+  }
+
+  public toggleIndices(): void {
+    if (this._indicesAreVisible === true) {
+      this.clearIndicesFromInnerHTML();
+      this._indicesAreVisible = false;
+      return;
+    }
+
+    this.writeIndicesToInnerHTML();
+    this._indicesAreVisible = true;
 
     return;
   }

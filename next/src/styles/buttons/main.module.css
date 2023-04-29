@@ -2,6 +2,7 @@
 * Exports
 * primary
 * secondary
+* green
 * danger_outline
 * dropdown
 * polished_button
@@ -19,6 +20,7 @@
 .btn,
 .primary,
 .secondary,
+.green,
 .danger_outline {
   padding: 0.5rem;
   border-radius: var(--border-rounded-md);
@@ -45,6 +47,14 @@
 
 .secondary:hover {
   background-color: rgb(128 128 128/ 75%);
+}
+
+.green {
+  background-color: rgb(61 166 65 / 100%);
+}
+
+.green:hover {
+  background-color: rgb(57 130 59 / 100%);
 }
 
 .danger_outline {

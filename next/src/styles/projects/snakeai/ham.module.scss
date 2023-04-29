@@ -1,0 +1,59 @@
+@use '@s/globals.module.scss' as g;
+@use './ham.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .nav_wrap {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 2rem;
+  }
+
+  .btn_area {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .btn_area_item > div {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn_area_item {
+    flex-direction: column;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .nav_wrap {
+    display: block;
+    margin-bottom: 0rem;
+  }
+
+  .btn_area_item {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .btn_area_item > div {
+    width: auto;
+  }
+}
+
+@media all and (min-width: g.$lg) {
+  .btn_area {
+    flex-direction: row;
+    gap: 0rem;
+  }
+
+  .btn_area_item {
+    width: auto;
+    justify-content: center;
+  }
+}
+
+@media all and (min-width: g.$xl) {
+  .time_settings > div {
+    width: 75rem;
+  }
+}
