@@ -521,7 +521,7 @@ class SnakeAIDemo_NoAI {
   private spawnFood(): void {
     const getNewFood = (): Tile => {
       const usableTiles = this._tiles.filter(
-        (tile) =>
+        (tile: Tile) =>
           !this._body.find(
             (bodyTile) => bodyTile.id === tile.id || this._head.id === tile.id
           )

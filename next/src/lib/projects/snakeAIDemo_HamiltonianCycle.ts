@@ -14,6 +14,10 @@ class Tile {
   public static readonly COLOR_TILE_CHECKING: string = '#FFFFFF';
   public static readonly COLOR_TILE_VIABLE: string = '#FFFF00';
 
+  public static readonly COLOR_SNAKE_HEAD: string = '#FF0000';
+  public static readonly COLOR_SNAKE_TAIL: string = '#00FF00';
+  public static readonly COLOR_SNAKE_FOOD: string = '#0000FF';
+
   public static readonly COLOR_OUTER_RING: string = '#0000FF';
   public static readonly COLOR_NOT_GOOD_TILE: string = '#000000';
   public static readonly COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_TILE: string =
@@ -245,6 +249,8 @@ class SnakeAIDemo_HamiltonianCycle {
 
   public static readonly DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER: number = 640;
 
+  private static readonly STARTING_SIZE_OF_SNAKE: number = 2;
+
   private static readonly TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR: number = 100;
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_VIABLE_HAM_IF_IT_CAN_REACH_ALL_UNHAMED_TILES: number = 5;
   private static readonly TIMEOUT_AFTER_CHECKING_IF_ALL_UNHAMED_TILES_ARE_NOT_LEADING_TO_AN_UNREACHABLE_HAM_CYCLE_FOR_CURRENT_PROGRESSED_HAM: number = 200;
@@ -254,6 +260,12 @@ class SnakeAIDemo_HamiltonianCycle {
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM_BACK_TO_NORMAL: number = 1000;
   private static readonly TOTAL_TIME_FOR_THE_ANIMATION_OF_A_SUCCEEDED_HAM: number = 3000;
   private static readonly BLINK_TIMEOUT_AFTER_SUCCEEDED_HAM: number = 200;
+
+  private static readonly TIMEOUT_AFTER_SNAKE_MOVE: number = 50;
+  private static readonly BLINK_TIMEOUT_AFTER_SUCCEEDED_SNAKE: number = 200;
+  private static readonly TOTAL_TIME_FOR_THE_ANIMATION_OF_A_SUCCEEDED_SNAKE: number = 3000;
+  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_SNAKE_BACK_TO_NORMAL: number = 1000;
+  private static readonly ANIMATE_SUCCEEDED_SNAKE: boolean = true;
 
   private static readonly ANIMATE_TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR: boolean =
     true;
@@ -278,6 +290,11 @@ class SnakeAIDemo_HamiltonianCycle {
   private _timeoutAfterEachSpreadCycleForSucceededHamBackToNormal: number;
   private _blinkTimeoutAfterSucceededHam: number;
 
+  private _timeoutAfterSnakeMove: number;
+  private _blinkTimeoutAfterSucceededSnake: number;
+  private _timeoutAfterEachSpreadCycleForSucceededSnakeBackToNormal: number;
+  private _animateSucceededSnake: boolean;
+
   private _animateTimeoutAfterCheckingOneNeighbor: boolean;
   private _animateTimeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles: boolean;
   private _animateTimeoutAfterCheckingIfAllUnhamedTilesAreNotLeadingToAnUnreachableHamCycleForCurrentProgressedHam: boolean;
@@ -298,6 +315,11 @@ class SnakeAIDemo_HamiltonianCycle {
   private _rows: number;
   private _tiles: Tile[];
   private _snakeGridContainer!: HTMLDivElement;
+
+  private _snake: Tile[] = [];
+  private _snakeLength: number;
+  private _snakeFood: Tile | null = null;
+  private _snakeMoves: number;
 
   private _hamiltonianCycle: Tile[] = [];
 
@@ -321,6 +343,15 @@ class SnakeAIDemo_HamiltonianCycle {
     this._blinkTimeoutAfterSucceededHam =
       SnakeAIDemo_HamiltonianCycle.BLINK_TIMEOUT_AFTER_SUCCEEDED_HAM;
 
+    this._timeoutAfterSnakeMove =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_SNAKE_MOVE;
+    this._blinkTimeoutAfterSucceededSnake =
+      SnakeAIDemo_HamiltonianCycle.BLINK_TIMEOUT_AFTER_SUCCEEDED_SNAKE;
+    this._timeoutAfterEachSpreadCycleForSucceededSnakeBackToNormal =
+      SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_SNAKE_BACK_TO_NORMAL;
+    this._animateSucceededSnake =
+      SnakeAIDemo_HamiltonianCycle.ANIMATE_SUCCEEDED_SNAKE;
+
     this._animateTimeoutAfterCheckingOneNeighbor =
       SnakeAIDemo_HamiltonianCycle.ANIMATE_TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR;
     this._animateTimeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles =
@@ -342,6 +373,10 @@ class SnakeAIDemo_HamiltonianCycle {
     this._columns = 0;
     this._rows = 0;
     this._tiles = [];
+
+    this._snake = [];
+    this._snakeLength = SnakeAIDemo_HamiltonianCycle.STARTING_SIZE_OF_SNAKE;
+    this._snakeMoves = 0;
 
     if (typeof window !== undefined) return;
     this._snakeGridContainer =
@@ -433,6 +468,10 @@ class SnakeAIDemo_HamiltonianCycle {
     return this._tiles[index];
   }
 
+  private getTileByRowAndColumn(row: number, column: number): Tile {
+    return this.getTileByIndex(row * this._columns + column);
+  }
+
   //#region colors
 
   private clearAllColors(): void {
@@ -509,6 +548,42 @@ class SnakeAIDemo_HamiltonianCycle {
         Tile.COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_CHECKED_NEIGHBORS
       );
     });
+
+    return;
+  }
+
+  private colorSnakeTail(): void {
+    this._snake.forEach((element) => {
+      element.element.style.setProperty(
+        Tile.TILE_COLOR_VAR,
+        Tile.COLOR_SNAKE_TAIL
+      );
+    });
+
+    return;
+  }
+
+  private colorSnakeHead(): void {
+    this._snake[0].element.style.setProperty(
+      Tile.TILE_COLOR_VAR,
+      Tile.COLOR_SNAKE_HEAD
+    );
+
+    return;
+  }
+
+  private colorEverythingOfTheSnake(): void {
+    this.colorSnakeTail();
+    this.colorSnakeHead();
+
+    return;
+  }
+
+  private colorSnakeFood(): void {
+    this._snakeFood?.element.style.setProperty(
+      Tile.TILE_COLOR_VAR,
+      Tile.COLOR_SNAKE_FOOD
+    );
 
     return;
   }
@@ -600,6 +675,15 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
+  public get timeoutAfterSnakeMove(): number {
+    return this._timeoutAfterSnakeMove;
+  }
+
+  public set timeoutAfterSnakeMove(value: number) {
+    this._timeoutAfterSnakeMove = value;
+    return;
+  }
+
   public get animateTimeoutAfterCheckingOneNeighbor(): boolean {
     return this._animateTimeoutAfterCheckingOneNeighbor;
   }
@@ -671,6 +755,10 @@ class SnakeAIDemo_HamiltonianCycle {
   public set animateSucceededHam(value: boolean) {
     this._animateSucceededHam = value;
     return;
+  }
+
+  public get snakeMoves(): number {
+    return this._snakeMoves;
   }
 
   //#endregion setters and getters
@@ -1182,7 +1270,7 @@ class SnakeAIDemo_HamiltonianCycle {
         );
 
         this.clearAllColors();
-        this.animationForAnSucceededHamiltonianCycle();
+        this.animationForASucceededHamiltonianCycle();
 
         return;
       }
@@ -1490,7 +1578,7 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  private async animationForAnSucceededHamiltonianCycle(): Promise<void> {
+  private async animationForASucceededHamiltonianCycle(): Promise<void> {
     if (this._hamiltonianCycle.length <= SnakeAIDemo_HamiltonianCycle.BETA)
       return;
 
@@ -1507,7 +1595,7 @@ class SnakeAIDemo_HamiltonianCycle {
       );
 
       const colorToNormal = async (): Promise<void> => {
-        return new Promise((r) => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             this._hamiltonianCycle[i].element.style.setProperty(
               Tile.TILE_COLOR_VAR,
@@ -1557,7 +1645,7 @@ class SnakeAIDemo_HamiltonianCycle {
     this.generateHamiltonianCycleFromIndices(preHam.hamiltonianCycle);
 
     if (animateHamiltonianCycle === true)
-      this.animationForAnSucceededHamiltonianCycle();
+      this.animationForASucceededHamiltonianCycle();
 
     this.toggleIndices(true);
     this.toggleHamiltonianCycle(true);
@@ -1565,7 +1653,221 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public spawnSnake(): void {}
+  public async snakeLoopCallThisFunctionInALoop(
+    direction: number
+  ): Promise<boolean> {
+    const getNewHead = (head: Tile): Tile | null => {
+      let newHead: Tile | null = null;
+
+      for (let i = 0; i < this._hamiltonianCycle.length; i++) {
+        if (this._hamiltonianCycle[i].index !== head.index) continue;
+
+        if (direction > 0) {
+          if (i + 1 < this._hamiltonianCycle.length) {
+            newHead = this._hamiltonianCycle[i + 1];
+            break;
+          }
+
+          newHead = this._hamiltonianCycle[0];
+          break;
+        }
+
+        if (direction < 0) {
+          if (i - 1 >= 0) {
+            newHead = this._hamiltonianCycle[i - 1];
+            break;
+          }
+
+          newHead = this._hamiltonianCycle[this._hamiltonianCycle.length - 1];
+          break;
+        }
+
+        console.error('FATAL ERROR: Invalid direction!');
+        alert('FATAL ERROR: Invalid direction!');
+        break;
+      }
+
+      return newHead;
+    };
+
+    const validateHead = (head: Tile): boolean => {
+      if (this._snake.includes(head) === true) return false;
+
+      return true;
+    };
+
+    const isSnakeOnFood = (): boolean => {
+      const head = this._snake[0];
+      if (this._snakeFood === null) return false;
+      if (head.index === this._snakeFood.index) return true;
+
+      return false;
+    };
+
+    const spawnFoodIfPossible = (): void => {
+      if (this._snakeFood !== null) return;
+
+      const usableTiles = this._tiles.filter((tile: Tile): Tile | null => {
+        if (this._snake.includes(tile) === true) return null;
+        return tile;
+      });
+
+      this._snakeFood =
+        usableTiles[Math.floor(Math.random() * usableTiles.length)];
+
+      return;
+    };
+
+    const handleColoring = (): void => {
+      this.clearAllColors();
+      this.colorEverythingOfTheSnake();
+      this.colorSnakeFood();
+
+      return;
+    };
+
+    const error = (): void => {
+      console.error(
+        'FATAL ERROR: Snake failed to finish. An unknown error occurred.'
+      );
+      alert('FATAL ERROR: Snake failed to finish. An unknown error occurred.');
+
+      return;
+    };
+
+    this._snakeMoves += 1;
+
+    const head = this._snake[0];
+    const newHead: Tile | null = getNewHead(head);
+    if (newHead === null) {
+      error();
+      return false;
+    }
+    if (validateHead(newHead) === false) return false;
+    this._snake.unshift(newHead);
+    if (this._snake.length > this._snakeLength) this._snake.pop();
+
+    const onFood: boolean = isSnakeOnFood();
+    if (onFood === true) {
+      this._snakeLength++;
+      this._snakeFood = null;
+    }
+    spawnFoodIfPossible();
+
+    handleColoring();
+
+    if (this._snake.length >= this._tiles.length) {
+      if (this._snake.length > this._tiles.length) {
+        error();
+        return false;
+      }
+
+      return false;
+    }
+
+    return true;
+  }
+
+  public get snakeLength(): number {
+    return this._snake.length;
+  }
+
+  public prepareSnakeLoop(): number {
+    const getMiddleTile = (): Tile => {
+      const middleRow = Math.floor(this._rows / 2);
+      const middleColumn = Math.floor(this._columns / 2);
+
+      return this.getTileByRowAndColumn(middleRow, middleColumn);
+    };
+
+    const calculateRandomDirection = (): number => {
+      return Math.random() < 0.5 ? -1 : 1;
+    };
+
+    const middleTile: Tile = getMiddleTile();
+    const direction: number = calculateRandomDirection();
+
+    this._snake = [];
+    this._snake.push(middleTile);
+    this._snakeLength = SnakeAIDemo_HamiltonianCycle.STARTING_SIZE_OF_SNAKE;
+    this._snakeFood = null;
+    this._snakeMoves = 0;
+
+    return direction;
+  }
+
+  public async blinkingSuccessAnimationAfterSnakeSucceeded(): Promise<void> {
+    this.clearAllColors();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.colorSnakeTail();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.clearAllColors();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.colorSnakeTail();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.clearAllColors();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.colorSnakeTail();
+    await new Promise((resolve) =>
+      setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+    );
+
+    this.clearAllColors();
+    const animationForASucceededSnake = async (): Promise<void> => {
+      const timeoutAfterEachSpread = Math.floor(
+        SnakeAIDemo_HamiltonianCycle.TOTAL_TIME_FOR_THE_ANIMATION_OF_A_SUCCEEDED_SNAKE /
+          this._snake.length
+      );
+
+      for (let i = 0; i < this._snake.length; i++) {
+        this._snake[i].element.style.setProperty(
+          Tile.TILE_COLOR_VAR,
+          Tile.COLOR_SUCCESS
+        );
+
+        const colorToNormal = async (): Promise<void> => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              this._snake[i].element.style.setProperty(
+                Tile.TILE_COLOR_VAR,
+                Tile.STD_COLOR
+              );
+            }, this._timeoutAfterEachSpreadCycleForSucceededSnakeBackToNormal);
+          });
+        };
+        colorToNormal();
+
+        if (this._animateSucceededSnake === false) return;
+        await new Promise((resolve) =>
+          setTimeout(resolve, timeoutAfterEachSpread)
+        );
+      }
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, this._blinkTimeoutAfterSucceededSnake)
+      );
+
+      return;
+    };
+    await animationForASucceededSnake();
+
+    return;
+  }
 }
 
 class PreHam {

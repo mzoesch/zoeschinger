@@ -14,6 +14,9 @@ import {
 } from '@l/projects/snakeAIDemo_HamiltonianCycle';
 import { SnakeAIDemo_HamiltonianCycle } from '@l/projects/snakeAIDemo_HamiltonianCycle';
 
+import { Source_Code_Pro } from 'next/font/google';
+const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
+
 const Demo = () => {
   const getFirstPreHamByRatio = (ratio: Ratio): number => {
     for (let i = 0; i < preHams.length; i++) {
@@ -75,11 +78,14 @@ const Demo = () => {
     currentlyGeneratingARandomHamiltonianCycle,
     setCurrentlyGeneratingARandomHamiltonianCycle,
   ] = useState<boolean>(false);
+  const [snakeIsCurrentlyMoving, setSnakeIsCurrentlyMoving] =
+    useState<boolean>(false);
 
   const snakeGridContainer = useRef<HTMLDivElement>(null);
   const [snakeGrid, DO_NOT_USE] = useState<SnakeAIDemo_HamiltonianCycle>(
     new SnakeAIDemo_HamiltonianCycle(snakeGridContainer.current)
   );
+  const [snakeMoves, setSnakeMoves] = useState<number>(0);
 
   const createSnakeGrid = () => {
     snakeGrid.fillGrid(
@@ -273,8 +279,59 @@ const Demo = () => {
                     )}
                     {currentlyGeneratingARandomHamiltonianCycle ? (
                       <div className={btn_styles.secondary}>Spawn Snake</div>
+                    ) : snakeIsCurrentlyMoving ? (
+                      <div className={btn_styles.secondary}>
+                        Snake is moving
+                      </div>
                     ) : (
-                      <div className={btn_styles.primary}>Spawn Snake</div>
+                      <div
+                        className={btn_styles.primary}
+                        onClick={async () => {
+                          setSnakeIsCurrentlyMoving(true);
+                          const dir: number = snakeGrid.prepareSnakeLoop();
+
+                          while (true) {
+                            const answer: boolean =
+                              await snakeGrid.snakeLoopCallThisFunctionInALoop(
+                                dir
+                              );
+
+                            setSnakeMoves(snakeGrid.snakeMoves);
+                            if (answer === false) break;
+
+                            await new Promise((resolve) =>
+                              setTimeout(
+                                resolve,
+                                snakeGrid.timeoutAfterSnakeMove
+                              )
+                            );
+
+                            continue;
+                          }
+
+                          if (
+                            snakeGrid.snakeLength !==
+                            snakeGrid.hamiltonianCycleLength
+                          ) {
+                            alert(
+                              `
+The snake length is not equal to the ham cycle length.
+Snake length: ${snakeGrid.snakeLength}
+Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
+`
+                            );
+
+                            return;
+                          }
+
+                          await snakeGrid.blinkingSuccessAnimationAfterSnakeSucceeded();
+
+                          setSnakeIsCurrentlyMoving(false);
+                          return;
+                        }}
+                      >
+                        Spawn Snake
+                      </div>
                     )}
                   </div>
                 </div>
@@ -318,7 +375,6 @@ const Demo = () => {
                                 handleSetCurrentlySelectedHamRatioForUnsavedChanges(
                                   i
                                 );
-                                // hahandleApplyHamSelectionndleSetCurrentlySelectedHamRatio(i);
                                 return;
                               }}
                               style={{
@@ -743,7 +799,11 @@ const Demo = () => {
                 </div>
               ) : null}
             </div>
-            <div className={styles.above_grid_item}></div>
+            <div className={styles.above_grid_item}>
+              <div
+                className={sourceCodePro.className}
+              >{`Snake moved: ${snakeMoves}`}</div>
+            </div>
           </div>
           <div
             ref={snakeGridContainer}
