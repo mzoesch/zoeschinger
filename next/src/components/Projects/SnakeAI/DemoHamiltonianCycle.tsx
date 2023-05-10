@@ -8,6 +8,10 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import { Ratio, ratios } from '@l/projects/snakeAIDemo_HamiltonianCycle';
 import { PreHam, preHams } from '@l/projects/snakeAIDemo_HamiltonianCycle';
+import {
+  CalculationMethodForNewHams,
+  calculationMethodsForNewHams,
+} from '@l/projects/snakeAIDemo_HamiltonianCycle';
 import { SnakeAIDemo_HamiltonianCycle } from '@l/projects/snakeAIDemo_HamiltonianCycle';
 
 const Demo = () => {
@@ -61,6 +65,16 @@ const Demo = () => {
 
     return;
   };
+  const [
+    currentlySelectedMethodForGeneratingANewHamiltonianCycle,
+    setCurrentlySelectedMethodForGeneratingANewHamiltonianCycle,
+  ] = useState<number>(
+    CalculationMethodForNewHams.DEFAULT_CALCULATION_METHOD_INDEX
+  );
+  const [
+    currentlyGeneratingARandomHamiltonianCycle,
+    setCurrentlyGeneratingARandomHamiltonianCycle,
+  ] = useState<boolean>(false);
 
   const snakeGridContainer = useRef<HTMLDivElement>(null);
   const [snakeGrid, DO_NOT_USE] = useState<SnakeAIDemo_HamiltonianCycle>(
@@ -226,7 +240,43 @@ const Demo = () => {
                       className={styles.section_for_showing_ham_select_arrow}
                     />
                   </div>
-                  <div className={btn_styles.secondary}>Spawn Snake</div>
+                  <div className={styles.main_selection_for_primary_buttons}>
+                    {currentlyGeneratingARandomHamiltonianCycle ? (
+                      <div
+                        className={btn_styles.secondary}
+                        style={{
+                          display:
+                            currentlySelectedHamRatio !== 0 ? 'none' : 'block',
+                        }}
+                      >
+                        Generating . . .
+                      </div>
+                    ) : (
+                      <div
+                        className={btn_styles.primary}
+                        style={{
+                          display:
+                            currentlySelectedHamRatio !== 0 ? 'none' : 'block',
+                        }}
+                        onClick={async () => {
+                          setCurrentlyGeneratingARandomHamiltonianCycle(true);
+                          const finish =
+                            await snakeGrid.calculateANewHamiltonianCycle();
+                          if (finish === true)
+                            setCurrentlyGeneratingARandomHamiltonianCycle(
+                              false
+                            );
+                        }}
+                      >
+                        Generate ham
+                      </div>
+                    )}
+                    {currentlyGeneratingARandomHamiltonianCycle ? (
+                      <div className={btn_styles.secondary}>Spawn Snake</div>
+                    ) : (
+                      <div className={btn_styles.primary}>Spawn Snake</div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -344,6 +394,54 @@ const Demo = () => {
                         })}
                       </div>
                     </div>
+                    <div
+                      style={{
+                        display:
+                          currentlySelectedHamRatioForUnsavedChanges !==
+                          Ratio.AUTO_INDEX
+                            ? 'none'
+                            : 'block',
+                      }}
+                    >
+                      <h3>
+                        Which method should be used for generating a new
+                        Hamiltonian cycle?
+                      </h3>
+                      <div
+                        className={
+                          styles.section_for_showing_ham_select_item_list
+                        }
+                      >
+                        {calculationMethodsForNewHams.map(
+                          (method: CalculationMethodForNewHams, i) => {
+                            return (
+                              <div
+                                key={method.method}
+                                onClick={() => {
+                                  setCurrentlySelectedMethodForGeneratingANewHamiltonianCycle(
+                                    i
+                                  );
+                                  return;
+                                }}
+                                style={{
+                                  backgroundColor:
+                                    currentlySelectedMethodForGeneratingANewHamiltonianCycle ===
+                                    i
+                                      ? PreHam.COLOR_SELECTED
+                                      : PreHam.COLOR_UNSELECTED,
+                                  border:
+                                    '1px solid rgb(var(--primary-negativ) / 100%)',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  width: 'fit-content',
+                                }}
+                              >{`${method.method} | ${method.complexity}`}</div>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className={styles.section_for_showing_apply_section}>
                     <div
@@ -364,7 +462,16 @@ const Demo = () => {
                     >
                       Apply
                     </div>
-                    <div className={btn_styles.primary}>Apply and close</div>
+                    <div
+                      className={btn_styles.primary}
+                      onClick={() => {
+                        handleApplyHamSelection();
+                        handleHamCycleSelectionToggle();
+                        return;
+                      }}
+                    >
+                      Apply and close
+                    </div>
                   </div>
                 </div>
                 <div
@@ -386,12 +493,16 @@ const Demo = () => {
                 <div className={styles.btn_for_showing_time_settings}>
                   <div
                     className={btn_styles.green}
+                    style={{
+                      width: '100%',
+                    }}
                     onClick={() => {
                       handleTimeSettingsToggle();
                       return;
                     }}
                   >
-                    {timeSettingsHidden ? 'Show' : 'Hide'} timing settings
+                    {timeSettingsHidden ? 'Show' : 'Hide'} timing settings for
+                    random ham cycle generation
                   </div>
                 </div>
                 <div
@@ -620,14 +731,17 @@ const Demo = () => {
               >
                 Toggle indices
               </div>
-              <div
-                className={btn_styles.secondary}
-                onClick={() => {
-                  snakeGrid.toggleHamiltonianCycle();
-                }}
-              >
-                Toggle hamiltonian cycle
-              </div>
+              {snakeGrid.hamiltonianCycleLength > 1 &&
+              currentlyGeneratingARandomHamiltonianCycle === false ? (
+                <div
+                  className={btn_styles.secondary}
+                  onClick={() => {
+                    snakeGrid.toggleHamiltonianCycle();
+                  }}
+                >
+                  Toggle hamiltonian cycle
+                </div>
+              ) : null}
             </div>
             <div className={styles.above_grid_item}></div>
           </div>

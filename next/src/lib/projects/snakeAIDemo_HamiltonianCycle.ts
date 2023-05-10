@@ -240,7 +240,8 @@ class Tile {
 class SnakeAIDemo_HamiltonianCycle {
   private static readonly DO_NOT_CALCULATE_HAMILTONIAN: number = 3;
   private static readonly ALPHA: number = 4;
-  private static readonly ALPHA_GOAL: number = 2;
+  private static readonly ALPHA_GOAL: number = 1;
+  private static readonly BETA: number = 2;
 
   public static readonly DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER: number = 640;
 
@@ -251,19 +252,22 @@ class SnakeAIDemo_HamiltonianCycle {
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK: number = 20;
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM: number = 50;
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM_BACK_TO_NORMAL: number = 1000;
+  private static readonly TOTAL_TIME_FOR_THE_ANIMATION_OF_A_SUCCEEDED_HAM: number = 3000;
+  private static readonly BLINK_TIMEOUT_AFTER_SUCCEEDED_HAM: number = 200;
 
   private static readonly ANIMATE_TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR: boolean =
     true;
   private static readonly ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_VIABLE_HAM_IF_IT_CAN_REACH_ALL_UNHAMED_TILES: boolean =
-    true;
+    false;
   private static readonly ANIMATE_TIMEOUT_AFTER_CHECKING_IF_ALL_UNHAMED_TILES_ARE_NOT_LEADING_TO_AN_UNREACHABLE_HAM_CYCLE_FOR_CURRENT_PROGRESSED_HAM: boolean =
-    true;
+    false;
   private static readonly ANIMATE_TIMEOUT_AFTER_A_NOT_GOOD_TILE_WAS_FOUND: boolean =
-    true;
+    false;
   private static readonly ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK: boolean =
-    true;
+    false;
   private static readonly ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM: boolean =
     true;
+  private static readonly ANIMATE_SUCCEEDED_HAM = true;
 
   private _timeoutAfterCheckingOneNeighbor: number;
   private _timeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles: number;
@@ -272,6 +276,7 @@ class SnakeAIDemo_HamiltonianCycle {
   private _timeoutAfterEachSpreadCycleForTwoNeighborsViableCheck: number;
   private _timeoutAfterEachSpreadCycleForSucceededHam: number;
   private _timeoutAfterEachSpreadCycleForSucceededHamBackToNormal: number;
+  private _blinkTimeoutAfterSucceededHam: number;
 
   private _animateTimeoutAfterCheckingOneNeighbor: boolean;
   private _animateTimeoutAfterEachSpreadCycleForViableHamIfItCanReachAllUnhamedTiles: boolean;
@@ -279,6 +284,7 @@ class SnakeAIDemo_HamiltonianCycle {
   private _animateTimeoutAfterANotGoodTileWasFound: boolean;
   private _animateTimeoutAfterEachSpreadCycleForTwoNeighborsViableCheck: boolean;
   private _animateTimeoutAfterEachSpreadCycleForSucceededHam: boolean;
+  private _animateSucceededHam: boolean;
 
   private static readonly HAM_CYCLE_IS_VISIBLE: boolean = false;
   private static readonly INDICES_ARE_VISIBLE: boolean = false;
@@ -312,6 +318,8 @@ class SnakeAIDemo_HamiltonianCycle {
       SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM;
     this._timeoutAfterEachSpreadCycleForSucceededHamBackToNormal =
       SnakeAIDemo_HamiltonianCycle.TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM_BACK_TO_NORMAL;
+    this._blinkTimeoutAfterSucceededHam =
+      SnakeAIDemo_HamiltonianCycle.BLINK_TIMEOUT_AFTER_SUCCEEDED_HAM;
 
     this._animateTimeoutAfterCheckingOneNeighbor =
       SnakeAIDemo_HamiltonianCycle.ANIMATE_TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR;
@@ -325,6 +333,8 @@ class SnakeAIDemo_HamiltonianCycle {
       SnakeAIDemo_HamiltonianCycle.ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK;
     this._animateTimeoutAfterEachSpreadCycleForSucceededHam =
       SnakeAIDemo_HamiltonianCycle.ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM;
+    this._animateSucceededHam =
+      SnakeAIDemo_HamiltonianCycle.ANIMATE_SUCCEEDED_HAM;
 
     this._hamCycleIsVisible = SnakeAIDemo_HamiltonianCycle.HAM_CYCLE_IS_VISIBLE;
     this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
@@ -651,6 +661,15 @@ class SnakeAIDemo_HamiltonianCycle {
 
   public set animateTimeoutAfterEachSpreadCycleForSucceededHam(value: boolean) {
     this._animateTimeoutAfterEachSpreadCycleForSucceededHam = value;
+    return;
+  }
+
+  public get animateSucceededHam(): boolean {
+    return this._animateSucceededHam;
+  }
+
+  public set animateSucceededHam(value: boolean) {
+    this._animateSucceededHam = value;
     return;
   }
 
@@ -1131,13 +1150,44 @@ class SnakeAIDemo_HamiltonianCycle {
     const success = await findHam(uncheckedTiles);
 
     if (success) {
-      this._hamiltonianCycle.forEach((element) => {
-        element.element.style.setProperty(
-          Tile.TILE_COLOR_VAR,
-          Tile.COLOR_SUCCESS
+      if (this._animateSucceededHam === true) {
+        this.clearAllColors();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
         );
-      });
 
+        this.colorHamiltonianCycle();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
+        );
+
+        this.clearAllColors();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
+        );
+
+        this.colorHamiltonianCycle();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
+        );
+
+        this.clearAllColors();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
+        );
+
+        this.colorHamiltonianCycle();
+        await new Promise((resolve) =>
+          setTimeout(resolve, this._blinkTimeoutAfterSucceededHam)
+        );
+
+        this.clearAllColors();
+        this.animationForAnSucceededHamiltonianCycle();
+
+        return;
+      }
+
+      this.clearAllColors();
       return;
     }
 
@@ -1147,17 +1197,22 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public calculateANewHamiltonianCycle(): void {
-    this.calculateAHamiltonianCycle();
+  public async calculateANewHamiltonianCycle(): Promise<boolean> {
+    await this.calculateAHamiltonianCycle();
 
-    return;
+    return true;
   }
 
-  private reset(): void {
+  private reset(resetVisuals: boolean = true): void {
     this._columns = 0;
     this._rows = 0;
     this._hamiltonianCycle = [];
 
+    // TODO: this._tiles should also be rested outside this method. So there
+    // TODO: is no need to call the specific reset / toggle functions for them.
+    // TODO: WARNING: Future changes to this class may break this
+    // TODO: WARnING: assumption. This is unsafe. Please fix.
+    if (resetVisuals === false) return;
     this._hamCycleIsVisible = SnakeAIDemo_HamiltonianCycle.HAM_CYCLE_IS_VISIBLE;
     this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
 
@@ -1166,7 +1221,7 @@ class SnakeAIDemo_HamiltonianCycle {
 
   public resetTilesWithRecalculation(preHam?: PreHam): void {
     if (preHam !== undefined) {
-      this.generateGridFromPreHam(preHam);
+      this.generateGridFromPreHam(preHam, false, true);
       return;
     }
 
@@ -1208,7 +1263,7 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public toggleIndices(): void {
+  public toggleIndices(onlyUpdateTheTiles: boolean = false): void {
     const writeIndicesToInnerHTML = (): void => {
       this._tiles.forEach((element: Tile) => {
         element.writeIndexToInnerHtml();
@@ -1220,6 +1275,17 @@ class SnakeAIDemo_HamiltonianCycle {
         element.clearIndexFromInnerHtml();
       });
     };
+
+    if (onlyUpdateTheTiles === true) {
+      if (this._indicesAreVisible === true) {
+        writeIndicesToInnerHTML();
+
+        return;
+      }
+
+      clearIndicesFromInnerHTML();
+      return;
+    }
 
     if (this._indicesAreVisible === true) {
       clearIndicesFromInnerHTML();
@@ -1233,8 +1299,94 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public toggleHamiltonianCycle(): void {
+  public get hamiltonianCycleLength(): number {
+    return this._hamiltonianCycle.length;
+  }
+
+  public toggleHamiltonianCycle(onlyUpdateTheTiles: boolean = false): void {
     const showHamiltonianCycle = (): void => {
+      const isVerticallyAligned = (
+        previousElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return previousElement.x === nextElement.x;
+      };
+
+      const isHorizontallyAligned = (
+        previousElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return previousElement.y === nextElement.y;
+      };
+
+      const isCornerTopRight = (
+        previousElement: Tile,
+        currentElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return (
+          (currentElement.x === previousElement.x &&
+            currentElement.y > previousElement.y &&
+            currentElement.x < nextElement.x &&
+            currentElement.y === nextElement.y) ||
+          (currentElement.x < previousElement.x &&
+            currentElement.y === previousElement.y &&
+            currentElement.x === nextElement.x &&
+            currentElement.y > nextElement.y)
+        );
+      };
+
+      const isCornerTopLeft = (
+        previousElement: Tile,
+        currentElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return (
+          (currentElement.x === previousElement.x &&
+            currentElement.y > previousElement.y &&
+            currentElement.x > nextElement.x &&
+            currentElement.y === nextElement.y) ||
+          (currentElement.x > previousElement.x &&
+            currentElement.y === previousElement.y &&
+            currentElement.x === nextElement.x &&
+            currentElement.y > nextElement.y)
+        );
+      };
+
+      const isCornerBottomRight = (
+        previousElement: Tile,
+        currentElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return (
+          (currentElement.x < previousElement.x &&
+            currentElement.y === previousElement.y &&
+            currentElement.x === nextElement.x &&
+            currentElement.y < nextElement.y) ||
+          (currentElement.x === previousElement.x &&
+            currentElement.y < previousElement.y &&
+            currentElement.x < nextElement.x &&
+            currentElement.y === nextElement.y)
+        );
+      };
+
+      const isCornerBottomLeft = (
+        previousElement: Tile,
+        currentElement: Tile,
+        nextElement: Tile
+      ): boolean => {
+        return (
+          (currentElement.x > previousElement.x &&
+            currentElement.y === previousElement.y &&
+            currentElement.x === nextElement.x &&
+            currentElement.y < nextElement.y) ||
+          (currentElement.x === previousElement.x &&
+            currentElement.y < previousElement.y &&
+            currentElement.x > nextElement.x &&
+            currentElement.y === nextElement.y)
+        );
+      };
+
       for (let i = 0; i < this._hamiltonianCycle.length; i++) {
         const previousIndex: number =
           i <= 0 ? this._hamiltonianCycle.length - 1 : i - 1;
@@ -1249,46 +1401,34 @@ class SnakeAIDemo_HamiltonianCycle {
         const nextElement = this._hamiltonianCycle[nextIndex];
         const N = this._hamiltonianCycle[nextIndex];
 
-        if (previousElement.x === nextElement.x) {
+        if (isVerticallyAligned(P, N)) {
           currentElement.showHamiltonianCycle(Tile.HAM_TYPE_HORIZONTAL_LINE);
           continue;
         }
 
-        if (previousElement.y === nextElement.y) {
+        if (isHorizontallyAligned(P, N)) {
           currentElement.showHamiltonianCycle(Tile.HAM_TYPE_VERTICAL_LINE);
           continue;
         }
 
-        if (
-          (C.x === P.x && C.y > P.y && C.x < N.x && C.y === N.y) ||
-          (C.x < P.x && C.y === P.y && C.x === N.x && C.y > N.y)
-        ) {
+        if (isCornerTopRight(P, C, N)) {
           currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_RIGHT);
           continue;
         }
 
-        if (
-          (C.x === P.x && C.y > P.y && C.x > N.x && C.y === N.y) ||
-          (C.x > P.x && C.y === P.y && C.x === N.x && C.y > N.y)
-        ) {
+        if (isCornerTopLeft(P, C, N)) {
           currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_LEFT);
           continue;
         }
 
-        if (
-          (C.x < P.x && C.y === P.y && C.x === N.x && C.y < N.y) ||
-          (C.x === P.x && C.y < P.y && C.x < N.x && C.y === N.y)
-        ) {
+        if (isCornerBottomRight(P, C, N)) {
           currentElement.showHamiltonianCycle(
             Tile.HAM_TYPE_CORNER_BOTTOM_RIGHT
           );
           continue;
         }
 
-        if (
-          (C.x > P.x && C.y === P.y && C.x === N.x && C.y < N.y) ||
-          (C.x === P.x && C.y < P.y && C.x > N.x && C.y === N.y)
-        ) {
+        if (isCornerBottomLeft(P, C, N)) {
           currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_BOTTOM_LEFT);
           continue;
         }
@@ -1297,22 +1437,32 @@ class SnakeAIDemo_HamiltonianCycle {
         continue;
       }
     };
-    const hideHamiltonianCycle = (): void => {
+    const clearHamiltonianCycle = (): void => {
       this._hamiltonianCycle.forEach((element: Tile) => {
         element.hideHamiltonianCycle();
       });
     };
 
     if (this._hamiltonianCycle.length <= 1) {
-      console.error('FATAL ERROR: No Hamiltonian Cycle found!');
-      alert('FATAL ERROR: No Hamiltonian Cycle found!');
+      if (this._hamCycleIsVisible === false && onlyUpdateTheTiles === false)
+        alert("You don't have a Hamiltonian Cycle calculated / selected yet!");
 
       this._hamCycleIsVisible = false;
       return;
     }
 
+    if (onlyUpdateTheTiles === true) {
+      if (this._hamCycleIsVisible === true) {
+        showHamiltonianCycle();
+        return;
+      }
+
+      clearHamiltonianCycle();
+      return;
+    }
+
     if (this._hamCycleIsVisible === true) {
-      hideHamiltonianCycle();
+      clearHamiltonianCycle();
       this._hamCycleIsVisible = false;
       return;
     }
@@ -1341,6 +1491,15 @@ class SnakeAIDemo_HamiltonianCycle {
   }
 
   private async animationForAnSucceededHamiltonianCycle(): Promise<void> {
+    if (this._hamiltonianCycle.length <= SnakeAIDemo_HamiltonianCycle.BETA)
+      return;
+
+    const length = this._hamiltonianCycle.length;
+    const timeoutAfterEachSpread = Math.floor(
+      SnakeAIDemo_HamiltonianCycle.TOTAL_TIME_FOR_THE_ANIMATION_OF_A_SUCCEEDED_HAM /
+        length
+    );
+
     for (let i = 0; i < this._hamiltonianCycle.length; i++) {
       this._hamiltonianCycle[i].element.style.setProperty(
         Tile.TILE_COLOR_VAR,
@@ -1357,11 +1516,11 @@ class SnakeAIDemo_HamiltonianCycle {
           }, this._timeoutAfterEachSpreadCycleForSucceededHamBackToNormal);
         });
       };
-
       colorToNormal();
 
+      if (this._animateSucceededHam === false) return;
       await new Promise((resolve) =>
-        setTimeout(resolve, this._timeoutAfterEachSpreadCycleForSucceededHam)
+        setTimeout(resolve, timeoutAfterEachSpread)
       );
     }
 
@@ -1389,9 +1548,10 @@ class SnakeAIDemo_HamiltonianCycle {
 
   public generateGridFromPreHam(
     preHam: PreHam,
-    animateHamiltonianCycle: boolean = true
+    animateHamiltonianCycle: boolean = true,
+    resetVisuals: boolean = false
   ): void {
-    this.reset();
+    this.reset(resetVisuals);
 
     this.fillGrid(null, preHam.rows, preHam.columns);
     this.generateHamiltonianCycleFromIndices(preHam.hamiltonianCycle);
@@ -1399,8 +1559,13 @@ class SnakeAIDemo_HamiltonianCycle {
     if (animateHamiltonianCycle === true)
       this.animationForAnSucceededHamiltonianCycle();
 
+    this.toggleIndices(true);
+    this.toggleHamiltonianCycle(true);
+
     return;
   }
+
+  public spawnSnake(): void {}
 }
 
 class PreHam {
@@ -1486,6 +1651,28 @@ class Ratio {
   }
 }
 
+class CalculationMethodForNewHams {
+  public static readonly DEFAULT_CALCULATION_METHOD_INDEX: number = 0;
+
+  private _method: string;
+  private _complexity: string;
+
+  constructor(method: string, complexity: string) {
+    this._method = method;
+    this._complexity = complexity;
+
+    return;
+  }
+
+  public get method(): string {
+    return this._method;
+  }
+
+  public get complexity(): string {
+    return this._complexity;
+  }
+}
+
 export const ratios: Ratio[] = [
   new Ratio('auto'),
   new Ratio('4:3'),
@@ -1514,6 +1701,11 @@ export const preHams: PreHam[] = [
   new PreHam(Ratio.SIXTEEN_TO_NINE, 36, 64, [0]),
 ];
 
+export const calculationMethodsForNewHams: CalculationMethodForNewHams[] = [
+  new CalculationMethodForNewHams('absolute random new ham cycle', 'O(n^3)'),
+];
+
 export { Ratio };
 export { PreHam };
+export { CalculationMethodForNewHams };
 export { SnakeAIDemo_HamiltonianCycle };

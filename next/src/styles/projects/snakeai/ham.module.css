@@ -48,7 +48,7 @@
 }
 
 .btn_for_showing_time_settings {
-  width: 15rem;
+  width: calc(100% - 1rem);
 }
 
 .time_settings {
@@ -310,6 +310,8 @@
 .section_for_showing_ham_select_item_list {
   display: flex;
   gap: 0.5rem;
+
+  flex-wrap: wrap;
 }
 
 .section_for_showing_ham_select_item_list > div {
@@ -332,6 +334,14 @@
 
   display: flex;
   gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.main_selection_for_primary_buttons {
+  display: flex;
+  gap: 0.5rem;
+
   justify-content: flex-end;
   align-items: center;
 }
