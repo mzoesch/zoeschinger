@@ -135,6 +135,10 @@
   transition-duration: 300ms;
 }
 
+.primary:hover .arrow {
+  rotate: 90deg;
+}
+
 .dropdown:hover .arrow {
   rotate: 90deg;
 }
