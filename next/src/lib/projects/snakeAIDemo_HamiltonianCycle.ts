@@ -21,10 +21,24 @@ class Tile {
   public static readonly COLOR_TILE_TWO_NEIGHBORS_CHECK_FROM_CHECKED_NEIGHBORS: string =
     '#AAFFAA';
 
+  public static readonly HAM_TYPE_HORIZONTAL_LINE: string = 'horizontal-line';
+  public static readonly HAM_TYPE_VERTICAL_LINE: string = 'vertical-line';
+  public static readonly HAM_TYPE_CORNER_TOP_RIGHT: string = 'corner-top-right';
+  public static readonly HAM_TYPE_CORNER_TOP_LEFT: string = 'corner-top-left';
+  public static readonly HAM_TYPE_CORNER_BOTTOM_RIGHT: string =
+    'corner-bottom-right';
+  public static readonly HAM_TYPE_CORNER_BOTTOM_LEFT: string =
+    'corner-bottom-left';
+
   private _index: number;
   private _element: HTMLDivElement;
   private _columns: number;
   private _rows: number;
+
+  private _hamiltonianCycleDiv: HTMLDivElement | null = null;
+  private _potentialLineOneDiv: HTMLDivElement | null = null;
+  private _potentialLineTwoDiv: HTMLDivElement | null = null;
+  private _indexDiv: HTMLDivElement | null = null;
 
   public constructor({
     element,
@@ -61,12 +75,122 @@ class Tile {
   }
 
   public clearIndexFromInnerHtml(): void {
-    this._element.innerHTML = '';
+    if (this._indexDiv === null) return;
+
+    this._element.removeChild(this._indexDiv);
+    this._indexDiv = null;
+
     return;
   }
 
   public writeIndexToInnerHtml(): void {
-    this._element.innerHTML = `${this._index}`;
+    this._indexDiv = document.createElement('div');
+    this._indexDiv.innerHTML = `${this._index}`;
+
+    this._element.appendChild(this._indexDiv);
+    return;
+  }
+
+  public showHamiltonianCycle(type: string): void {
+    this._hamiltonianCycleDiv = document.createElement('div');
+
+    switch (type) {
+      case Tile.HAM_TYPE_HORIZONTAL_LINE:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_horizontal_line;
+        break;
+
+      case Tile.HAM_TYPE_VERTICAL_LINE:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_vertical_line;
+        break;
+
+      case Tile.HAM_TYPE_CORNER_TOP_RIGHT:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_corner_top_right;
+
+        this._potentialLineOneDiv = document.createElement('div');
+        this._potentialLineOneDiv.className =
+          styles.hamiltonian_path_corner_top_line;
+
+        this._potentialLineTwoDiv = document.createElement('div');
+        this._potentialLineTwoDiv.className =
+          styles.hamiltonian_path_corner_right_line;
+
+        break;
+
+      case Tile.HAM_TYPE_CORNER_TOP_LEFT:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_corner_top_left;
+
+        this._potentialLineOneDiv = document.createElement('div');
+        this._potentialLineOneDiv.className =
+          styles.hamiltonian_path_corner_top_line;
+
+        this._potentialLineTwoDiv = document.createElement('div');
+        this._potentialLineTwoDiv.className =
+          styles.hamiltonian_path_corner_left_line;
+
+        break;
+
+      case Tile.HAM_TYPE_CORNER_BOTTOM_RIGHT:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_corner_bottom_right;
+
+        this._potentialLineOneDiv = document.createElement('div');
+        this._potentialLineOneDiv.className =
+          styles.hamiltonian_path_corner_bottom_line;
+
+        this._potentialLineTwoDiv = document.createElement('div');
+        this._potentialLineTwoDiv.className =
+          styles.hamiltonian_path_corner_right_line;
+
+        break;
+
+      case Tile.HAM_TYPE_CORNER_BOTTOM_LEFT:
+        this._hamiltonianCycleDiv.className =
+          styles.hamiltonian_path_corner_bottom_left;
+
+        this._potentialLineOneDiv = document.createElement('div');
+        this._potentialLineOneDiv.className =
+          styles.hamiltonian_path_corner_bottom_line;
+
+        this._potentialLineTwoDiv = document.createElement('div');
+        this._potentialLineTwoDiv.className =
+          styles.hamiltonian_path_corner_left_line;
+
+        break;
+
+      default:
+        this._hamiltonianCycleDiv.innerHTML = ``;
+        break;
+    }
+
+    if (this._potentialLineTwoDiv !== null)
+      this._element.prepend(this._potentialLineTwoDiv);
+    this._element.prepend(this._hamiltonianCycleDiv);
+    if (this._potentialLineOneDiv !== null)
+      this._element.prepend(this._potentialLineOneDiv);
+
+    return;
+  }
+
+  public hideHamiltonianCycle(): void {
+    if (this._potentialLineTwoDiv !== null) {
+      this._element.removeChild(this._potentialLineTwoDiv);
+      this._potentialLineTwoDiv = null;
+    }
+
+    if (this._hamiltonianCycleDiv !== null) {
+      this._element.removeChild(this._hamiltonianCycleDiv);
+      this._hamiltonianCycleDiv = null;
+    }
+
+    if (this._potentialLineOneDiv !== null) {
+      this._element.removeChild(this._potentialLineOneDiv);
+      this._potentialLineOneDiv = null;
+    }
+
     return;
   }
 
@@ -125,8 +249,8 @@ class SnakeAIDemo_HamiltonianCycle {
   private static readonly TIMEOUT_AFTER_CHECKING_IF_ALL_UNHAMED_TILES_ARE_NOT_LEADING_TO_AN_UNREACHABLE_HAM_CYCLE_FOR_CURRENT_PROGRESSED_HAM: number = 200;
   private static readonly TIMEOUT_AFTER_A_NOT_GOOD_TILE_WAS_FOUND: number = 150;
   private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_TWO_NEIGHBORS_VIABLE_CHECK: number = 20;
-  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM: number = 100;
-  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM_BACK_TO_NORMAL: number = 500;
+  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM: number = 50;
+  private static readonly TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM_BACK_TO_NORMAL: number = 1000;
 
   private static readonly ANIMATE_TIMEOUT_AFTER_CHECKING_ONE_NEIGHBOR: boolean =
     true;
@@ -156,9 +280,11 @@ class SnakeAIDemo_HamiltonianCycle {
   private _animateTimeoutAfterEachSpreadCycleForTwoNeighborsViableCheck: boolean;
   private _animateTimeoutAfterEachSpreadCycleForSucceededHam: boolean;
 
+  private static readonly HAM_CYCLE_IS_VISIBLE: boolean = false;
   private static readonly INDICES_ARE_VISIBLE: boolean = false;
   private static readonly TILE_SIZE: number = 50;
 
+  private _hamCycleIsVisible: boolean;
   private _indicesAreVisible: boolean;
   private _tileSize: number;
 
@@ -200,6 +326,7 @@ class SnakeAIDemo_HamiltonianCycle {
     this._animateTimeoutAfterEachSpreadCycleForSucceededHam =
       SnakeAIDemo_HamiltonianCycle.ANIMATE_TIMEOUT_AFTER_EACH_SPREAD_CYCLE_FOR_SUCCEEDED_HAM;
 
+    this._hamCycleIsVisible = SnakeAIDemo_HamiltonianCycle.HAM_CYCLE_IS_VISIBLE;
     this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
 
     this._columns = 0;
@@ -1030,6 +1157,8 @@ class SnakeAIDemo_HamiltonianCycle {
     this._columns = 0;
     this._rows = 0;
     this._hamiltonianCycle = [];
+
+    this._hamCycleIsVisible = SnakeAIDemo_HamiltonianCycle.HAM_CYCLE_IS_VISIBLE;
     this._indicesAreVisible = SnakeAIDemo_HamiltonianCycle.INDICES_ARE_VISIBLE;
 
     return;
@@ -1104,7 +1233,95 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public toggleHamiltonianCycle(): void {}
+  public toggleHamiltonianCycle(): void {
+    const showHamiltonianCycle = (): void => {
+      for (let i = 0; i < this._hamiltonianCycle.length; i++) {
+        const previousIndex: number =
+          i <= 0 ? this._hamiltonianCycle.length - 1 : i - 1;
+        const previousElement = this._hamiltonianCycle[previousIndex];
+        const P = this._hamiltonianCycle[previousIndex];
+
+        const currentElement = this._hamiltonianCycle[i];
+        const C = this._hamiltonianCycle[i];
+
+        const nextIndex: number =
+          i >= this._hamiltonianCycle.length - 1 ? 0 : i + 1;
+        const nextElement = this._hamiltonianCycle[nextIndex];
+        const N = this._hamiltonianCycle[nextIndex];
+
+        if (previousElement.x === nextElement.x) {
+          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_HORIZONTAL_LINE);
+          continue;
+        }
+
+        if (previousElement.y === nextElement.y) {
+          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_VERTICAL_LINE);
+          continue;
+        }
+
+        if (
+          (C.x === P.x && C.y > P.y && C.x < N.x && C.y === N.y) ||
+          (C.x < P.x && C.y === P.y && C.x === N.x && C.y > N.y)
+        ) {
+          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_RIGHT);
+          continue;
+        }
+
+        if (
+          (C.x === P.x && C.y > P.y && C.x > N.x && C.y === N.y) ||
+          (C.x > P.x && C.y === P.y && C.x === N.x && C.y > N.y)
+        ) {
+          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_LEFT);
+          continue;
+        }
+
+        if (
+          (C.x < P.x && C.y === P.y && C.x === N.x && C.y < N.y) ||
+          (C.x === P.x && C.y < P.y && C.x < N.x && C.y === N.y)
+        ) {
+          currentElement.showHamiltonianCycle(
+            Tile.HAM_TYPE_CORNER_BOTTOM_RIGHT
+          );
+          continue;
+        }
+
+        if (
+          (C.x > P.x && C.y === P.y && C.x === N.x && C.y < N.y) ||
+          (C.x === P.x && C.y < P.y && C.x > N.x && C.y === N.y)
+        ) {
+          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_BOTTOM_LEFT);
+          continue;
+        }
+
+        currentElement.showHamiltonianCycle('not supported');
+        continue;
+      }
+    };
+    const hideHamiltonianCycle = (): void => {
+      this._hamiltonianCycle.forEach((element: Tile) => {
+        element.hideHamiltonianCycle();
+      });
+    };
+
+    if (this._hamiltonianCycle.length <= 1) {
+      console.error('FATAL ERROR: No Hamiltonian Cycle found!');
+      alert('FATAL ERROR: No Hamiltonian Cycle found!');
+
+      this._hamCycleIsVisible = false;
+      return;
+    }
+
+    if (this._hamCycleIsVisible === true) {
+      hideHamiltonianCycle();
+      this._hamCycleIsVisible = false;
+      return;
+    }
+
+    showHamiltonianCycle();
+    this._hamCycleIsVisible = true;
+
+    return;
+  }
 
   private generateHamiltonianCycleFromIndices(
     hamiltonianCycleIndices: number[]
@@ -1170,13 +1387,18 @@ class SnakeAIDemo_HamiltonianCycle {
     return;
   }
 
-  public generateGridFromPreHam(preHam: PreHam): void {
+  public generateGridFromPreHam(
+    preHam: PreHam,
+    animateHamiltonianCycle: boolean = true
+  ): void {
     this.reset();
 
     this.fillGrid(null, preHam.rows, preHam.columns);
     this.generateHamiltonianCycleFromIndices(preHam.hamiltonianCycle);
 
-    this.animationForAnSucceededHamiltonianCycle();
+    if (animateHamiltonianCycle === true)
+      this.animationForAnSucceededHamiltonianCycle();
+
     return;
   }
 }
@@ -1234,6 +1456,13 @@ class PreHam {
 }
 
 class Ratio {
+  public static readonly AUTO_INDEX: number = 0;
+  public static readonly DEFAULT_RATIO_INDEX: number = 2;
+
+  public static readonly AUTO: string = 'auto';
+  public static readonly FOUR_TO_THREE: string = '4:3';
+  public static readonly SIXTEEN_TO_NINE: string = '16:9';
+
   private _ratio: string;
 
   constructor(ratio: string) {
@@ -1264,15 +1493,25 @@ export const ratios: Ratio[] = [
 ];
 
 export const preHams: PreHam[] = [
-  new PreHam('1:1', undefined, undefined, undefined, 'auto'),
-  new PreHam('4:3', 6, 8, [0]),
-  new PreHam('4:3', 9, 12, [0]),
-  new PreHam('4:3', 16, 24, [0]),
-  new PreHam('4:3', 32, 48, [0]),
-  new PreHam('16:9', 9, 16, [0]),
-  new PreHam('16:9', 12, 20, [0]),
-  new PreHam('16:9', 18, 32, [0]),
-  new PreHam('16:9', 36, 64, [0]),
+  new PreHam(Ratio.AUTO, undefined, undefined, undefined, 'auto'),
+  new PreHam(Ratio.FOUR_TO_THREE, 6, 8, [0]),
+  new PreHam(Ratio.FOUR_TO_THREE, 9, 12, [0]),
+  new PreHam(Ratio.FOUR_TO_THREE, 16, 24, [0]),
+  new PreHam(Ratio.FOUR_TO_THREE, 32, 48, [0]),
+  new PreHam(
+    Ratio.SIXTEEN_TO_NINE,
+    5,
+    8,
+    [
+      0, 8, 16, 17, 18, 26, 25, 24, 32, 33, 34, 35, 36, 37, 38, 39, 31, 23, 15,
+      7, 6, 14, 22, 30, 29, 28, 27, 19, 11, 12, 20, 21, 13, 5, 4, 3, 2, 10, 9,
+      1,
+    ]
+  ),
+  new PreHam(Ratio.SIXTEEN_TO_NINE, 9, 16, [0]),
+  new PreHam(Ratio.SIXTEEN_TO_NINE, 12, 20, [0]),
+  new PreHam(Ratio.SIXTEEN_TO_NINE, 18, 32, [0]),
+  new PreHam(Ratio.SIXTEEN_TO_NINE, 36, 64, [0]),
 ];
 
 export { Ratio };

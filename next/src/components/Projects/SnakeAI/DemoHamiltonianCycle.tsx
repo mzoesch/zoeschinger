@@ -21,7 +21,9 @@ const Demo = () => {
     return -1;
   };
 
-  const getRightHeightForHamGridViewInPixels = (): number => {
+  const getRightHeightForHamGridViewInPixels = (
+    hamRatioIndex: number
+  ): number => {
     if (
       snakeGridContainer.current === null ||
       snakeGridContainer.current === undefined
@@ -29,14 +31,7 @@ const Demo = () => {
       return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
 
     const width = snakeGridContainer.current.clientWidth;
-    const ratio = ratios[currentlySelectedHamRatio];
-
-    console.log(
-      'pixel',
-      ratios[currentlySelectedHamRatio].ratio,
-      ratios[currentlySelectedHamRatioForUnsavedChanges].ratio,
-      preHams[currentlySelectedPreHam].label
-    );
+    const ratio = ratios[hamRatioIndex];
 
     if (ratio.ratio === 'auto')
       return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
@@ -52,7 +47,7 @@ const Demo = () => {
   const [
     currentlySelectedHamRatioForUnsavedChanges,
     setCurrentlySelectedHamRatioForUnsavedChanges,
-  ] = useState<number>(2);
+  ] = useState<number>(Ratio.DEFAULT_RATIO_INDEX);
   const [currentlySelectedHamRatio, setCurrentlySelectedHamRatio] =
     useState<number>(currentlySelectedHamRatioForUnsavedChanges);
   const [currentlySelectedPreHam, setCurrentlySelectedPreHam] =
@@ -92,15 +87,16 @@ const Demo = () => {
   };
 
   const handleApplyHamSelection = () => {
-    console.log(
-      'apply',
-      currentlySelectedHamRatio,
-      currentlySelectedHamRatioForUnsavedChanges,
-      currentlySelectedPreHam
-    );
-
     setCurrentlySelectedHamRatio(currentlySelectedHamRatioForUnsavedChanges);
+
+    setHeightForSnakeGridView(
+      getRightHeightForHamGridViewInPixels(
+        currentlySelectedHamRatioForUnsavedChanges
+      )
+    );
     snakeGrid.generateGridFromPreHam(preHams[currentlySelectedPreHam]);
+
+    handleUpdateDOM();
     return;
   };
 
@@ -117,30 +113,69 @@ const Demo = () => {
   };
 
   useEffect(() => {
-    createSnakeGrid();
-
     const rightHeightForSnakeGrid = (): void => {
-      setHeightForSnakeGridView(getRightHeightForHamGridViewInPixels());
-      return;
+      const effectGetRightHeightForHamGridViewInPixels = (): number => {
+        if (
+          snakeGridContainer.current === null ||
+          snakeGridContainer.current === undefined
+        )
+          return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
+
+        const width = snakeGridContainer.current.clientWidth;
+        const ratio = ratios[currentlySelectedHamRatio];
+
+        if (ratio.ratio === 'auto')
+          return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
+
+        const height = width / ratio.asNumber();
+
+        return height;
+      };
+
+      setHeightForSnakeGridView(effectGetRightHeightForHamGridViewInPixels());
     };
 
-    window.addEventListener('resize', () => {
-      rightHeightForSnakeGrid();
-    });
-
-    handleUpdateDOM();
+    createSnakeGrid();
     rightHeightForSnakeGrid();
+    snakeGrid.generateGridFromPreHam(preHams[currentlySelectedPreHam], false);
+    handleUpdateDOM();
 
     return () => {
-      window.removeEventListener('resize', () => {
-        rightHeightForSnakeGrid();
-      });
-
       return;
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const rightHeightForSnakeGrid = (): void => {
+      const effectGetRightHeightForHamGridViewInPixels = (): number => {
+        if (
+          snakeGridContainer.current === null ||
+          snakeGridContainer.current === undefined
+        )
+          return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
+
+        const width = snakeGridContainer.current.clientWidth;
+        const ratio = ratios[currentlySelectedHamRatio];
+
+        if (ratio.ratio === 'auto')
+          return SnakeAIDemo_HamiltonianCycle.DEFAULT_HEIGHT_FOR_SNAKE_GRID_CONTAINER;
+
+        const height = width / ratio.asNumber();
+
+        return height;
+      };
+
+      setHeightForSnakeGridView(effectGetRightHeightForHamGridViewInPixels());
+    };
+
+    window.addEventListener('resize', rightHeightForSnakeGrid);
+
+    return () => {
+      window.removeEventListener('resize', rightHeightForSnakeGrid);
+    };
+  }, [currentlySelectedHamRatio]);
 
   return (
     <>
@@ -172,14 +207,6 @@ const Demo = () => {
                     }}
                   >
                     Recalculate cells
-                  </div>
-                  <div
-                    className={btn_styles.secondary}
-                    onClick={() => {
-                      snakeGrid.toggleIndices();
-                    }}
-                  >
-                    Toggle indices
                   </div>
                 </div>
                 <div className={styles.btn_area_item}>
@@ -241,7 +268,7 @@ const Demo = () => {
                                 handleSetCurrentlySelectedHamRatioForUnsavedChanges(
                                   i
                                 );
-                                // handleSetCurrentlySelectedHamRatio(i);
+                                // hahandleApplyHamSelectionndleSetCurrentlySelectedHamRatio(i);
                                 return;
                               }}
                               style={{
@@ -266,7 +293,8 @@ const Demo = () => {
                     <div
                       style={{
                         display:
-                          currentlySelectedHamRatioForUnsavedChanges === 0
+                          currentlySelectedHamRatioForUnsavedChanges ===
+                          Ratio.AUTO_INDEX
                             ? 'none'
                             : 'block',
                       }}
@@ -307,8 +335,11 @@ const Demo = () => {
                                     : PreHam.COLOR_UNSELECTED,
                                 border:
                                   '1px solid rgb(var(--primary-negativ) / 100%)',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                               }}
-                            >{`${i}. ${ham.label}`}</div>
+                            >{`${ham.label}`}</div>
                           );
                         })}
                       </div>
@@ -342,7 +373,16 @@ const Demo = () => {
               </div>
             </div>
             <div className={text_styles.text}>
-              <div className={styles.area_for_showing_time_settings}>
+              <div
+                style={{
+                  display:
+                    currentlySelectedHamRatioForUnsavedChanges !==
+                    Ratio.AUTO_INDEX
+                      ? 'none'
+                      : 'flex',
+                }}
+                className={styles.area_for_showing_time_settings}
+              >
                 <div className={styles.btn_for_showing_time_settings}>
                   <div
                     className={btn_styles.green}
@@ -570,7 +610,27 @@ const Demo = () => {
               </div>
             </div>
           </div>
-          <div className={styles.stats}></div>
+          <div className={styles.above_grid}>
+            <div className={styles.above_grid_item}>
+              <div
+                className={btn_styles.secondary}
+                onClick={() => {
+                  snakeGrid.toggleIndices();
+                }}
+              >
+                Toggle indices
+              </div>
+              <div
+                className={btn_styles.secondary}
+                onClick={() => {
+                  snakeGrid.toggleHamiltonianCycle();
+                }}
+              >
+                Toggle hamiltonian cycle
+              </div>
+            </div>
+            <div className={styles.above_grid_item}></div>
+          </div>
           <div
             ref={snakeGridContainer}
             className={styles.snakeGridContainer}
