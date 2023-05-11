@@ -1003,7 +1003,6 @@ class SnakeAIDemo_HamiltonianCycle {
 
                 if (theTwoNeighborsAreAligned === false) return false;
 
-                // Tile is relevant
                 return true;
               };
 
@@ -1296,8 +1295,8 @@ class SnakeAIDemo_HamiltonianCycle {
     this._rows = 0;
     this._hamiltonianCycle = [];
 
-    // TODO: this._tiles should also be rested outside this method. So there
-    // TODO: is no need to call the specific reset / toggle functions for them.
+    // TODO: this._tiles should also always be rested outside this method. So there is no
+    // TODO: need to call the specific reset / toggle functions for the variables below.
     // TODO: WARNING: Future changes to this class may break this
     // TODO: WARnING: assumption. This is unsafe. Please fix.
     if (resetVisuals === false) return;
@@ -1478,50 +1477,44 @@ class SnakeAIDemo_HamiltonianCycle {
       for (let i = 0; i < this._hamiltonianCycle.length; i++) {
         const previousIndex: number =
           i <= 0 ? this._hamiltonianCycle.length - 1 : i - 1;
-        const previousElement = this._hamiltonianCycle[previousIndex];
-        const P = this._hamiltonianCycle[previousIndex];
-
-        const currentElement = this._hamiltonianCycle[i];
-        const C = this._hamiltonianCycle[i];
-
         const nextIndex: number =
           i >= this._hamiltonianCycle.length - 1 ? 0 : i + 1;
-        const nextElement = this._hamiltonianCycle[nextIndex];
+
+        const P = this._hamiltonianCycle[previousIndex];
+        const C = this._hamiltonianCycle[i];
         const N = this._hamiltonianCycle[nextIndex];
 
         if (isVerticallyAligned(P, N)) {
-          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_HORIZONTAL_LINE);
+          C.showHamiltonianCycle(Tile.HAM_TYPE_HORIZONTAL_LINE);
           continue;
         }
 
         if (isHorizontallyAligned(P, N)) {
-          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_VERTICAL_LINE);
+          C.showHamiltonianCycle(Tile.HAM_TYPE_VERTICAL_LINE);
           continue;
         }
 
         if (isCornerTopRight(P, C, N)) {
-          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_RIGHT);
+          C.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_RIGHT);
           continue;
         }
 
         if (isCornerTopLeft(P, C, N)) {
-          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_LEFT);
+          C.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_TOP_LEFT);
           continue;
         }
 
         if (isCornerBottomRight(P, C, N)) {
-          currentElement.showHamiltonianCycle(
-            Tile.HAM_TYPE_CORNER_BOTTOM_RIGHT
-          );
+          C.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_BOTTOM_RIGHT);
           continue;
         }
 
         if (isCornerBottomLeft(P, C, N)) {
-          currentElement.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_BOTTOM_LEFT);
+          C.showHamiltonianCycle(Tile.HAM_TYPE_CORNER_BOTTOM_LEFT);
           continue;
         }
 
-        currentElement.showHamiltonianCycle('not supported');
+        C.showHamiltonianCycle('not supported');
         continue;
       }
     };
@@ -1983,8 +1976,29 @@ export const ratios: Ratio[] = [
 
 export const preHams: PreHam[] = [
   new PreHam(Ratio.AUTO, undefined, undefined, undefined, 'auto'),
-  new PreHam(Ratio.FOUR_TO_THREE, 6, 8, [0]),
-  new PreHam(Ratio.FOUR_TO_THREE, 9, 12, [0]),
+  new PreHam(
+    Ratio.FOUR_TO_THREE,
+    6,
+    8,
+    [
+      0, 8, 16, 24, 32, 40, 41, 42, 43, 44, 36, 35, 27, 19, 20, 28, 29, 37, 45,
+      46, 47, 39, 38, 30, 31, 23, 22, 21, 13, 14, 15, 7, 6, 5, 4, 12, 11, 3, 2,
+      10, 18, 26, 34, 33, 25, 17, 9, 1,
+    ]
+  ),
+  new PreHam(
+    Ratio.FOUR_TO_THREE,
+    9,
+    12,
+    [
+      0, 12, 13, 14, 15, 16, 17, 18, 30, 42, 43, 31, 19, 20, 32, 44, 45, 46, 58,
+      70, 82, 94, 93, 81, 69, 57, 56, 55, 54, 53, 52, 64, 76, 88, 87, 86, 85,
+      73, 61, 49, 37, 38, 50, 62, 74, 75, 63, 51, 39, 40, 41, 29, 28, 27, 26,
+      25, 24, 36, 48, 60, 72, 84, 96, 97, 98, 99, 100, 101, 102, 103, 91, 79,
+      78, 90, 89, 77, 65, 66, 67, 68, 80, 92, 104, 105, 106, 107, 95, 83, 71,
+      59, 47, 35, 23, 11, 10, 22, 34, 33, 21, 9, 8, 7, 6, 5, 4, 3, 2, 1,
+    ]
+  ),
   new PreHam(Ratio.FOUR_TO_THREE, 16, 24, [0]),
   new PreHam(Ratio.FOUR_TO_THREE, 32, 48, [0]),
   new PreHam(
@@ -1997,8 +2011,44 @@ export const preHams: PreHam[] = [
       1,
     ]
   ),
-  new PreHam(Ratio.SIXTEEN_TO_NINE, 9, 16, [0]),
-  new PreHam(Ratio.SIXTEEN_TO_NINE, 12, 20, [0]),
+  new PreHam(
+    Ratio.SIXTEEN_TO_NINE,
+    9,
+    16,
+    [
+      0, 16, 32, 48, 49, 50, 51, 52, 68, 67, 66, 65, 64, 80, 81, 82, 98, 99, 83,
+      84, 100, 101, 102, 103, 104, 105, 121, 120, 119, 118, 117, 116, 115, 114,
+      113, 97, 96, 112, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138,
+      122, 106, 90, 89, 88, 87, 86, 85, 69, 70, 71, 72, 73, 74, 75, 91, 107,
+      108, 109, 93, 92, 76, 77, 61, 60, 59, 58, 57, 56, 55, 54, 53, 37, 36, 35,
+      19, 20, 21, 22, 38, 39, 23, 24, 40, 41, 42, 43, 27, 28, 44, 45, 29, 30,
+      46, 62, 78, 94, 110, 126, 125, 124, 123, 139, 140, 141, 142, 143, 127,
+      111, 95, 79, 63, 47, 31, 15, 14, 13, 12, 11, 10, 26, 25, 9, 8, 7, 6, 5, 4,
+      3, 2, 18, 34, 33, 17, 1,
+    ]
+  ),
+  new PreHam(
+    Ratio.SIXTEEN_TO_NINE,
+    12,
+    20,
+    [
+      0, 20, 40, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 90, 89, 88, 87, 86,
+      106, 126, 146, 145, 165, 166, 167, 147, 148, 168, 188, 189, 190, 191, 192,
+      193, 173, 153, 154, 155, 156, 157, 137, 136, 135, 134, 133, 132, 152, 172,
+      171, 170, 169, 149, 129, 128, 127, 107, 108, 109, 110, 130, 150, 151, 131,
+      111, 91, 71, 51, 31, 32, 52, 72, 92, 112, 113, 93, 73, 53, 33, 34, 35, 36,
+      37, 38, 58, 57, 56, 55, 54, 74, 94, 114, 115, 95, 75, 76, 96, 116, 117,
+      118, 138, 158, 178, 198, 218, 217, 216, 215, 195, 196, 197, 177, 176, 175,
+      174, 194, 214, 213, 212, 211, 210, 209, 208, 207, 187, 186, 206, 205, 185,
+      184, 204, 203, 183, 163, 164, 144, 143, 123, 124, 125, 105, 85, 84, 104,
+      103, 83, 82, 81, 80, 100, 120, 140, 160, 161, 141, 121, 101, 102, 122,
+      142, 162, 182, 181, 180, 200, 220, 221, 201, 202, 222, 223, 224, 225, 226,
+      227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 219, 199,
+      179, 159, 139, 119, 99, 98, 97, 77, 78, 79, 59, 39, 19, 18, 17, 16, 15,
+      14, 13, 12, 11, 10, 30, 50, 49, 29, 9, 8, 7, 6, 5, 25, 26, 27, 28, 48, 47,
+      46, 45, 44, 43, 23, 24, 4, 3, 2, 22, 42, 41, 21, 1,
+    ]
+  ),
   new PreHam(Ratio.SIXTEEN_TO_NINE, 18, 32, [0]),
   new PreHam(Ratio.SIXTEEN_TO_NINE, 36, 64, [0]),
 ];
