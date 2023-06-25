@@ -1,4 +1,3 @@
-import styles from '@s/projects/snakeai/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import basic_layout_styles from '@s/projects/basic_layout.module.scss';
 
@@ -25,25 +24,9 @@ const SnakeAI = () => {
           </div>
           <div className={text_styles.text}>
             <div className={text_styles.paragraph}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium odit cupiditate blanditiis nesciunt, eligendi expedita
-              laborum, similique, laboriosam ut in quod temporibus obcaecati.
-              Commodi excepturi in accusamus architecto hic laboriosam a
-              molestiae sint dolores totam voluptas tempore aliquam deserunt
-              debitis atque vitae consequuntur molestias beatae, placeat
-              voluptate quaerat deleniti sit! Perspiciatis beatae sapiente ad
-              optio. Culpa obcaecati consequatur voluptatum iure mollitia
-              dolorem repudiandae, provident perspiciatis laborum asperiores
-              fugit sit temporibus explicabo dolores sint? Quam commodi deserunt
-              magnam saepe? Quod aliquid quis nulla quia fuga. Tempora accusamus
-              natus obcaecati animi? Explicabo laborum accusamus assumenda
-              pariatur consequuntur. Distinctio fugiat architecto, asperiores
-              rerum consequuntur at voluptas fuga delectus a ea itaque est
-              nostrum maxime odio deleniti doloribus, vel accusamus accusantium
-              ipsam animi ratione magnam minima ullam? Consequatur corrupti
-              facere ad laborum quos expedita aspernatur aliquid quo illo at,
-              amet reiciendis similique rem, deserunt ab quidem beatae
-              asperiores iusto adipisci, non cupiditate nam unde.
+              Snakes can still bite you besides being legless. This is a
+              collection of snake games with different AI implementations. Well,
+              currently with no AI.
             </div>
           </div>
           <div>
@@ -87,6 +70,10 @@ const SnakeAI = () => {
                 </h4>
                 <div className={text_styles.text}>
                   <div className={text_styles.paragraph}>
+                    Also no AI, but I put it here to feel better. The snake
+                    follows somewhat a hamiltonian cycle.
+                  </div>
+                  <div className={text_styles.paragraph}>
                     Check it out{' '}
                     <Link
                       href='/projects/demo/snakeai-hamiltonian-cycle'
@@ -96,6 +83,17 @@ const SnakeAI = () => {
                     </Link>
                     .
                   </div>
+                </div>
+              </div>
+              <div>
+                <h4
+                  className={text_styles.subtitle}
+                  style={{ marginTop: '1rem' }}
+                >
+                  Q learning
+                </h4>
+                <div className={text_styles.text}>
+                  <div className={text_styles.paragraph}>in progress</div>
                 </div>
               </div>
             </div>

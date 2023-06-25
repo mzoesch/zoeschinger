@@ -2,6 +2,10 @@
 @use './ham.module.css';
 
 @media all and (min-width: g.$mobile) {
+  .wrapper {
+    margin-bottom: 7rem;
+  }
+
   .nav_wrap {
     display: flex;
     flex-direction: column-reverse;
@@ -25,6 +29,10 @@
   .time_settings > div {
     flex-direction: column;
   }
+
+  .above_grid {
+    flex-direction: column;
+  }
 }
 
 @media all and (min-width: g.$sm) {
@@ -42,9 +50,17 @@
   .btn_area_item > div {
     width: auto;
   }
+
+  .above_grid {
+    flex-direction: row;
+  }
 }
 
 @media all and (min-width: g.$lg) {
+  .wrapper {
+    margin-bottom: 5rem;
+  }
+
   .btn_area {
     flex-direction: row;
     gap: 0rem;

@@ -400,7 +400,7 @@ const SAlgo = () => {
               Visualization
             </h1>
             <div className={text_styles.text}>
-              <h2 className={text_styles.subtitle}>How to get started</h2>
+              <h2 className={text_styles.subtitle}>How to get started.</h2>
               <div
                 className={text_styles.paragraph}
                 style={{

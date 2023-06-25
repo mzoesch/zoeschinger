@@ -1,4 +1,4 @@
-import styles from '@s/projects/snakeai/main.module.scss';
+import styles from '@s/projects/snakeai/playable.module.scss';
 
 class Coordinate {
   private _x: number;
@@ -132,6 +132,8 @@ class SnakeAIDemo_NoAI {
   private static readonly INTERNAL_MOVE_DOWN: number = 2;
   private static readonly INTERNAL_MOVE_RIGHT: number = 3;
 
+  private static readonly TIMEOUT_AFTER_MOVE: number = 100;
+
   private _tiles: Tile[];
   private _columns: number;
   private _rows: number;
@@ -140,6 +142,7 @@ class SnakeAIDemo_NoAI {
   private _setRunSnake: (runSnake: boolean) => void;
 
   private _setScore: (score: number) => void;
+  private _timeoutAfterMove: number;
 
   private _timeAlive: number;
   private _timer: NodeJS.Timeout | null;
@@ -158,6 +161,7 @@ class SnakeAIDemo_NoAI {
   private _head!: Tile;
 
   private _score: number;
+  private _isAlive: boolean;
 
   constructor(
     setRunSnake: (runSnake: boolean) => void,
@@ -176,11 +180,13 @@ class SnakeAIDemo_NoAI {
     this._length = SnakeAIDemo_NoAI.DEFAULT_LENGTH;
 
     this._score = 0;
+    this._isAlive = false;
 
     this._body = [];
 
     this._setRunSnake = setRunSnake;
     this._setScore = setScore;
+    this._timeoutAfterMove = SnakeAIDemo_NoAI.TIMEOUT_AFTER_MOVE;
 
     this._setHighScore = setHighScore;
 
@@ -197,6 +203,15 @@ class SnakeAIDemo_NoAI {
   private appendTile(tile: HTMLDivElement): void {
     this._tiles.push(new Tile({ element: tile, columns: this.columns }));
 
+    return;
+  }
+
+  public get speed(): number {
+    return this._timeoutAfterMove;
+  }
+
+  public set speed(speed: number) {
+    this._timeoutAfterMove = speed;
     return;
   }
 
@@ -295,7 +310,7 @@ class SnakeAIDemo_NoAI {
     return;
   }
 
-  public spawnSnake(): void {
+  public async spawnSnake(): Promise<void> {
     const spawn: Tile | undefined = this.tileById(this.middleCoordinate.id);
     if (!spawn) return;
 
@@ -303,12 +318,23 @@ class SnakeAIDemo_NoAI {
     this.colorHead();
 
     this.spawnFood();
+    this._isAlive = true;
 
     this._timer = setInterval(() => {
       this._timeAlive += 1;
       this._handleTimeAliveUpdate(this._timeAlive);
-    }, 1000);
+    }, 1_000);
 
+    while (this._isAlive) {
+      console.log('Snake is alive');
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, this._timeoutAfterMove)
+      );
+
+      await this.move();
+      continue;
+    }
     return;
   }
 
@@ -325,6 +351,7 @@ class SnakeAIDemo_NoAI {
   }
 
   private gameOver(): void {
+    this._isAlive = false;
     this._setRunSnake(false);
 
     if (this._timer) clearInterval(this._timer);
@@ -495,6 +522,25 @@ class SnakeAIDemo_NoAI {
       case 'KeyD':
         this._wantToDirection = SnakeAIDemo_NoAI.INTERNAL_MOVE_RIGHT;
         break;
+
+      case 'ArrowUp':
+        this._wantToDirection = SnakeAIDemo_NoAI.INTERNAL_MOVE_UP;
+        break;
+
+      case 'ArrowLeft':
+        this._wantToDirection = SnakeAIDemo_NoAI.INTERNAL_MOVE_LEFT;
+        break;
+
+      case 'ArrowDown':
+        this._wantToDirection = SnakeAIDemo_NoAI.INTERNAL_MOVE_DOWN;
+        break;
+
+      case 'ArrowRight':
+        this._wantToDirection = SnakeAIDemo_NoAI.INTERNAL_MOVE_RIGHT;
+        break;
+
+      default:
+        break;
     }
 
     return;
@@ -507,6 +553,7 @@ class SnakeAIDemo_NoAI {
     this._direction = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._wantToDirection = SnakeAIDemo_NoAI.DEFAULT_DIRECTION;
     this._setRunSnake(false);
+    this._isAlive = false;
 
     if (this._timer) clearInterval(this._timer);
 

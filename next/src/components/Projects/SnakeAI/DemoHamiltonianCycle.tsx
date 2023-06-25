@@ -207,12 +207,37 @@ const Demo = () => {
             </h1>
             <div className={text_styles.text}>
               <div className={text_styles.paragraph}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                dolore delectus labore, autem dignissimos dolores ratione
-                cupiditate corrupti sapiente, amet deleniti inventore quae!
-                Error possimus quod enim ratione. Asperiores ipsa atque ut. Ad
-                dolor maiores, aperiam mollitia blanditiis tempore unde totam
-                sint iusto error consequuntur, praesentium iure quod ipsa sunt?
+                In this version of the snake demo, the snake will always
+                somewhat follow a hamiltonian cycle. You can choose between
+                precalculated hamiltonian cycles or calculate a new one. Note
+                that the snake can shortcut the hamiltonian cycle. But be
+                warned, the snake will often die to reach faster its goal -
+                eating more food than the average McDonald&apos;s customer.
+              </div>
+              <div className={text_styles.paragraph}>
+                &quot;I&apos;am an animal lover and don&apos;t like to see the
+                snake die&quot; option:{' '}
+                <input
+                  type='checkbox'
+                  checked={snakeGrid.doYouWantToSeeTheSnakeSuffer}
+                  onChange={() => {
+                    snakeGrid.doYouWantToSeeTheSnakeSuffer =
+                      !snakeGrid.doYouWantToSeeTheSnakeSuffer;
+                    handleUpdateDOM();
+                    return;
+                  }}
+                />{' '}
+                (Disabling this option will take the snake a lot more of time to
+                finish; But it will also always succeed.)
+              </div>
+              <h2>How to get started.</h2>
+              <div className={text_styles.paragraph}>
+                <div>
+                  1. Select an hamiltonian cycle (hams). You can choose between
+                  precalculated hams or calculate a new one (Warning: on large
+                  grids this may take a while).
+                </div>
+                <div>2. Spawn la snake.</div>
               </div>
             </div>
           </div>
@@ -305,13 +330,21 @@ const Demo = () => {
 
                               setSnakeMoves(snakeGrid.snakeMoves);
                               if (answer === false) break;
+                              snakeGrid.currentMove++;
 
-                              await new Promise((resolve) =>
-                                setTimeout(
-                                  resolve,
-                                  snakeGrid.timeoutAfterSnakeMove
-                                )
-                              );
+                              if (
+                                snakeGrid.currentMove >= snakeGrid.movesPerFrame
+                              ) {
+                                snakeGrid.currentMove = 0;
+                                await new Promise((resolve) =>
+                                  setTimeout(
+                                    resolve,
+                                    snakeGrid.timeoutAfterSnakeMove
+                                  )
+                                );
+
+                                continue;
+                              }
 
                               continue;
                             }
@@ -320,20 +353,24 @@ const Demo = () => {
                               snakeGrid.snakeLength !==
                               snakeGrid.hamiltonianCycleLength
                             ) {
-                              alert(
-                                `
-The snake length is not equal to the ham cycle length.
-Snake length: ${snakeGrid.snakeLength}
-Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
-`
-                              );
+                              if (snakeGrid.hamiltonianCycleLength !== 0)
+                                alert(
+                                  `\
+The snake poisoned itself. And died a horrible death.
 
+The snake length is not equal to the ham.
+Snake length: ${snakeGrid.snakeLength}
+Ham-cycle length: ${snakeGrid.hamiltonianCycleLength}
+`
+                                );
+
+                              setSnakeIsCurrentlyMoving(false);
                               return;
                             }
 
                             await snakeGrid.blinkingSuccessAnimationAfterSnakeSucceeded();
-
                             setSnakeIsCurrentlyMoving(false);
+
                             return;
                           }}
                         >
@@ -355,11 +392,12 @@ Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
                     <div>
                       <h2>Precalculated Hamiltonian cycles</h2>
                       <div className={text_styles.paragraph}>
-                        These ham cycles were precalculated with the
-                        &quot;generate absolute random new ham cycle&quot;
-                        option. It is not really handy to use this algorithm
-                        because it has a time complexity of O(n^3) and it is
-                        therefore not really efficient.
+                        These ham cycles were precalculated with the generate
+                        &quot;absolute random new ham cycle&quot; option (you
+                        can find it under the &quot;auto&quot; rato option). It
+                        is not really handy to use this algorithm because it has
+                        a time complexity of O(n^3) and it is therefore not
+                        efficient. But fun to watch while it is suffering.
                       </div>
                     </div>
                     <div
@@ -792,7 +830,7 @@ Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
                     snakeGrid.toggleIndices();
                   }}
                 >
-                  Toggle indices
+                  <div className={text_styles.text}>Toggle indices</div>
                 </div>
                 {snakeGrid.hamiltonianCycleLength > 1 &&
                 currentlyGeneratingARandomHamiltonianCycle === false ? (
@@ -802,11 +840,30 @@ Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
                       snakeGrid.toggleHamiltonianCycle();
                     }}
                   >
-                    Toggle hamiltonian cycle
+                    <div className={text_styles.text}>
+                      Toggle hamiltonian cycle
+                    </div>
                   </div>
                 ) : null}
               </div>
               <div className={styles.above_grid_item}>
+                <div className={text_styles.text}>
+                  <input
+                    type='number'
+                    style={{
+                      width: '2.5rem',
+                      textAlign: 'right',
+                    }}
+                    min='1'
+                    value={`${snakeGrid.movesPerFrame}`}
+                    onChange={(e) => {
+                      snakeGrid.movesPerFrame = parseInt(e.target.value);
+                      handleUpdateDOM();
+                      return;
+                    }}
+                  />{' '}
+                  Moves per Frame
+                </div>
                 <div className={styles.snake_speed_slider}>
                   <div
                     style={{
@@ -815,10 +872,12 @@ Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
                     }}
                     className={sourceCodePro.className}
                   >
-                    <div>Snake speed:</div>
-                    <div
-                      className={sourceCodePro.className}
-                    >{`${snakeGrid.timeoutAfterSnakeMove}ms`}</div>
+                    <div className={text_styles.text}>Snake speed:</div>
+                    <div className={sourceCodePro.className}>
+                      <div className={text_styles.text}>
+                        {`${snakeGrid.timeoutAfterSnakeMove}ms`}
+                      </div>
+                    </div>
                   </div>
                   <input
                     type='range'
@@ -834,9 +893,11 @@ Ham cycle length: ${snakeGrid.hamiltonianCycleLength}
                     }}
                   />
                 </div>
-                <div
-                  className={sourceCodePro.className}
-                >{`Snake moved: ${snakeMoves}`}</div>
+                <div className={sourceCodePro.className}>
+                  <div className={text_styles.text}>
+                    {`${snakeMoves} moves`}
+                  </div>
+                </div>
               </div>
             </div>
             <div
