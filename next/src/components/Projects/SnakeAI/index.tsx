@@ -24,9 +24,11 @@ const SnakeAI = () => {
           </div>
           <div className={text_styles.text}>
             <div className={text_styles.paragraph}>
-              Snakes can still bite you besides being legless. This is a
-              collection of snake games with different AI implementations. Well,
-              currently with no AI.
+              Snakes can still bite you besides being legless.
+            </div>
+            <div className={text_styles.paragraph}>
+              This is a collection of snake games with different AI
+              implementations. Well, currently with no AI 🙃.
             </div>
           </div>
           <div>
