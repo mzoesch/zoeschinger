@@ -350,6 +350,10 @@ class SnakeAIDemo_NoAI {
     return this._score;
   }
 
+  public get score(): number {
+    return this._score;
+  }
+
   private gameOver(): void {
     this._isAlive = false;
     this._setRunSnake(false);
@@ -439,6 +443,9 @@ class SnakeAIDemo_NoAI {
 
       if (isOnFood()) {
         this._length++;
+
+        this._score++;
+        this._setScore(this._score);
 
         this._score++;
         this._setScore(this._score);
