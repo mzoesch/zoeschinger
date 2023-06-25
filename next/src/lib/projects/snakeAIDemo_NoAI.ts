@@ -350,10 +350,6 @@ class SnakeAIDemo_NoAI {
     return this._score;
   }
 
-  public get score(): number {
-    return this._score;
-  }
-
   private gameOver(): void {
     this._isAlive = false;
     this._setRunSnake(false);
