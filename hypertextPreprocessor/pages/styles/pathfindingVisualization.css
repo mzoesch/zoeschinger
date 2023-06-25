@@ -1,0 +1,43 @@
+.nav {
+  height: 4rem;
+  background-color: #252d3c;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer {
+  height: 4rem;
+  background-color: #252d3c;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+}
+
+.wrapper {
+  height: calc(100vh - 4rem - 32px);
+  background-color: #898c93;
+
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(var(--columns), 1fr);
+
+  color: white;
+  padding: 1rem;
+}
+
+.wrapper > div {
+  background-color: #131826;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.wrapper > div:hover {
+  background-color: rgb(19 24 38 / 80%);
+}

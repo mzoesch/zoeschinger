@@ -1,0 +1,364 @@
+.wrapper {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: calc(100% - 4rem);
+  max-width: 75rem;
+}
+
+.demo {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-color: rgb(var(--primary-off) / 100%);
+
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.btn_area {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn_area_item {
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.area_for_showing_time_settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  background-color: rgb(00 255 00 / 10%);
+  padding: 0.5rem;
+  border-radius: var(--border-rounded-lg);
+  border-color: rgb(var(--primary-negativ) / 100%);
+  border-style: solid;
+  border-width: 1px;
+}
+
+.btn_for_showing_time_settings {
+  width: calc(100% - 1rem);
+}
+
+.time_settings {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  justify-content: center;
+}
+
+.time_settings > div {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+
+  width: 100%;
+
+  color: white;
+
+  border-radius: var(--border-rounded-lg);
+  border-color: rgb(var(--primary-negativ) / 100%);
+  border-style: solid;
+  border-width: 1px;
+
+  background-color: rgb(51, 51, 51);
+}
+
+.time_settings_inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.snakeGridContainer {
+  position: relative;
+
+  background-color: rgb(0, 0, 0);
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: 1px;
+}
+
+.snakeGridTile {
+  position: relative;
+  background-color: var(--snake-grid-tile-color);
+
+  overflow: hidden;
+}
+
+.hamiltonian_path_horizontal_line {
+  position: absolute;
+  top: 0rem;
+  left: calc(50% - 1px);
+
+  width: 2px;
+  height: 100%;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_vertical_line {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 0rem;
+
+  width: 100%;
+  height: 2px;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_top_right {
+  position: absolute;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_top_left {
+  position: absolute;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_bottom_right {
+  position: absolute;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_bottom_left {
+  position: absolute;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_top_line {
+  position: absolute;
+  top: 0rem;
+  left: calc(50% - 1px);
+
+  width: 2px;
+  height: calc(50% - 3px);
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_right_line {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% + 3px);
+
+  width: calc(50% - 3px);
+  height: 2px;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_bottom_line {
+  position: absolute;
+  top: calc(50% + 3px);
+  left: calc(50% - 1px);
+
+  width: 2px;
+  height: calc(50% - 3px);
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.hamiltonian_path_corner_left_line {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 0rem;
+
+  width: calc(50% - 3px);
+  height: 2px;
+
+  background-color: rgb(128 128 128 / 100%);
+}
+
+.reset_timing_settings_btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+
+  width: calc(100% - 1rem);
+  max-width: 75rem;
+
+  border-radius: var(--border-rounded-md);
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid rgb(233 86 58 / 100%);
+  color: rgb(var(--primary-negativ) / 100%);
+
+  background-color: transparent;
+  transition: background-color 400ms ease-in-out;
+}
+
+.reset_timing_settings_btn:hover {
+  background-color: rgb(233 86 58 / 100%);
+}
+
+.above_grid {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.above_grid_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stats {
+  margin-top: 1rem;
+
+  color: rgb(var(--primary-negativ) / 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stats_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section_for_showing_ham_select {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+
+  background-color: rgb(40 40 40 / 30%);
+
+  border: 1px solid rgb(var(--primary-negativ) / 100%);
+  border-radius: var(--border-rounded-lg);
+}
+
+.section_for_showing_ham_select_arrow {
+  position: relative;
+
+  margin-left: 0.25rem;
+  rotate: 0deg;
+
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.section_for_showing_ham_select_item_list_wrapper {
+}
+
+.section_for_showing_ham_select_item_list {
+  display: flex;
+  gap: 0.5rem;
+
+  flex-wrap: wrap;
+}
+
+.section_for_showing_ham_select_item_list > div {
+  width: 5rem;
+  cursor: pointer;
+
+  padding: 0.5rem;
+  background-color: rgb(255 255 255 / 5%);
+
+  border-radius: var(--border-rounded-md);
+  border: 1px solid rgb(var(--primary-negativ) / 25%);
+}
+
+.section_for_showing_ham_select_item_list > div:hover {
+  background-color: rgb(255 255 255 / 13%);
+}
+
+.section_for_showing_apply_section {
+  margin-top: 1rem;
+
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.main_selection_for_primary_buttons {
+  display: flex;
+  gap: 0.5rem;
+
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.snake_speed_slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
