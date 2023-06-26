@@ -13,7 +13,7 @@ const SnakeAI = () => {
             <div className={basic_layout_styles.top_information}>
               View source code{' '}
               <Link
-                href='https://github.com/mzoesch/zoeschinger/tree/master/next/src/lib/projects'
+                href='https://github.com/mzoesch/zoeschinger/blob/master/next/src/lib/projects/snakeAIDemo_HamiltonianCycle.ts'
                 target='_blank'
                 className={text_styles.link}
               >

@@ -45,7 +45,7 @@ export const projects = [
     'SAlgo',
     'A visualization tool for sorting algorithms. See how they work and perform in the web.',
     '-1',
-    '-1',
+    'https://github.com/mzoesch/zoeschinger/tree/master/app/lib/salgo',
     '/projects/salgo',
     'SortIcon'
   ),
@@ -53,7 +53,7 @@ export const projects = [
     'Snake AI',
     "Just some snakes, you can watch eating apples. Lucky you that those are harmless and don't bite you.",
     '-1',
-    '-1',
+    'https://github.com/mzoesch/zoeschinger/blob/master/next/src/lib/projects/snakeAIDemo_HamiltonianCycle.ts',
     '/projects/snakeai',
     'SnakeAIIcon'
   ),
