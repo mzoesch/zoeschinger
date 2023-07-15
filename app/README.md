@@ -50,7 +50,7 @@ Test if everything works so far
 ```
 gunicorn main:app -k uvicorn.workers.UvicornWorker
 
-curl http://localhost:800/
+curl http://localhost:8000/
 ```
 
 # 😈 Create a daemon
