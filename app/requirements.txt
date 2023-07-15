@@ -8,7 +8,7 @@ httptools==0.5.0
 idna==3.4
 pip==23.1.2
 pycodestyle==2.10.0
-pydantic==2.0
+pydantic==2.0.2
 python-dotenv==1.0.0
 PyYAML==6.0
 setuptools==68.0.0
