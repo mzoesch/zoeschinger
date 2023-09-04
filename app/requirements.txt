@@ -1,4 +1,4 @@
-anyio==3.7.1
+anyio==4.0.0
 autopep8==2.0.2
 certifi==2023.7.22
 click==8.1.6
