@@ -2,7 +2,7 @@ anyio==4.0.0
 autopep8==2.0.4
 certifi==2023.7.22
 click==8.1.7
-fastapi==0.101.0
+fastapi==0.103.1
 h11==0.14.0
 httptools==0.6.0
 idna==3.4
