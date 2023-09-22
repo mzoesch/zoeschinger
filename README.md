@@ -1,4 +1,4 @@
-# zoeschinger.com 🎉
+# 🎉 zoeschinger.com 🎉
 
 Just a website with NextJS and FastAPI where you can view some projects that I made 😄.
 
