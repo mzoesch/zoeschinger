@@ -1,0 +1,21 @@
+@use '@s/globals.module.scss' as g;
+@use './main.module.css';
+
+@media all and (min-width: g.$mobile) {
+  .front_text {
+    font-size: 2rem;
+  }
+  .very_intense_fancy_text {
+    font-size: 5rem;
+  }
+}
+
+@media all and (min-width: g.$sm) {
+  .front_text {
+    font-size: 5rem;
+  }
+
+  .very_intense_fancy_text {
+    font-size: 10rem;
+  }
+}

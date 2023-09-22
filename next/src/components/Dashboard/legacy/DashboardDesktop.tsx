@@ -1,4 +1,4 @@
-import styles from '@s/dashboard/main.module.scss';
+import styles from '@s/dashboard/legacy/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
 
 import { useRef, useEffect, useState } from 'react';

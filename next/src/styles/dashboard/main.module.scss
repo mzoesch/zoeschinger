@@ -2,20 +2,23 @@
 @use './main.module.css';
 
 @media all and (min-width: g.$mobile) {
-  .front_text {
-    font-size: 2rem;
+  .wrapper {
+    margin-top: 23vh;
+    font-size: 1.6rem;
   }
-  .very_intense_fancy_text {
-    font-size: 5rem;
+
+  .sub {
+    font-size: small;
   }
 }
 
 @media all and (min-width: g.$sm) {
-  .front_text {
-    font-size: 5rem;
+  .wrapper {
+    margin-top: 29vh;
+    font-size: 2.5rem;
   }
 
-  .very_intense_fancy_text {
-    font-size: 10rem;
+  .sub {
+    font-size: medium;
   }
 }

@@ -1,143 +1,25 @@
-@keyframes background-pan {
-  from {
-    background-position: 0% center;
-  }
-
-  to {
-    background-position: -400% center;
-  }
-}
-
-.front_text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: 700;
-  text-align: center;
-
-  transition: all;
-  transition-duration: 1300ms;
-}
-
-.very_intense_fancy_text {
-  color: rgb(236 64 122 / 100%);
-}
-
-.back_wrapper_mobile {
-  margin-top: 0rem;
-  margin-bottom: 3rem;
-
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-}
-
-.back_wrapper_mobile > div {
-  margin-top: 8rem;
-  margin-bottom: 8rem;
-
-  width: calc(100vw - 10rem);
-  max-width: 75rem;
-
-  padding: 2rem;
-  border-radius: var(--border-rounded-2xl);
-  background-color: rgb(128 128 128 / 15%);
-}
-
-.back_wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: calc(100vw - 20rem);
-  max-width: 75rem;
-
-  color: white;
-  font-weight: 700;
-  text-align: center;
-
-  padding: 2rem;
-  background-color: rgb(128 128 128 / 50%);
-  border-radius: var(--border-rounded-3xl);
-
-  transition: all;
-  transition-duration: 1300ms;
-}
-
-.back_navbar {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  width: 100vw;
-
-  transition: all;
-  transition-duration: 1300ms;
-}
-
-.back_footer {
-  position: absolute;
-
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-
-  transition: all;
-  transition-duration: 1300ms;
-}
-
 .main {
-  animation: background-pan var(--time) linear infinite;
+  display: flex;
+  flex-direction: column;
 
-  background: linear-gradient(
-    to right,
-    rgb(4, 0, 234),
-    rgb(98 0 234 / 100%),
-    rgb(255, 0, 225),
-    rgb(236 64 122/ 100%),
-    rgb(255, 0, 225),
-    rgb(98 0 234 / 100%),
-    rgb(4, 0, 234)
-  );
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 
-  background-size: 400%;
-  height: 100vh;
-  overflow: hidden;
+  min-width: 100vw;
+  min-height: 100vh;
+
+  background-color: rgb(var(--primary) / 100%);
+  color: rgb(var(--primary-negativ-off) / 100%);
 }
 
-.tiles {
-  position: relative;
+.sub {
+  flex: auto;
 
-  height: calc(100vh);
-  width: calc(100vw);
-
-  display: grid;
-  grid-template-columns: repeat(var(--columns), 1fr);
-  grid-template-rows: repeat(var(--rows), 1fr);
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
-.tile {
-  cursor: pointer;
-  position: relative;
-}
-
-.tile:hover::before {
-  background-color: rgb(35, 35, 35);
-}
-
-.tile::before {
-  background-color: rgb(15 15 15 / 100%);
-  content: '';
-  inset: 0.5px;
-  position: absolute;
-}
-
-.debug_tile {
-  position: absolute;
-  color: aliceblue;
+.footer_link {
+  color: rgb(70 126 236 / 100%);
 }

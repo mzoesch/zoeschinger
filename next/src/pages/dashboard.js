@@ -1,28 +1,8 @@
 import Head from 'next/head';
 import Layout from '@c/layouts/stdLayout';
-// import Dashboard from '@c/Dashboard';
-import DashboardDesktop from '@c/Dashboard/DashboardDesktop';
-import DashboardMobile from '@c/Dashboard/DashboardMobile';
-import { useEffect, useState } from 'react';
+import Dashboard from '@c/Dashboard';
 
 const Page = () => {
-  const [mediaQuery, setMediaQuery] = useState(null);
-
-  useEffect(() => {
-    const CheckMediaQuery = () => {
-      const mediaQuery = window.matchMedia('(max-width: 640px)');
-      setMediaQuery(mediaQuery.matches);
-    };
-
-    CheckMediaQuery();
-
-    window.addEventListener('resize', CheckMediaQuery);
-
-    return () => {
-      window.removeEventListener('resize', CheckMediaQuery);
-    };
-  }, []);
-
   return (
     <>
       <>
@@ -33,15 +13,14 @@ const Page = () => {
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        {mediaQuery ? <DashboardMobile /> : <DashboardDesktop />}
+        <Dashboard />
       </>
     </>
   );
 };
 
-// TODO: Create different layout
-// Page.getLayout = function getLayout(page) {
-//   return <Layout>{page}</Layout>;
-// };
+Page.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
 
 export default Page;
