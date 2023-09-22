@@ -1,6 +1,6 @@
 # zoeschinger.com 🎉
 
-Just a simple website with NextJS and FastAPI where you can view some projects that I made 😄.
+Just a website with NextJS and FastAPI where you can view some projects that I made 😄.
 
 <br />
 
