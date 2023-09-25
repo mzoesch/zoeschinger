@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: 'weekly'
     target-branch: 'dev'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 1
     commit-message:
       prefix: '⬆ ⏭️'
 
@@ -19,6 +19,6 @@ updates:
     schedule:
       interval: 'weekly'
     target-branch: 'dev'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 1
     commit-message:
       prefix: '⬆ 🐍'
