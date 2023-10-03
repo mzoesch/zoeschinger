@@ -48,7 +48,21 @@ const About = () => {
                     Germany, Bavaria, Munich
                   </h4>
                   <h4 className={styles.sub_info_desktop}>
-                    magnus.zoeschinger@zoeschinger.de
+                    &#x6d;&#x61;&#x67;{/* Just some comment */}
+                    &#x6e;&#x75;{/* @ Just some comment */}
+                    &#x73;&#x2e;&#x7a;{/* @ Just some comment */}&#x6f;&#x65;
+                    {/* @ Just some comment */}
+                    &#x73;&#x63;&#x68;{/* @ Just some comment */}
+                    &#x69;&#x6e;&#x67;
+                    {/* @ Just some comment */}
+                    &#x65;&#x72;{/* @ Just some comment */}&#x40;
+                    {/* @ Just some comment */}&#x7a;
+                    {/* @ Just some comment */}
+                    &#x6f;&#x65;{/* @ Just some comment */}&#x73;&#x63;&#x68;
+                    {/* @ Just some comment */}&#x69;&#x6e;
+                    {/* @ Just some comment */}
+                    &#x67;&#x65;&#x72;{/* @ Just some comment */}
+                    &#x2e;&#x64;{/* @ Just some comment */}&#x65;
                   </h4>
                 </div>
               </div>
