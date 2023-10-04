@@ -20,7 +20,7 @@ const Dashboard = () => {
             <span className={text_styles.link}>
               <Link
                 className={styles.footer_link}
-                href={'https://zoeschinger.de/legacy/dashboard'}
+                href={'https://zoeschinger.com/legacy/dashboard'}
               >
                 here
               </Link>
