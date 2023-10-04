@@ -394,7 +394,7 @@ Ham-cycle length: ${snakeGrid.hamiltonianCycleLength}
                       <div className={text_styles.paragraph}>
                         These ham cycles were precalculated with the generate
                         &quot;absolute random new ham cycle&quot; option (you
-                        can find it under the &quot;auto&quot; rato option). It
+                        can find it under the &quot;auto&quot; ratio option). It
                         is not really handy to use this algorithm because it has
                         a time complexity of O(n^3) and it is therefore not
                         efficient. But fun to watch while it is suffering.
