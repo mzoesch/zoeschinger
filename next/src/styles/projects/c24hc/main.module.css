@@ -1,0 +1,44 @@
+.nav_title {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.logo {
+  padding-top: 1rem;
+  height: 2.5rem;
+
+  fill: white;
+
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  background-color: rgb(6, 55, 115);
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn_area {
+  margin-top: 1rem;
+
+  background-color: black;
+  height: 10rem;
+}
+
+.results_area {
+  margin-top: 1rem;
+
+  background-color: black;
+  /* height: 20rem; */
+}
+
+.offer_container {
+  background-color: red;
+  height: 5rem;
+}
