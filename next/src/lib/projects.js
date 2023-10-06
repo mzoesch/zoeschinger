@@ -42,6 +42,14 @@ class Project {
 
 export const projects = [
   new Project(
+    'C24 HC',
+    "Check 24's GenDev Holiday Challenge from autumn 2023.",
+    '-1',
+    'https://github.com/mzoesch/zoeschinger/tree/master/app/lib/c24hc',
+    '/projects/c24hc',
+    'C24HCIcon'
+  ),
+  new Project(
     'SAlgo',
     'A visualization tool for sorting algorithms. See how they work and perform in the web.',
     '-1',

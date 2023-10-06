@@ -5,6 +5,8 @@ export { default as GitHubLogo } from '@p/svg/GitHubLogo.svg';
 export { default as LinkIcon } from '@p/svg/LinkIcon.svg';
 export { default as TextIcon } from '@p/svg/TextIcon.svg';
 export { default as SortIcon } from '@p/svg/SortIcon.svg';
+export { default as C24HCIcon } from '@p/svg/C24HCIcon.svg';
+export { default as Check24Icon } from '@p/svg/Check24Icon.svg';
 export { default as ShuttleIcon } from '@p/svg/ShuttleIcon.svg';
 export { default as Projects_SAlgo_SSD } from '@p/svg/projects_salgo_ssd.svg';
 export { default as BadAppleIcon } from '@p/svg/BadAppleIcon.svg';

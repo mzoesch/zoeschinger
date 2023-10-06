@@ -1,5 +1,5 @@
 // Following the norm of ~view.dio
-// Class should only used to communicate with the ReST-api
+// Class should only be used to communicate with the ReST-api
 
 export class SAlgo {
   #type;
