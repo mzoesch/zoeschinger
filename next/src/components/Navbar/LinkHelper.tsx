@@ -16,6 +16,7 @@ import {
   ShuttleIcon,
   BadAppleIcon,
   SnakeAIIcon,
+  C24HCIcon,
 } from '@c/svg';
 
 import { useState, useEffect, useRef } from 'react';
@@ -148,6 +149,9 @@ const LinksMobile = () => {
                         )}
                         {element.icon === 'SnakeAIIcon' && (
                           <SnakeAIIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'C24HCIcon' && (
+                          <C24HCIcon className={styles.prj_icon} />
                         )}
                         {element.title}
                       </a>
