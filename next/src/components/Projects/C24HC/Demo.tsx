@@ -19,38 +19,16 @@ const Demo = () => {
   const [model, _] = useState<Model>(new Model());
   const [offers, setOffers] = useState<Offer[]>([]);
 
-  // region MISC
-
-  const [updateDOM, setUpdateDOM] = useState(0);
-  const handleUpdateDOM = () => {
-    if (updateDOM == 1) {
-      setUpdateDOM(0);
-
-      return;
-    }
-
-    setUpdateDOM(1);
-    return;
-  };
-
-  // endregion MISC
-
   async function loadTrendingOffers() {
-    const offers: Offer[] = await model.sendGETReqForTrendingOffers();
-    if (offers.length == 0) {
-      console.error('No trending offers found.');
-      return;
-    }
-
-    setOffers(offers);
+    model.sendGETReqForTrendingOffers().then((res: Offer[]) => {
+      setOffers(res);
+    });
 
     return;
   }
 
   useEffect(() => {
-    loadTrendingOffers().catch((err) => {
-      console.error(err);
-    });
+    loadTrendingOffers();
   }, []);
 
   return (
@@ -70,10 +48,8 @@ const Demo = () => {
         <div className={styles.btn_area}></div>
         <h2>asdf</h2>
         <div className={styles.results_area}>
-          {offers.map((offer: Offer) => (
-            <div key={offer.id} className={styles.offer_container}>
-              <h1 style={{ color: 'green' }}>hu</h1>
-            </div>
+          {offers.map((t: Offer) => (
+            <div key={t.id}>{t.id}</div>
           ))}
         </div>
       </div>
