@@ -15,20 +15,43 @@ const rubik = Rubik({ subsets: ['latin-ext'] });
 import { Source_Code_Pro } from 'next/font/google';
 const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
 
+import OfferShowcase from './utils/OfferShowcase';
+
 const Demo = () => {
   const [model, _] = useState<Model>(new Model());
   const [offers, setOffers] = useState<Offer[]>([]);
 
   async function loadTrendingOffers() {
-    model.sendGETReqForTrendingOffers().then((res: Offer[]) => {
-      setOffers(res);
-    });
+    model
+      .sendGETReqForTrendingOffers()
+      .then((res: Components.Schemas.APIResponse.Trending) => {
+        setOffers((prev) => res.offers);
+      });
 
     return;
   }
 
-  useEffect(() => {
+  async function storeAvailableHotelMockImageIndices() {
+    model
+      .sendGETReqForAvailableHotelMockImageIndices()
+      .then(
+        (
+          res: Components.Schemas.APIResponse.AvailableHotelMockImageIndices
+        ) => {
+          model.availableHotelMockImgURLIndices = res.until;
+        }
+      );
+
+    return;
+  }
+
+  async function loadDefault() {
+    await storeAvailableHotelMockImageIndices();
     loadTrendingOffers();
+  }
+
+  useEffect(() => {
+    loadDefault();
   }, []);
 
   return (
@@ -46,10 +69,10 @@ const Demo = () => {
           <div className={styles.nav_title}>GenDev Autumn 2023</div>
         </div>
         <div className={styles.btn_area}></div>
-        <h2>asdf</h2>
+        <h2>Our best offers:</h2>
         <div className={styles.results_area}>
-          {offers.map((t: Offer) => (
-            <div key={t.id}>{t.id}</div>
+          {offers.map((offer: Offer) => (
+            <OfferShowcase offer={offer} model={model} key={offer.offerid} />
           ))}
         </div>
       </div>
