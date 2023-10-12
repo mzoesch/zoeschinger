@@ -1,0 +1,3 @@
+def main(*args, **kwargs):
+    """Currently out of service."""
+    ...

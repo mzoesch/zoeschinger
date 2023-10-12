@@ -32,13 +32,12 @@
 }
 
 .results_area {
-  margin-top: 1rem;
+  width: 100%;
 
-  background-color: green;
-  /* height: 20rem; */
-}
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
-.offer_container {
-  background-color: red;
-  height: 5rem;
+  gap: 0.5rem;
 }

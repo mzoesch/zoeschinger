@@ -1,0 +1,101 @@
+.container {
+  position: relative;
+
+  margin: 4rem;
+}
+
+.hotelname {
+  top: 0rem;
+  left: 0rem;
+
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.hotel_rating {
+  top: 0rem;
+  right: 0rem;
+
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.picture {
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  right: 0rem;
+
+  margin: 1rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.dot {
+  position: relative;
+  width: 17px;
+  height: 17px;
+
+  background-color: grey;
+  border-radius: 50%;
+}
+
+.dot_connection_wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dot_connection {
+  position: relative;
+  width: 4px;
+  height: 50px;
+
+  background-color: grey;
+}
+
+.flight_time {
+  white-space: nowrap;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+
+.side_information {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.vertical_line {
+  position: relative;
+  height: 20px;
+  width: 1px;
+
+  background-color: grey;
+}
