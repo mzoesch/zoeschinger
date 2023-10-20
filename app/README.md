@@ -246,3 +246,13 @@ sudo systemctl restart nginx
 ```
 
 Congrats. Your api should now be encrypted
+
+# Overwrite env
+
+```
+conda env export > environment.yml --no-builds
+```
+
+```
+pip freeze > requirements.txt
+```
