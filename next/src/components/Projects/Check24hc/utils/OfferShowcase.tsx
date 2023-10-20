@@ -13,8 +13,10 @@ import { Model } from '@m/Check24hc';
 
 const OfferShowcase = ({ offer, model }: { offer: Offer; model: Model }) => {
   const [breakfast, setBreakfast] = useState<string>('');
-  offer.countadults = 4;
-  offer.countchildren = 5;
+
+  // Just for debugging purposes; remove after finishing
+  // offer.countadults = 4;
+  // offer.countchildren = 5;
 
   const getDuration = (offer: Offer): number => {
     const start = new Date(offer.outbounddeparturedatetime);
