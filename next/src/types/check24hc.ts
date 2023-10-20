@@ -1,7 +1,7 @@
 export type Unused = any;
 
-declare namespace Components {
-  declare namespace Schemas {
+export declare namespace Components {
+  namespace Schemas {
     export interface Hotel {
       hotelid: number;
       hotelname: string;
@@ -27,7 +27,7 @@ declare namespace Components {
 
       detail: string;
     }
-    declare namespace APIResponse {
+    namespace APIResponse {
       export interface Trending {
         offers: Offer[];
       }
@@ -47,8 +47,8 @@ declare namespace Components {
   }
 }
 
-declare namespace Paths {
-  declare namespace GetTrendingOffers {
+export declare namespace Paths {
+  namespace GetTrendingOffers {
     namespace Parameters {
       export type duration = number;
     }

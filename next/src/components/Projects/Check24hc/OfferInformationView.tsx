@@ -1,13 +1,13 @@
 'use client';
 
-import styles from '@s/projects/c24hc/main.module.scss';
-import more_styles from '@s/projects/c24hc/search_offer.module.scss';
+import styles from '@s/projects/check24hc/main.module.scss';
+import more_styles from '@s/projects/check24hc/search_offer.module.scss';
 import text_styles from '@s/text/main.module.scss';
 import btn_styles from '@s/buttons/main.module.scss';
 
-import { Model } from '@m/C24HC';
+import { Model } from '@m/Check24hc';
 
-import { Components } from '@t/c24hc';
+import { Components } from '@t/check24hc';
 import Offer = Components.Schemas.Offer;
 
 import { Check24Icon } from '@c/svg';
@@ -69,7 +69,7 @@ const Demo = () => {
       return;
     };
 
-    if (route.startsWith('/projects/demo/c24hc/search')) {
+    if (route.startsWith('/projects/demo/check24hc/search')) {
       const offerid: number = parseInt(
         route.split('?offerid=')[1].split('&')[0]
       );
