@@ -126,10 +126,8 @@ def get_c24hc_trending() -> c24hc_model.TrendingOffersModel:
     response_model=c24hc_model.Offer,
     tags=['c24hc']
 )
-# @ft.lru_cache(maxsize=50)
+@ft.lru_cache(maxsize=50)
 def get_c24hc_offer(offer_id: int) -> c24hc_model.Offer:
-    time.sleep(1)
-
     if offer_id < 0:
         raise HTTPException(status_code=404, detail='Offer not found.')
 
