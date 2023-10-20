@@ -35,7 +35,6 @@ const Check24hc = () => {
             <div className={text_styles.paragraph}>
               You can view the demo{' '}
               <Link
-                target='_blank'
                 href='/projects/demo/check24hc'
                 className={text_styles.link}
               >
