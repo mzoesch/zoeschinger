@@ -68,12 +68,14 @@ const Demo = () => {
           </div>
           <div className={styles.nav_title}>GenDev Autumn 2023</div>
         </div>
-        <div className={styles.btn_area}></div>
-        <h2>Our best offers:</h2>
-        <div className={styles.results_area}>
-          {offers.map((offer: Offer) => (
-            <OfferShowcase offer={offer} model={model} key={offer.offerid} />
-          ))}
+        <div className={styles.main}>
+          <div className={styles.btn_area}></div>
+          <h2>Our best offers:</h2>
+          <div className={styles.results_area}>
+            {offers.map((offer: Offer) => (
+              <OfferShowcase offer={offer} model={model} key={offer.offerid} />
+            ))}
+          </div>
         </div>
       </div>
     </>
