@@ -1,4 +1,4 @@
-import styles from '@s/projects/c24hc/offer_showcase.module.scss';
+import styles from '@s/projects/check24hc/offer_showcase.module.scss';
 
 import { useState, useEffect } from 'react';
 
@@ -6,10 +6,10 @@ import Image from 'next/image';
 
 import Link from 'next/link';
 
-import { Components } from '@t/c24hc';
+import { Components } from '@t/check24hc';
 import Offer = Components.Schemas.Offer;
 
-import { Model } from '@m/C24HC';
+import { Model } from '@m/Check24hc';
 
 const OfferShowcase = ({ offer, model }: { offer: Offer; model: Model }) => {
   const [breakfast, setBreakfast] = useState<string>('');
