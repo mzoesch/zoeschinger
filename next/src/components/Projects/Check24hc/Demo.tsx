@@ -60,7 +60,7 @@ const Demo = () => {
         <div className={styles.nav}>
           <div>
             <a
-              href='https://www.zoeschinger.com/projects/c24hc'
+              href='https://www.zoeschinger.com/projects/check24hc'
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
               <Check24Icon className={styles.logo} />
