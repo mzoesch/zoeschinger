@@ -45,8 +45,8 @@ export const projects = [
     'C24 HC',
     "Check 24's GenDev Holiday Challenge from autumn 2023.",
     '-1',
-    'https://github.com/mzoesch/zoeschinger/tree/master/app/lib/c24hc',
-    '/projects/c24hc',
+    'https://github.com/mzoesch/zoeschinger/tree/master/app/lib/c24hc_main.py',
+    '/projects/check24hc',
     'C24HCIcon'
   ),
   new Project(

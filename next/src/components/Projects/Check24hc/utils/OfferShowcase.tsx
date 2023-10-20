@@ -52,7 +52,7 @@ const OfferShowcase = ({ offer, model }: { offer: Offer; model: Model }) => {
   return (
     <Link
       href={{
-        pathname: '/projects/demo/c24hc/search',
+        pathname: '/projects/demo/check24hc/search',
         query: { offerid: offer.offerid },
       }}
       style={{ textDecoration: 'none', color: 'inherit' }}
