@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '@c/layouts/projectsLayout';
-import C24HC from '@c/projects/C24HC';
+// import C24HC from '@c/projects/C24HC';
+import SAlgo from '@c/Projects/SAlgo';
 
 const Page = () => {
   return (
@@ -13,7 +14,7 @@ const Page = () => {
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <C24HC />
+        <SAlgo />
       </>
     </>
   );
