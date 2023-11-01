@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Layout from '@c/layouts/stdLayout';
+import Layout from '@c/layouts/check24hcLayout';
 import Demo from '@c/Projects/Check24hc/OfferInformationView';
 
 const Page = () => {
@@ -15,9 +15,16 @@ const Page = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Demo />
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <Demo />
+        <div style={{ marginTop: '9rem' }}></div>
+      </div>
     </>
   );
+};
+
+Page.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Page;
