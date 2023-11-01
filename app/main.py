@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from pathlib import Path
 from fastapi.responses import FileResponse as Fileres
+from fastapi.staticfiles import StaticFiles
 
 from lib import c24hc_main, salgo_main
 
@@ -44,6 +45,7 @@ def root():
 
 # region /projects/salgo
 
+
 @app.get('/projects/salgo', tags=['salgo'])
 def get_salgo():
     return {'SAlgo': 'Make a POST request to get started.'}
@@ -66,7 +68,7 @@ def post_salgo(req: salgo_model.Model):
         'sortedSteps': backend_algorithm.sortedSteps
     }
 
-# endregion
+# endregion /projects/salgo
 
 # region /projects/c24hc
 
@@ -281,7 +283,18 @@ def get_room_type_names():
         roomtypes=c24hc_data.room_type_names
     )
 
-# endregion
+# endregion /projects/c24hc
+
+
+# region /static files
+
+app.mount(
+    '/static',
+    StaticFiles(directory='static'),
+    name='static'
+)
+
+# endregion /static files
 
 
 def main():
