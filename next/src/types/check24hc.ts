@@ -7,6 +7,7 @@ export declare namespace Components {
       hotelname: string;
       hotelstars: number;
     }
+
     export interface Offer {
       offerid: number;
       hotel: Hotel;
@@ -27,6 +28,7 @@ export declare namespace Components {
 
       detail: string;
     }
+
     namespace APIResponse {
       export interface Trending {
         offers: Offer[];
@@ -42,6 +44,17 @@ export declare namespace Components {
       }
       export interface RoomTypeNames {
         roomtypes: { [key: string]: string };
+      }
+    }
+
+    namespace Form {
+      export interface Search {
+        duration: number;
+        earliestdeparturedate: string;
+        latestreturndate: string;
+        countadults: number;
+        countchildren: number;
+        departureairports: Array<string>;
       }
     }
   }

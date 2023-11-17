@@ -5,6 +5,7 @@ import { Model } from '@m/Check24hc';
 
 import { Components } from '@t/check24hc';
 import Offer = Components.Schemas.Offer;
+import SearchForm = Components.Schemas.Form.Search;
 
 import { Check24Icon } from '@c/svg';
 
@@ -16,10 +17,16 @@ import { Source_Code_Pro } from 'next/font/google';
 const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
 
 import OfferShowcase from './utils/OfferShowcase';
+import Form from './utils/Form';
 
 const Demo = () => {
   const [model, _] = useState<Model>(new Model());
   const [offers, setOffers] = useState<Offer[]>([]);
+
+  async function onSubmitSearchForm(params: SearchForm) {
+    console.log(params);
+    return;
+  }
 
   async function loadTrendingOffers() {
     model
@@ -69,12 +76,25 @@ const Demo = () => {
           <div className={styles.nav_title}>GenDev Autumn 2023</div>
         </div>
         <div className={styles.main}>
-          <div className={styles.btn_area}></div>
-          <h2>Our best offers:</h2>
-          <div className={styles.results_area}>
-            {offers.map((offer: Offer) => (
-              <OfferShowcase offer={offer} model={model} key={offer.offerid} />
-            ))}
+          <div className={styles.btn_area}>
+            <Form submitCallback={onSubmitSearchForm} model={model} />
+          </div>
+          <h2 className={styles.offers_title}>Our best offers:</h2>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <div className={styles.results_area}>
+              {offers.map((offer: Offer) => (
+                <OfferShowcase
+                  offer={offer}
+                  model={model}
+                  key={offer.offerid}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

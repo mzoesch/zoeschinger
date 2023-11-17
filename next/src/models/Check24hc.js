@@ -121,4 +121,33 @@ export class Model {
 
     return await res.json();
   }
+
+  async sendRequestForMatchingOffers(
+    duration,
+    earliestDepartureDate,
+    latestReturnDate,
+    countAdults,
+    countChildren,
+    departureAirports
+  ) {
+    const apiEndpoint =
+      process.env.PRIVATE_API_ENDPOINT + 'projects/c24hc/????';
+
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        duration: duration,
+        earliestDepartureDate: earliestDepartureDate,
+        latestReturnDate: latestReturnDate,
+        countAdults: countAdults,
+        countChildren: countChildren,
+        departureAirports: departureAirports,
+      }),
+    });
+
+    return await res.json();
+  }
 }
