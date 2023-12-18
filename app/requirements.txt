@@ -1,5 +1,5 @@
 annotated-types==0.6.0
-anyio==3.7.1
+anyio==4.2.0
 Bottleneck @ file:///Users/ec2-user/ci_py311/bottleneck_1678322312632/work
 click==8.1.7
 fastapi==0.103.2
