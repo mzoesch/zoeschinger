@@ -6,7 +6,6 @@ import { Model } from '@m/Check24hc';
 import { Components } from '@t/check24hc';
 import Offer = Components.Schemas.Offer;
 import SearchForm = Components.Schemas.Form.Search;
-
 import { Check24Icon } from '@c/svg';
 
 import { useState, useEffect } from 'react';
@@ -24,7 +23,19 @@ const Demo = () => {
   const [offers, setOffers] = useState<Offer[]>([]);
 
   async function onSubmitSearchForm(params: SearchForm) {
-    console.log(params);
+    model
+      .sendRequestForMatchingOffers(
+        params.duration,
+        params.earliestdeparturedate,
+        params.latestreturndate,
+        params.countadults,
+        params.countchildren,
+        params.departureairports
+      )
+      .then((res: Components.Schemas.APIResponse.Trending) => {
+        setOffers((prev) => res.offers);
+      });
+
     return;
   }
 

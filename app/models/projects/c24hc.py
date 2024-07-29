@@ -35,6 +35,19 @@ class Offer(BaseModel):
     inboundarrivalairport: str
 
 
+class SearchForOffersModel(BaseModel):
+    duration: int
+    earliestdeparturedate: str
+    latestreturndate: str
+    departureairports: List[str]
+    countadults: int
+    countchildren: int
+
+
+class SearchOffersModel(BaseModel):
+    offers: list[Offer] | None = None
+
+
 class TrendingOffersModel(BaseModel):
     offers: list[Offer] | None = None
 
