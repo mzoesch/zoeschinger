@@ -131,7 +131,7 @@ export class Model {
     departureAirports
   ) {
     const apiEndpoint =
-      process.env.PRIVATE_API_ENDPOINT + 'projects/c24hc/????';
+      process.env.PRIVATE_API_ENDPOINT + 'projects/c24hc/matching_offers';
 
     const res = await fetch(apiEndpoint, {
       method: 'POST',
@@ -140,11 +140,11 @@ export class Model {
       },
       body: JSON.stringify({
         duration: duration,
-        earliestDepartureDate: earliestDepartureDate,
-        latestReturnDate: latestReturnDate,
-        countAdults: countAdults,
-        countChildren: countChildren,
-        departureAirports: departureAirports,
+        earliestdeparturedate: earliestDepartureDate,
+        latestreturndate: latestReturnDate,
+        countadults: countAdults,
+        countchildren: countChildren,
+        departureairports: departureAirports,
       }),
     });
 
