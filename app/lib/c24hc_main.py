@@ -69,6 +69,7 @@ class Data:
     TO_MEALTYPE: str = 'mealtype'
     TO_OCEANVIEW: str = 'oceanview'
     TO_ROOMTYPE: str = 'roomtype'
+    TO_START_DATE_INT: str = 'startdateasint'
 
     # endregion
 
@@ -102,6 +103,7 @@ class Data:
             self._initial_setup()
 
         self._con.close()
+
         return None
 
     @property
@@ -126,6 +128,60 @@ class Data:
 
         return None
 
+    @staticmethod
+    def _convert_str_date_to_bit_date(in_str: str) -> str:
+        """
+        In order to save some bits we subtract 2_000 from the input year.
+        Works until: 2127-12-31.
+
+        00 0000   <- 5 bit day
+        0000      <- 4 bit month  /// 9 bit
+        000 0000  <- 7 bit year   /// 16 bit
+
+        Example:
+
+        year,       month,      day
+        000 0000    0000        00 0000
+
+        2024,       January,    1
+        1 1000      0001        0 0001
+        """
+
+        def deserialize(string: str) -> list[int]:
+            """
+            :param string: 2020-10-05
+            :return: [year, month, day]
+            """
+            if len(string.split("-")) != 3:
+                raise ValueError("Invalid Date.")
+
+            return [
+                int(_)
+                for _ in
+                string.split("-")
+            ]
+        
+        year, month, day = deserialize(in_str)
+
+        year -= 2_000
+
+        if year < 0x0 or year > 0b1111111:
+            raise ValueError(f"Year is out of bounds: {year + 2_000 = }.")
+        if month > 0b1111:
+            raise ValueError(f"Month is out of bounds: {month}")
+        if day > 0b11111:
+            raise ValueError(f"Day is out of bounds: {day}")
+
+        bit_16: int = 0
+
+        bit_16 += year
+        bit_16 = bit_16 << 4
+        bit_16 += month
+        bit_16 = bit_16 << 5
+        bit_16 += day
+
+        return bit_16
+    
     def _initial_setup(self) -> None:
 
         @log_time_v2
@@ -172,7 +228,7 @@ VALUES (?, ?, ?);\
         def initialise_offer_table() -> None:
 
             @log_time_v2
-            def process_chunk(chunk: pd.DataFrame, index: int):
+            def process_chunk(chunk: pd.DataFrame, index: int) -> None:
                 chunk.to_sql(
                     Data.OFFER_TABLE_NAME,
                     self._con,
@@ -219,7 +275,7 @@ CREATE TABLE IF NOT EXISTS {} (\
                 Data.TO_OUTBOUND_ARRIVAL_DATE_TIME,
                 Data.TO_MEALTYPE,
                 Data.TO_OCEANVIEW,
-                Data.TO_ROOMTYPE
+                Data.TO_ROOMTYPE,
             )
             self._cur.execute(sql)
 
@@ -230,6 +286,16 @@ CREATE TABLE IF NOT EXISTS {} (\
                         self._data_offers, chunksize=7_500_000, delimiter=','
                     )
             ):
+                chunk: pd.core.frame.DataFrame = chunk
+                
+                # # 2023-02-05T11:45:00+00:00
+                # DATE_LEN: int = 10
+                # Data._convert_str_date_to_bit_date(chunk[Data.TO_INBOUND_DEPARTURE_DATE_TIME][:DATE_LEN])
+
+                # # TODO Here add the new column (start date as int)
+                # # chunk.add(my new row)
+                # chunk.
+
                 process_chunk(chunk, index=i)
 
                 continue
@@ -266,7 +332,83 @@ LIMIT {};\
         self._db_logout()
 
         return rows
+    
+    def _validate_matching_offer_req(
+        self,
+        *,
+        duration: int,
+        earliest_departure_date: str,
+        latest_departure_date: str,
+        count_adults: int,
+        count_children: int,
+        departure_airports: list[str],
+        limit: int = 10
+    ) -> bool:
+        if (count_adults < 1):
+            return False
+        
+        if (count_children < 0):
+            return False
+        
+        if (duration < 1):
+            return False
+    
+        return True
 
+    @log_time_v2
+    # @ft.lru_cache(maxsize=20)
+    def get_matching_offers(
+        self,
+        /,
+        limit:int = 10,
+        *,
+        duration: int,
+        earliest_departure_date: str,
+        latest_departure_date: str,
+        count_adults: int,
+        count_children: int,
+        departure_airports: list[str]
+    ) -> list[dict]:
+        """
+        @return: [(offerid, hotelid), ...]
+        """
+
+        if (self._validate_matching_offer_req(
+            duration=duration,
+            earliest_departure_date=earliest_departure_date,
+            latest_departure_date=latest_departure_date,
+            count_adults=count_adults,
+            count_children=count_children,
+            departure_airports=departure_airports
+        ) == False):
+            print("Invalid request. Ignoring.")
+            return []
+
+        print(duration)
+        print(earliest_departure_date)
+        print(latest_departure_date)
+        print(count_adults)
+        print(count_children)
+        print(departure_airports)
+        print(limit)
+
+        sql: str = '\
+SELECT {}, {} FROM {} \
+LIMIT {} \
+        '.format(
+            Data.TO_PK,
+            Data.TO_HOTEL_ID,
+            Data.OFFER_TABLE_NAME,
+            limit
+        )
+        
+        self._db_login()
+        self._cur.execute(sql)
+        rows: list[tuple] = self._cur.fetchall()
+        self._db_logout()
+
+        return rows
+        
     @log_time_v2
     @ft.lru_cache(maxsize=10)
     def get_hotel_information(self, hotelid: int) -> dict:

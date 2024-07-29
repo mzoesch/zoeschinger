@@ -283,6 +283,61 @@ def get_room_type_names():
         roomtypes=c24hc_data.room_type_names
     )
 
+@app.post(
+    '/projects/c24hc/matching_offers',
+    response_model=c24hc_model.TrendingOffersModel,
+    tags=['c24hc']
+)
+def get_matching_offers(req: c24hc_model.SearchForOffersModel):
+    def transform_to_model(offer: tuple):
+        hotel_information: dict = c24hc_data.get_hotel_information(
+            hotelid=offer[1]
+        )
+        hotel: c24hc_model.Hotel = c24hc_model.Hotel(
+            hotelid=hotel_information[c24hc_main.Data.TH_HOTEL_ID],
+            hotelname=hotel_information[c24hc_main.Data.TH_HOTEL_NAME],
+            hotelstars=hotel_information[c24hc_main.Data.TH_HOTEL_STAR_RATING]
+        )
+
+        offer_information: dict = c24hc_data.get_offer_information(
+            offerid=offer[0]
+        )
+        offer: c24hc_model.Offer = c24hc_model.Offer(
+            offerid=offer_information[c24hc_main.Data.TO_PK],
+            hotel=hotel,
+            countadults=offer_information[c24hc_main.Data.TO_COUNT_ADULTS],
+            countchildren=offer_information[c24hc_main.Data.TO_COUNT_CHILDREN],
+            price=offer_information[c24hc_main.Data.TO_PRICE],
+            mealtype=offer_information[c24hc_main.Data.TO_MEALTYPE],
+            oceanview=offer_information[c24hc_main.Data.TO_OCEANVIEW],
+            roomtype=offer_information[c24hc_main.Data.TO_ROOMTYPE],
+            outbounddeparturedatetime=offer_information[c24hc_main.Data.TO_OUTBOUND_DEPARTURE_DATE_TIME],
+            outbounddepartureairport=offer_information[c24hc_main.Data.TO_OUTBOUND_DEPARTURE_AIRPORT],
+            outboundarrivaldatetime=offer_information[c24hc_main.Data.TO_OUTBOUND_ARRIVAL_DATE_TIME],
+            outboundarrivalairport=offer_information[c24hc_main.Data.TO_OUTBOUND_ARRIVAL_AIRPORT],
+            inbounddeparturedatetime=offer_information[c24hc_main.Data.TO_INBOUND_DEPARTURE_DATE_TIME],
+            inbounddepartureairport=offer_information[c24hc_main.Data.TO_INBOUND_DEPARTURE_AIRPORT],
+            inboundarrivaldatetime=offer_information[c24hc_main.Data.TO_INBOUND_ARRIVAL_DATE_TIME],
+            inboundarrivalairport=offer_information[c24hc_main.Data.TO_INBOUND_ARRIVAL_AIRPORT]
+        )
+
+        return offer
+
+    matching_offers: list[tuple] = c24hc_data.get_matching_offers(
+        20,
+        duration=req.duration,
+        earliest_departure_date=req.earliestdeparturedate,
+        latest_departure_date=req.latestreturndate,
+        count_adults=req.countadults,
+        count_children=req.countchildren,
+        departure_airports=[airport_code for airport_code in req.departureairports]
+    )
+    res: c24hc_model.SearchOffersModel = c24hc_model.SearchOffersModel(offers=[
+        transform_to_model(offer) for offer in matching_offers
+    ])
+
+    return res
+
 # endregion /projects/c24hc
 
 
