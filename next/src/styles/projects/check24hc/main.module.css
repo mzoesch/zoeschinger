@@ -60,3 +60,19 @@
   font-size: 2rem;
   font-weight: 600;
 }
+
+.disclaimer_outdated {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background-color: rgb(115, 6, 51);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: rgb(255, 0, 0);
+  margin-bottom: 3rem;
+  color: white;
+  text-align: justify;
+}

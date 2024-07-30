@@ -87,6 +87,18 @@ const Demo = () => {
           <div className={styles.nav_title}>GenDev Autumn 2023</div>
         </div>
         <div className={styles.main}>
+          <div className={styles.disclaimer_outdated}>
+            As this the GenDev uses specific offer data somewhere in the past of
+            2023, the offers shown here are outdated and not up-to-date.
+            Therefore I have disabled the search form for the start and end
+            date. These options will not get checked in the backend. Only the
+            duration will be used to determine the time frame of the offer. The
+            other options work as intended. <br />
+            Note that due to server storage limitations (only 1 GB for the whole
+            website) a smaller sample of the true data is used (~500MB of 20GB).
+            Most of the offers in this section are from MUC. You will get less
+            to sadly even none results for other airports.
+          </div>
           <div className={styles.btn_area}>
             <Form submitCallback={onSubmitSearchForm} model={model} />
           </div>
