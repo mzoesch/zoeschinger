@@ -1,3 +1,4 @@
+import datetime
 from pathlib import Path
 import sqlite3
 import functools as ft
@@ -160,7 +161,7 @@ class Data:
                 for _ in
                 string.split("-")
             ]
-        
+
         year, month, day = deserialize(in_str)
 
         year -= 2_000
@@ -181,7 +182,7 @@ class Data:
         bit_16 += day
 
         return bit_16
-    
+
     def _initial_setup(self) -> None:
 
         @log_time_v2
@@ -287,7 +288,7 @@ CREATE TABLE IF NOT EXISTS {} (\
                     )
             ):
                 chunk: pd.core.frame.DataFrame = chunk
-                
+
                 # # 2023-02-05T11:45:00+00:00
                 # DATE_LEN: int = 10
                 # Data._convert_str_date_to_bit_date(chunk[Data.TO_INBOUND_DEPARTURE_DATE_TIME][:DATE_LEN])
@@ -332,7 +333,7 @@ LIMIT {};\
         self._db_logout()
 
         return rows
-    
+
     def _validate_matching_offer_req(
         self,
         *,
@@ -346,14 +347,22 @@ LIMIT {};\
     ) -> bool:
         if (count_adults < 1):
             return False
-        
+
         if (count_children < 0):
             return False
-        
+
         if (duration < 1):
             return False
-    
+
         return True
+
+    def _get_duration(self, t0: str, t1: str) -> int:
+        date_t0: datetime.datetime = datetime.datetime.strptime(t0, '%Y-%m-%dT%H:%M:%S%z')
+        date_t1: datetime.datetime = datetime.datetime.strptime(t1, '%Y-%m-%dT%H:%M:%S%z')
+        day_of_year_t0: int = date_t0.timetuple().tm_yday
+        day_of_year_t1: int = date_t1.timetuple().tm_yday
+
+        return day_of_year_t1 - day_of_year_t0
 
     @log_time_v2
     # @ft.lru_cache(maxsize=20)
@@ -380,35 +389,53 @@ LIMIT {};\
             count_adults=count_adults,
             count_children=count_children,
             departure_airports=departure_airports
-        ) == False):
+        ) is False):
             print("Invalid request. Ignoring.")
             return []
 
-        print(duration)
-        print(earliest_departure_date)
-        print(latest_departure_date)
-        print(count_adults)
-        print(count_children)
-        print(departure_airports)
-        print(limit)
-
         sql: str = '\
-SELECT {}, {} FROM {} \
-LIMIT {} \
+SELECT {}, {}, {}, {} FROM {} \
+WHERE {} IN ({}) \
         '.format(
             Data.TO_PK,
             Data.TO_HOTEL_ID,
+            Data.TO_OUTBOUND_DEPARTURE_DATE_TIME,
+            Data.TO_INBOUND_ARRIVAL_DATE_TIME,
             Data.OFFER_TABLE_NAME,
-            limit
+
+            Data.TO_OUTBOUND_DEPARTURE_AIRPORT,
+            ','.join(f'?' for port in tuple(departure_airports)),
         )
-        
+
         self._db_login()
-        self._cur.execute(sql)
-        rows: list[tuple] = self._cur.fetchall()
+        self._cur.execute(sql, tuple(departure_airports))
+
+        rows: list[dict] = []
+
+        while ...:
+            if len(rows) >= limit:
+                break
+
+            some_rows: list[dict] = self._cur.fetchmany(limit)
+
+            if len(some_rows) == 0:
+                break
+
+            for row in some_rows:
+                dur: int = self._get_duration(row[2], row[3])
+                if dur + 1 != duration and dur + 1 != duration + 1:
+                    continue
+
+                rows.append(row)
+
+            continue
+
+        # self._cur.fetchmany(limit)
+        # rows: list[dict] = self._cur.fetchall()
         self._db_logout()
 
         return rows
-        
+
     @log_time_v2
     @ft.lru_cache(maxsize=10)
     def get_hotel_information(self, hotelid: int) -> dict:
@@ -512,45 +539,81 @@ LIMIT 1;\
 
         return switch.get(meal_type, 'Unknown Meal Type')
 
-    @property
-    def airport_codes_city(self) -> dict[str, str]:
-        # TODO: Verify that this is the correct list of airports.
-        return {
-            'PMI': 'Palma de Mallorca',
-            'FMO': 'Münster',
-            'STR': 'Stuttgart',
-            'LEJ': 'Leipzig',
-            'NUE': 'Nürnberg',
-            'CGN': 'Köln',
+    @log_time_v2
+    @ft.lru_cache(maxsize=1)
+    def get_airport_codes_city(self) -> dict[str, str]:
+        lookup_city_names: dict[str, str] = {
             'PAD': 'Paderborn',
-            'HAJ': 'Hannover',
-            'BER': 'Berlin',
-            'FMM': 'Memmingen',
-            'SCN': 'Saarbrücken',
-            'DRS': 'Dresden',
-            'BRE': 'Bremen',
-            'DTM': 'Dortmund',
-            'VIE': 'Wien',
-            'NRN': 'Weeze',
-            'BSL': 'Basel',
-            'HHN': 'Frankfurt-Hahn',
-            'FKB': 'Karlsruhe',
-            'ZRH': 'Zürich',
+            'BRU': 'Brussels',
             'SZG': 'Salzburg',
-            'LUX': 'Luxemburg',
-            'AMS': 'Amsterdam',
-            'PRG': 'Prag',
-            'FDH': 'Friedrichshafen',
+            'CRL': 'Brussels',
             'INN': 'Innsbruck',
-            'KSF': 'Kassel',
+            'DRS': 'Dresden',
+            'BSL': 'Basel',
+            'STR': 'Stuttgart',
             'LNZ': 'Linz',
-            'EIN': 'Eindhoven',
-            'SXB': 'Straßburg',
+            'CSO': 'Magdeburg',
+            'FKB': 'Karlsruhe',
+            'BER': 'Berlin',
+            'ZRH': 'Zürich',
+            'KSF': 'Kassel',
+            'SXB': 'Strasbourg',
             'HAM': 'Hamburg',
-            'FRA': 'Frankfurt',
-            'MUC': 'München',
-            'DUS': 'Düsseldorf',
+            'FMO': 'Munster Osnabruck',
+            'LBC': 'Lübeck',
+            'DUS': "Düsseldorf",
+            "SCN": "Saarbrücken",
+            "GRZ": "Graz",
+            "GWT": "GWT",
+            "DTM": "Dortmund",
+            "CGN": "Köln Bonn",
+            "LUX": "Luxembourg",
+            "PRG": "Prague",
+            "VIE": "Vienna",
+            "BLL": "Billund",
+            "NRN": "Weeze",
+            "EIN": "Eindhoven",
+            "HHN": "Frankfurt Hahn",
+            "AMS": "Amsterdam",
+            "HAJ": "Hannover",
+            "FDH": "Friedrichshafen",
+            "LEJ": "Leipzig / Halle",
+            "FMM": "Memmingen",
+            "WAW": "Warsaw",
+            "NUE": "Nuremberg",
+            "FRA": "Frankfurt",
+            "MUC": "München",
+            "BRE": "Bremen",
         }
+
+        sql: str = '\
+SELECT DISTINCT {}, {} FROM {} \
+        '.format(
+            Data.TO_OUTBOUND_DEPARTURE_AIRPORT,
+            Data.TO_INBOUND_ARRIVAL_AIRPORT,
+            Data.OFFER_TABLE_NAME,
+        )
+
+        self._db_login()
+        self._cur.execute(sql)
+        rows: list[tuple[str, str]] = self._cur.fetchall()
+        self._db_logout()
+
+        all_ports: set[str] = set()
+        for row in rows:
+            all_ports.add(row[0])
+            all_ports.add(row[1])
+
+        all_ports_with_cities: dict[str, str] = {}
+
+        for port in all_ports:
+            if port in lookup_city_names:
+                all_ports_with_cities[port] = lookup_city_names[port]
+            else:
+                all_ports_with_cities[port] = 'Unknown City'
+
+        return all_ports_with_cities
+
 
     @property
     def airport_codes_country(self) -> dict[str, str]:

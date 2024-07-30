@@ -269,7 +269,7 @@ def translate_meal_type(meal_type: str):
 )
 def get_airport_codes():
     return c24hc_model.AirportCodeCity(
-        cities=c24hc_data.airport_codes_city
+        cities=c24hc_data.get_airport_codes_city()
     )
 
 
@@ -289,7 +289,7 @@ def get_room_type_names():
     tags=['c24hc']
 )
 def get_matching_offers(req: c24hc_model.SearchForOffersModel):
-    def transform_to_model(offer: tuple):
+    def transform_to_model(offer: dict):
         hotel_information: dict = c24hc_data.get_hotel_information(
             hotelid=offer[1]
         )
@@ -323,7 +323,7 @@ def get_matching_offers(req: c24hc_model.SearchForOffersModel):
 
         return offer
 
-    matching_offers: list[tuple] = c24hc_data.get_matching_offers(
+    matching_offers: list[dict] = c24hc_data.get_matching_offers(
         20,
         duration=req.duration,
         earliest_departure_date=req.earliestdeparturedate,
