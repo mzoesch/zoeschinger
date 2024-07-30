@@ -395,7 +395,8 @@ LIMIT {};\
 
         sql: str = '\
 SELECT {}, {}, {}, {} FROM {} \
-WHERE {} IN ({}) \
+WHERE {} IN ({}) AND \
+{} = {} AND {} = {} \
         '.format(
             Data.TO_PK,
             Data.TO_HOTEL_ID,
@@ -405,6 +406,11 @@ WHERE {} IN ({}) \
 
             Data.TO_OUTBOUND_DEPARTURE_AIRPORT,
             ','.join(f'?' for port in tuple(departure_airports)),
+
+            Data.TO_COUNT_ADULTS,
+            count_adults,
+            Data.TO_COUNT_CHILDREN,
+            count_children
         )
 
         self._db_login()
