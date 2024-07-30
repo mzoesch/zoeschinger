@@ -284,6 +284,54 @@ def get_room_type_names():
     )
 
 @app.post(
+    '/projects/c24hc/offers_by_hotel',
+    response_model=c24hc_model.TrendingOffersModel,
+    tags=['c24hc']
+)
+def get_matching_hotel_offers(req: c24hc_model.SearchForOffersFromHotelModel):
+    def transform_to_model(offer: dict):
+        hotel_information: dict = c24hc_data.get_hotel_information(
+            hotelid=offer[1]
+        )
+        hotel: c24hc_model.Hotel = c24hc_model.Hotel(
+            hotelid=hotel_information[c24hc_main.Data.TH_HOTEL_ID],
+            hotelname=hotel_information[c24hc_main.Data.TH_HOTEL_NAME],
+            hotelstars=hotel_information[c24hc_main.Data.TH_HOTEL_STAR_RATING]
+        )
+
+        offer_information: dict = c24hc_data.get_offer_information(
+            offerid=offer[0]
+        )
+        offer: c24hc_model.Offer = c24hc_model.Offer(
+            offerid=offer_information[c24hc_main.Data.TO_PK],
+            hotel=hotel,
+            countadults=offer_information[c24hc_main.Data.TO_COUNT_ADULTS],
+            countchildren=offer_information[c24hc_main.Data.TO_COUNT_CHILDREN],
+            price=offer_information[c24hc_main.Data.TO_PRICE],
+            mealtype=offer_information[c24hc_main.Data.TO_MEALTYPE],
+            oceanview=offer_information[c24hc_main.Data.TO_OCEANVIEW],
+            roomtype=offer_information[c24hc_main.Data.TO_ROOMTYPE],
+            outbounddeparturedatetime=offer_information[c24hc_main.Data.TO_OUTBOUND_DEPARTURE_DATE_TIME],
+            outbounddepartureairport=offer_information[c24hc_main.Data.TO_OUTBOUND_DEPARTURE_AIRPORT],
+            outboundarrivaldatetime=offer_information[c24hc_main.Data.TO_OUTBOUND_ARRIVAL_DATE_TIME],
+            outboundarrivalairport=offer_information[c24hc_main.Data.TO_OUTBOUND_ARRIVAL_AIRPORT],
+            inbounddeparturedatetime=offer_information[c24hc_main.Data.TO_INBOUND_DEPARTURE_DATE_TIME],
+            inbounddepartureairport=offer_information[c24hc_main.Data.TO_INBOUND_DEPARTURE_AIRPORT],
+            inboundarrivaldatetime=offer_information[c24hc_main.Data.TO_INBOUND_ARRIVAL_DATE_TIME],
+            inboundarrivalairport=offer_information[c24hc_main.Data.TO_INBOUND_ARRIVAL_AIRPORT]
+        )
+
+        return offer
+
+    offers_from_hotel: list[dict] = c24hc_data.get_offers_from_hotel(req.hotelname)
+
+    res: c24hc_model.SearchOffersModel = c24hc_model.SearchOffersModel(offers=[
+        transform_to_model(offer) for offer in offers_from_hotel
+    ])
+
+    return res
+
+@app.post(
     '/projects/c24hc/matching_offers',
     response_model=c24hc_model.TrendingOffersModel,
     tags=['c24hc']
