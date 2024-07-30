@@ -30,6 +30,8 @@ import { GetCurrentRoute } from '@l/Routes';
 
 import Image from 'next/image';
 
+import OfferShowcase from './utils/OfferShowcase';
+
 const Demo = () => {
   const route: string = GetCurrentRoute();
   const [model, _] = useState<Model>(new Model());
@@ -40,6 +42,7 @@ const Demo = () => {
     useState<Components.Schemas.APIResponse.MealTypeNames>();
   const [roomTypeNames, setRoomTypeNames] =
     useState<Components.Schemas.APIResponse.RoomTypeNames>();
+  const [moreOffers, setMoreOffers] = useState<Offer[]>([]);
 
   const hotelMockImageLoader = ({
     src,
@@ -119,8 +122,25 @@ const Demo = () => {
       });
   }
 
+  async function loadMoreOffersImpl() {
+    model
+      .sendRequestForMatchingHotel(offer?.hotel.hotelname)
+      .then((res: Components.Schemas.APIResponse.Trending) => {
+        setMoreOffers((prev) => res.offers);
+      });
+  }
+
+  async function loadMoreOffers() {
+    await storeAvailableHotelMockImageIndices();
+    loadMoreOffersImpl();
+  }
+
   useEffect(() => {
-    storeAvailableHotelMockImageIndices();
+    loadMoreOffers();
+  }, [offer]);
+
+  useEffect(() => {
+    loadMoreOffers();
     getAirportCodesCity();
     getMealTypeNames();
     getRoomTypeNames();
@@ -536,6 +556,26 @@ const Demo = () => {
                 </div>
               </div>
               <h2>More offers from {offer.hotel.hotelname}:</h2>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                {moreOffers === undefined || moreOffers!.length === 0 ? (
+                  <h3>Loading more offers of your hotel . . .</h3>
+                ) : (
+                  <div className={styles.results_area}>
+                    {moreOffers.map((offer: Offer) => (
+                      <OfferShowcase
+                        offer={offer}
+                        model={model}
+                        key={offer.offerid}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )
         ) : (

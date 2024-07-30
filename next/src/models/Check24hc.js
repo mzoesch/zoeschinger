@@ -150,4 +150,21 @@ export class Model {
 
     return await res.json();
   }
+
+  async sendRequestForMatchingHotel(hotelName) {
+    const apiEndpoint =
+      process.env.PRIVATE_API_ENDPOINT + 'projects/c24hc/offers_by_hotel';
+
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hotelname: hotelName,
+      }),
+    });
+
+    return await res.json();
+  }
 }
