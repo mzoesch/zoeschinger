@@ -169,10 +169,65 @@ const Form = ({ submitCallback, model }: Properties) => {
 
   const test = () => {
     const availableDepartureAirports = [
-      { code: 'MUC', name: 'Munich' },
+      { code: 'PAD', name: 'Paderborn' },
+      { code: 'BRU', name: 'Brussels (BRU)' },
+      { code: 'SZG', name: 'Salzburg' },
+      { code: 'CRL', name: 'Brussels (CRL)' },
+      { code: 'INN', name: 'Innsbruck' },
+      { code: 'DRS', name: 'Dresden' },
+      { code: 'BSL', name: 'Basel' },
+      { code: 'STR', name: 'Stuttgart' },
+      { code: 'LNZ', name: 'Linz' },
+      { code: 'CSO', name: 'Magdeburg' },
+      { code: 'FKB', name: 'Karlsruhe' },
+      { code: 'BER', name: 'Berlin' },
+      { code: 'ZRH', name: 'Zürich' },
+      { code: 'KSF', name: 'Kassel' },
+      { code: 'SXB', name: 'Strasbourg' },
+      { code: 'HAM', name: 'Hamburg' },
+      { code: 'FMO', name: 'Munster Osnabruck' },
+      { code: 'LBC', name: 'Lübeck' },
+      { code: 'DUS', name: 'Düsseldorf' },
+      { code: 'SCN', name: 'Saarbrücken' },
+      { code: 'GRZ', name: 'Graz' },
+      { code: 'GWT', name: 'Sylt' },
+      { code: 'DTM', name: 'Dortmund' },
+      { code: 'CGN', name: 'Köln Bonn' },
+      { code: 'LUX', name: 'Luxembourg' },
+      { code: 'PRG', name: 'Prague' },
+      { code: 'VIE', name: 'Vienna' },
+      { code: 'BLL', name: 'Billund' },
+      { code: 'NRN', name: 'Weeze' },
+      { code: 'EIN', name: 'Eindhoven' },
+      { code: 'HHN', name: 'Frankfurt Hahn' },
+      { code: 'AMS', name: 'Amsterdam' },
+      { code: 'HAJ', name: 'Hannover' },
+      { code: 'FDH', name: 'Friedrichshafen' },
+      { code: 'LEJ', name: 'Leipzig / Halle' },
+      { code: 'FMM', name: 'Memmingen' },
+      { code: 'WAW', name: 'Warsaw' },
+      { code: 'NUE', name: 'Nuremberg' },
       { code: 'FRA', name: 'Frankfurt' },
+      { code: 'MUC', name: 'München' },
+      { code: 'BRE', name: 'Bremen' },
     ];
 
+    availableDepartureAirports.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+
+    if (airportCodesCity == undefined) {
+      return availableDepartureAirports.map((airport) => (
+        <MenuItem key={airport.code} value={airport.code}>
+          <Checkbox checked={departureAirports.indexOf(airport.code) > -1} />
+          <ListItemText primary={airport.name} />
+        </MenuItem>
+      ));
+    }
+
+    // TODO Here make the async mapping of the airport codes to the city names
     return availableDepartureAirports.map((airport) => (
       <MenuItem key={airport.code} value={airport.code}>
         <Checkbox checked={departureAirports.indexOf(airport.code) > -1} />
