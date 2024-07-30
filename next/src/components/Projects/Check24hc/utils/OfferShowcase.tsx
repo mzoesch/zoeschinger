@@ -92,7 +92,7 @@ const OfferShowcase = ({ offer, model }: { offer: Offer; model: Model }) => {
           {offer.countchildren > 0 ? (
             <div>
               {offer.countchildren}{' '}
-              {offer.countchildren > 1 ? 'chldn.' : 'child'}
+              {offer.countchildren > 1 ? 'Chldn.' : 'Child'}
               {offer.countadults > 0 ? <span>, </span> : <></>}
             </div>
           ) : (
@@ -100,7 +100,7 @@ const OfferShowcase = ({ offer, model }: { offer: Offer; model: Model }) => {
           )}
           {offer.countadults > 0 ? (
             <div>
-              {offer.countadults} {offer.countadults > 1 ? 'adults' : 'adult'}
+              {offer.countadults} {offer.countadults > 1 ? 'Adults' : 'Adult'}
             </div>
           ) : (
             <></>
