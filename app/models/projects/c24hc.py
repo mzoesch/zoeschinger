@@ -44,6 +44,10 @@ class SearchForOffersModel(BaseModel):
     countchildren: int
 
 
+class SearchForOffersFromHotelModel(BaseModel):
+    hotelname: str
+
+
 class SearchOffersModel(BaseModel):
     offers: list[Offer] | None = None
 

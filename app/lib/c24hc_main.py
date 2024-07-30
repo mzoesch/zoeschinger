@@ -365,11 +365,53 @@ LIMIT {};\
         return day_of_year_t1 - day_of_year_t0
 
     @log_time_v2
+    def get_offers_from_hotel(self, hotelName: str) -> list[dict]:
+        sql: str = '\
+SELECT {} FROM {} \
+WHERE {} = "{}" \
+LIMIT 1;\
+        '.format(
+            Data.TH_HOTEL_ID,
+            Data.HOTEL_TABLE_NAME,
+            Data.TH_HOTEL_NAME,
+            hotelName
+        )
+
+        self._db_login()
+        self._cur.execute(sql)
+        hotel_id: list = self._cur.fetchall()
+        self._db_logout()
+
+        if len(hotel_id) <= 0:
+            return []
+
+        right_full_hotel_id: int = hotel_id[0][0]
+
+        sql: str = '\
+SELECT {}, {} FROM {} \
+WHERE {} = {} \
+LIMIT 20; \
+                '.format(
+            Data.TO_PK,
+            Data.TO_HOTEL_ID,
+            Data.OFFER_TABLE_NAME,
+            Data.TO_HOTEL_ID,
+            right_full_hotel_id
+        )
+
+        self._db_login()
+        self._cur.execute(sql)
+        offers: list[dict] = self._cur.fetchall()
+        self._db_logout()
+
+        return offers
+
+    @log_time_v2
     # @ft.lru_cache(maxsize=20)
     def get_matching_offers(
         self,
         /,
-        limit:int = 10,
+        limit: int = 10,
         *,
         duration: int,
         earliest_departure_date: str,
@@ -436,8 +478,6 @@ WHERE {} IN ({}) AND \
 
             continue
 
-        # self._cur.fetchmany(limit)
-        # rows: list[dict] = self._cur.fetchall()
         self._db_logout()
 
         return rows
