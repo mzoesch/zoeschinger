@@ -84,17 +84,9 @@ const About = () => {
                   Hello there. I am Magnus Zoeschinger.
                 </div>
                 <div className={text_styles.paragraph}>
-                  I am a CS student with a passion for language and
-                  communication. Currently pursuing a degree at the
-                  Ludwig-Maximilians-Universität München (LMU). I am
-                  specializing in computer science while also gaining
-                  comprehensive knowledge in computer linguistics.
-                </div>
-                <div className={text_styles.paragraph}>
-                  With a passion for coding and natural language processing, I
-                  am constantly seeking new challenges and opportunities to
-                  expand my knowledge and skills and I am poised to make a
-                  significant contribution to the tech industry.
+                  I am a Computer Science and Computer Linguistic student.
+                  Currently pursuing a degree at the
+                  Ludwig-Maximilians-Universität München.
                 </div>
               </div>
             </div>
