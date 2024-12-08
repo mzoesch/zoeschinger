@@ -16,7 +16,7 @@
     "@mui/material": "^5.14.16",
     "@mui/x-date-pickers": "^6.17.0",
     "@types/node": "20.6.5",
-    "@types/react": "18.2.22",
+    "@types/react": "18.2.45",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.1.1",
     "animejs": "^3.2.1",
