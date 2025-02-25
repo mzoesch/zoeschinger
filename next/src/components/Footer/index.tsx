@@ -8,7 +8,7 @@ const Footer = () => {
     <>
       <div className={styles.main}>
         <div className={styles.copyright}>
-          ©2023 Magnus Zoeschinger (mzoesch). All rights reserved.
+          ©2025 Magnus Zoeschinger (mzoesch). All rights reserved.
         </div>
         <div className={styles.links}>
           <div className={styles.link_section}>
