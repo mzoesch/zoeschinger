@@ -12,6 +12,7 @@ import {
   BadAppleIcon,
   SnakeAIIcon,
   C24HCIcon,
+  JafgIcon,
 } from '@c/svg';
 
 import { Raleway, Josefin_Sans } from 'next/font/google';
@@ -45,6 +46,7 @@ const ProjectCard = ({
           {icon === 'SortIcon' && <SortIcon className={styles.top_img} />}
           {icon === 'C24HCIcon' && <C24HCIcon className={styles.top_img} />}
           {icon === 'ShuttleIcon' && <ShuttleIcon className={styles.top_img} />}
+          {icon === 'JafgIcon' && <JafgIcon className={styles.top_img} />}
           {icon === 'BadAppleIcon' && (
             <BadAppleIcon className={styles.top_img} />
           )}

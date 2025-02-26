@@ -17,6 +17,7 @@ import {
   BadAppleIcon,
   SnakeAIIcon,
   C24HCIcon,
+  JafgIcon,
 } from '@c/svg';
 
 import { useState, useEffect, useRef } from 'react';
@@ -134,6 +135,9 @@ const LinksMobile = () => {
                       >
                         {element.icon === 'DashboardIcon' && (
                           <DashboardIcon className={styles.prj_icon} />
+                        )}
+                        {element.icon === 'JafgIcon' && (
+                          <JafgIcon className={styles.prj_icon} />
                         )}
                         {element.icon === 'TextIcon' && (
                           <TextIcon className={styles.prj_icon} />

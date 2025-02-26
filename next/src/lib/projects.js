@@ -42,6 +42,14 @@ class Project {
 
 export const projects = [
   new Project(
+    'Jafg',
+    "Jafg is a Voxel based game. Currently in very early development.",
+    'https://api.zoeschinger.com/static/Jafg/Runtime.html',
+    'https://github.com/mzoesch/S-Jafg',
+    '/projects/jafg',
+    'JafgIcon'
+  ),
+  new Project(
     'C24 HC',
     "Check 24's GenDev Holiday Challenge from autumn 2023.",
     '-1',
@@ -68,7 +76,7 @@ export const projects = [
   new Project(
     'Zoeschinger',
     'Website for my projects and stuff. So you can run them in the web.',
-    'https://www.zoeschinger.com/',
+    '-1',
     'https://github.com/mzoesch/zoeschinger',
     '/projects/zoeschinger',
     'DashboardIcon'
@@ -85,7 +93,7 @@ export const projects = [
   new Project(
     'Text to git',
     'Allows you to place and display ASCII-Text at your GitHubs contributions overview.',
-    '-1',
+    'https://github.com/mzoesch?tab=overview&from=2019-12-01&to=2019-12-31',
     'https://github.com/mzoesch/TxtToGit',
     '/projects/txttogit',
     'TextIcon'

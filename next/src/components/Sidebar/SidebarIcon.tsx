@@ -8,6 +8,7 @@ import {
   BadAppleIcon,
   SnakeAIIcon,
   C24HCIcon,
+  JafgIcon,
 } from '@c/svg';
 
 import Link from 'next/link';
@@ -33,6 +34,11 @@ const SidebarIcon = ({
           {icon === 'TextIcon' && (
             <div className={styles.icon}>
               <TextIcon className={styles.icon_inner} />
+            </div>
+          )}
+          {icon === 'JafgIcon' && (
+            <div className={styles.icon}>
+              <JafgIcon className={styles.icon_inner} />
             </div>
           )}
           {icon === 'ShuttleIcon' && (
