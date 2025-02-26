@@ -1,27 +1,34 @@
+import Link from 'next/link';
+
 import styles from '@s/about/main.module.scss';
 import text_styles from '@s/text/main.module.scss';
-
 import profilePicture from '@p/profilePicture.png';
 
 import {
   Tools_CSS3,
   Tools_HTML5,
+  Tools_CMake,
   Tools_Cpp,
   Tools_FastAPI,
   Tools_Git,
   Tools_GitHub,
   Tools_GitLab,
   Tools_Java,
+  Tools_C,
+  Tools_Go,
+  Tools_Wasm,
   Tools_JavaScript,
   Tools_NextJS,
   Tools_Python3,
   Tools_React,
   Tools_Sass,
+  Tools_SqlLite,
   Tools_TailwindCSS,
   Tools_TypeScript,
   Tools_UnrealEngine,
   Tools_Unity,
   Tools_Blender,
+  Tools_Nginx,
 } from '@c/svg';
 
 import { tools, Tools } from '@l/tools.js';
@@ -64,6 +71,18 @@ const About = () => {
                     &#x67;&#x65;&#x72;{/* @ Just some comment */}
                     &#x2e;&#x64;{/* @ Just some comment */}&#x65;
                   </h4>
+                  <h4 className={styles.sub_info_desktop}>
+                    <Link
+                      href='https://www.linkedin.com/in/mzoesch'
+                      className={styles.link}
+                    >LinkedIn</Link>
+                  </h4>
+                  <h4 className={styles.sub_info_desktop}>
+                    <Link
+                      href='https://github.com/mzoesch'
+                      className={styles.link}
+                    >GitHub</Link>
+                  </h4>
                 </div>
               </div>
             </div>
@@ -73,8 +92,34 @@ const About = () => {
                   Germany, Bavaria, Munich
                 </h4>
                 <h4 className={styles.sub_info_mobile}>
-                  magnus.zoeschinger@zoeschinger.de
+                    &#x6d;&#x61;&#x67;{/* Just some comment */}
+                    &#x6e;&#x75;{/* @ Just some comment */}
+                    &#x73;&#x2e;&#x7a;{/* @ Just some comment */}&#x6f;&#x65;
+                    {/* @ Just some comment */}
+                    &#x73;&#x63;&#x68;{/* @ Just some comment */}
+                    &#x69;&#x6e;&#x67;
+                    {/* @ Just some comment */}
+                    &#x65;&#x72;{/* @ Just some comment */}&#x40;
+                    {/* @ Just some comment */}&#x7a;
+                    {/* @ Just some comment */}
+                    &#x6f;&#x65;{/* @ Just some comment */}&#x73;&#x63;&#x68;
+                    {/* @ Just some comment */}&#x69;&#x6e;
+                    {/* @ Just some comment */}
+                    &#x67;&#x65;&#x72;{/* @ Just some comment */}
+                    &#x2e;&#x64;{/* @ Just some comment */}&#x65;
                 </h4>
+                <h4 className={styles.sub_info_mobile}>
+                    <Link
+                      href='https://www.linkedin.com/in/mzoesch'
+                      className={styles.link}
+                    >LinkedIn</Link>
+                  </h4>
+                  <h4 className={styles.sub_info_mobile}>
+                    <Link
+                      href='https://github.com/mzoesch'
+                      className={styles.link}
+                    >GitHub</Link>
+                  </h4>
               </div>
             </div>
             <div className={styles.side_text_wrapper}>
@@ -84,17 +129,9 @@ const About = () => {
                   Hello there. I am Magnus Zoeschinger.
                 </div>
                 <div className={text_styles.paragraph}>
-                  I am a CS student with a passion for language and
-                  communication. Currently pursuing a degree at the
-                  Ludwig-Maximilians-Universität München (LMU). I am
-                  specializing in computer science while also gaining
-                  comprehensive knowledge in computer linguistics.
-                </div>
-                <div className={text_styles.paragraph}>
-                  With a passion for coding and natural language processing, I
-                  am constantly seeking new challenges and opportunities to
-                  expand my knowledge and skills and I am poised to make a
-                  significant contribution to the tech industry.
+                  I am a Computer Science and Computer Linguistic student.
+                  Currently pursuing a degree at the
+                  Ludwig-Maximilians-Universität München.
                 </div>
               </div>
             </div>
@@ -111,6 +148,21 @@ const About = () => {
                 {tools.map((tool: Tools) => {
                   return (
                     <div key={tool.title}>
+                      {tool.icon === 'CMakeIcon' && (
+                        <Tools_CMake className={styles.tool_icon} />
+                      )}
+                      {tool.icon === 'CIcon' && (
+                        <Tools_C className={styles.tool_icon} />
+                      )}
+                      {tool.icon === 'GoIcon' && (
+                        <Tools_Go className={styles.tool_icon} />
+                      )}
+                      {tool.icon === 'WasmIcon' && (
+                        <Tools_Wasm className={styles.tool_icon} />
+                      )}
+                      {tool.icon === 'SqlLiteIcon' && (
+                        <Tools_SqlLite className={styles.tool_icon} />
+                      )}
                       {tool.icon === 'HTML5Icon' && (
                         <Tools_HTML5 className={styles.tool_icon} />
                       )}
@@ -140,6 +192,9 @@ const About = () => {
                       )}
                       {tool.icon === 'Python3Icon' && (
                         <Tools_Python3 className={styles.tool_icon} />
+                      )}
+                      {tool.icon === 'NginxIcon' && (
+                        <Tools_Nginx className={styles.tool_icon} />
                       )}
                       {tool.icon === 'ReactIcon' && (
                         <Tools_React className={styles.tool_icon} />
