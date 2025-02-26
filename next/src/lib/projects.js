@@ -43,7 +43,7 @@ class Project {
 export const projects = [
   new Project(
     'Jafg',
-    "Jafg is a Voxel based game. Currently in very early development.",
+    "Jafg is a voxel based game. Currently in very early development.",
     'https://api.zoeschinger.com/static/Jafg/Runtime.html',
     'https://github.com/mzoesch/S-Jafg',
     '/projects/jafg',
