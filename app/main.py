@@ -3,6 +3,8 @@ from typing import List
 import functools as ft
 from uuid import uuid4, UUID
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
 import os
 from pathlib import Path
 from fastapi.responses import FileResponse as Fileres
@@ -36,6 +38,15 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+# For Wasm. @see Jafg
+class COOPCOEPMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+        response.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+        return response
+app.add_middleware(COOPCOEPMiddleware)
 
 
 @app.get('/')
